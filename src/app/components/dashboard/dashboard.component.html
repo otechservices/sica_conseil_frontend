@@ -51,8 +51,7 @@
 
     <!-- Hero Banner -->
     <p-card class="mb-4 border-0 shadow-sm" 
-            styleClass="bg-gradient-to-r from-orange-400 to-orange-600" 
-            style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+            [style]="{ 'background': 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)' }">
       <div class="text-center py-4">
         <h2 class="h3 fw-bold mb-3 text-white">Accélérez votre carrière en gestion de projet</h2>
         <p class="text-white opacity-75 mb-4">Accédez à tous nos outils et formations pour réussir votre certification PMP</p>
@@ -184,8 +183,8 @@
             <div class="text-center p-4 border rounded-3 h-100 position-relative overflow-hidden" 
                  style="cursor: pointer; transition: all 0.2s ease;"
                  (click)="onQuickAction(action.action)"
-                 (mouseenter)="$event.target.style.transform = 'translateY(-2px)'; $event.target.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'"
-                 (mouseleave)="$event.target.style.transform = 'translateY(0)'; $event.target.style.boxShadow = 'none'">
+                 (mouseenter)="($event.target as any).style.transform = 'translateY(-2px)'; ($event.target as any).style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'"
+                 (mouseleave)="($event.target as any).style.transform = 'translateY(0)'; ($event.target as any).style.boxShadow = 'none'">
               <div class="rounded-circle d-inline-flex align-items-center justify-center mb-3"
                    style="width: 60px; height: 60px;"
                    [style.background-color]="action.color + '20'">
