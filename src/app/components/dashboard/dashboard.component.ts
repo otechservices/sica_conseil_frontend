@@ -1,89 +1,84 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, CardModule, ButtonModule, ProgressBarModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  // Données du simulateur PMP
-  simulatorData = {
-    correctAnswers: 0,
-    totalQuestions: 0,
-    timeUsed: '55min',
-    successRate: 'NaN%',
-    examType: 'Quiz',
-    status: 'Échec'
-  };
-
-  // Données de performance par domaine
-  domainPerformance = [
-    { domain: 'Initiation', score: 45, color: '#ef4444' },
-    { domain: 'Planification', score: 72, color: '#f59e0b' },
-    { domain: 'Exécution', score: 68, color: '#10b981' },
-    { domain: 'Surveillance', score: 55, color: '#3b82f6' },
-    { domain: 'Clôture', score: 80, color: '#8b5cf6' }
+  // Statistiques principales
+  statistics = [
+    { label: 'Projets générés', value: '12', icon: 'folder', color: '#f59e0b' },
+    { label: 'Modules complétés', value: '8/15', icon: 'book', color: '#3b82f6' },
+    { label: 'Score moyen PMP', value: '78%', icon: 'chart-line', color: '#10b981' },
+    { label: 'Temps d\'étude', value: '24h', icon: 'clock', color: '#ef4444' }
   ];
 
-  // Données d'analyse détaillée
-  detailedAnalysis = {
-    yourScore: { value: 0, label: 'Votre score', subtitle: 'En dessous du seuil', color: '#3b82f6' },
-    passThreshold: { value: 61, label: 'Seuil de réussite', subtitle: 'Standard PMP', color: '#6b7280' },
-    averageScore: { value: 78, label: 'Score moyen', subtitle: 'Utilisateurs SICA', color: '#10b981' },
-    excellentScore: { value: 85, label: 'Score excellent', subtitle: 'Top 20%', color: '#8b5cf6' }
-  };
+  // Données de progression
+  progressData = [
+    { label: 'Formation PMP', value: 53, color: '#f59e0b' },
+    { label: 'Simulateur d\'examen', value: 78, color: '#f59e0b' },
+    { label: 'Projets générés', value: 100, color: '#f59e0b' }
+  ];
 
-  // Actions recommandées
-  recommendedActions = [
-    'Revoir les modules de formation',
-    'Pratiquer avec des quiz ciblés',
-    'Analyser vos erreurs'
+  // Activité récente
+  recentActivity = [
+    { title: 'Module "Gestion des risques" complété', time: 'Il y a 2 heures', icon: 'check-circle', color: '#10b981' },
+    { title: 'Projet "Application mobile" généré', time: 'Hier', icon: 'folder-plus', color: '#f59e0b' },
+    { title: 'Test PMP réalisé - Score: 82%', time: 'Il y a 2 jours', icon: 'calculator', color: '#3b82f6' },
+    { title: 'Certificat de formation téléchargé', time: 'Il y a 3 jours', icon: 'download', color: '#8b5cf6' }
+  ];
+
+  // Actions rapides
+  quickActions = [
+    { title: 'Nouveau projet', description: 'Créer un nouveau projet', icon: 'plus', color: '#f59e0b', action: 'new-project' },
+    { title: 'Continuer la formation', description: 'Reprendre où vous vous êtes arrêté', icon: 'play', color: '#3b82f6', action: 'continue-training' },
+    { title: 'Test PMP', description: 'Évaluer vos connaissances', icon: 'calculator', color: '#10b981', action: 'pmp-test' }
   ];
 
   // Navigation sidebar
   sidebarItems = [
-    { icon: 'grid', label: 'Tableau de bord', active: true },
-    { icon: 'document', label: 'Générateur de projets', active: false },
-    { icon: 'academic-cap', label: 'Formation PMP', active: false },
-    { icon: 'calculator', label: 'Simulateur PMP', active: false },
-    { icon: 'chart-bar', label: 'Progression', active: false },
+    { icon: 'home', label: 'Tableau de bord', active: true, route: '/dashboard' },
+    { icon: 'folder', label: 'Générateur de projets', active: false, route: '/project-generator' },
+    { icon: 'book', label: 'Formation PMP', active: false, route: '/training' },
+    { icon: 'calculator', label: 'Simulateur PMP', active: false, route: '/simulator' },
+    { icon: 'chart-line', label: 'Progression', active: false, route: '/history' },
     { icon: 'cog', label: 'Paramètres', active: false }
   ];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
-  onRetakeTest() {
-    console.log('Refaire un test');
-    // Logique pour refaire un test
+  onGenerateProject() {
+    this.router.navigate(['/project-generator']);
   }
 
-  onAccessTraining() {
-    console.log('Accéder à la formation');
-    // Logique pour accéder à la formation
+  onAccessSimulator() {
+    this.router.navigate(['/simulator']);
   }
 
-  onDownloadReport() {
-    console.log('Télécharger le rapport');
-    // Logique pour télécharger le rapport
-  }
-
-  onShareResult() {
-    console.log('Partager le résultat');
-    // Logique pour partager le résultat
-  }
-
-  onViewHistory() {
-    console.log('Voir l\'historique');
-    // Logique pour voir l'historique
+  onQuickAction(action: string) {
+    switch(action) {
+      case 'new-project':
+        this.router.navigate(['/project-generator']);
+        break;
+      case 'continue-training':
+        this.router.navigate(['/training']);
+        break;
+      case 'pmp-test':
+        this.router.navigate(['/simulator']);
+        break;
+    }
   }
 
   onLogout() {
-    console.log('Déconnexion');
-    // Logique de déconnexion
+    this.router.navigate(['/']);
   }
 
   onSidebarItemClick(item: any) {
@@ -91,6 +86,9 @@ export class DashboardComponent {
     this.sidebarItems.forEach(i => i.active = false);
     // Activer l'item cliqué
     item.active = true;
-    console.log('Navigation vers:', item.label);
+    
+    if (item.route) {
+      this.router.navigate([item.route]);
+    }
   }
 }
