@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-signup',
@@ -14,6 +15,8 @@ export class SignupComponent {
   signupForm: FormGroup;
   showPassword = false;
   showConfirmPassword = false;
+  
+  @Output() switchToLogin = new EventEmitter<void>();
 
   constructor(private fb: FormBuilder) {
     this.signupForm = this.fb.group({
@@ -61,7 +64,6 @@ export class SignupComponent {
   }
 
   onSignIn() {
-    console.log('Redirect to sign in');
-    // Logique de redirection vers la page de connexion
+    this.switchToLogin.emit();
   }
 }

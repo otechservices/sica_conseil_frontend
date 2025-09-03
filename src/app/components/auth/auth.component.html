@@ -1,0 +1,11 @@
+<div class="auth-container">
+  <app-login 
+    *ngIf="currentView === 'login'"
+    (switchToSignup)="switchToSignup()">
+  </app-login>
+  
+  <app-signup 
+    *ngIf="currentView === 'signup'"
+    (switchToLogin)="switchToLogin()">
+  </app-signup>
+</div>

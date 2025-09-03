@@ -1,0 +1,21 @@
+.auth-container {
+  width: 100%;
+  height: 100vh;
+}
+
+/* Transitions fluides entre les vues */
+app-login, app-signup {
+  display: block;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

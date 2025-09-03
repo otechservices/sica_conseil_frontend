@@ -1,0 +1,66 @@
+/* Styles personnalisés pour le composant login */
+.form-field-error {
+  @apply border-red-500 focus:ring-red-500 focus:border-red-500;
+}
+
+/* Animation pour les transitions */
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+/* Style pour les liens */
+a, button[type="button"] {
+  @apply transition-colors duration-200;
+}
+
+/* Style pour les boutons */
+button {
+  @apply transition-all duration-200;
+}
+
+/* Style pour les inputs focus */
+input:focus {
+  @apply outline-none;
+}
+
+/* Animation pour les erreurs */
+.error-message {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effects */
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Focus states */
+button:focus {
+  @apply outline-none ring-2 ring-orange-500 ring-offset-2;
+}
+
+/* Style pour le formulaire dans la carte blanche */
+.bg-white {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+/* Style pour les inputs avec fond gris clair */
+input {
+  background-color: #f8fafc;
+}
+
+input:focus {
+  background-color: white;
+}
