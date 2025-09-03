@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @Component({
   selector: 'app-training',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, CardModule, ButtonModule, ProgressBarModule],
   templateUrl: './training.component.html',
   styleUrls: ['./training.component.css']
 })
@@ -101,15 +104,15 @@ export class TrainingComponent {
 
   // Navigation sidebar
   sidebarItems = [
-    { icon: 'grid', label: 'Tableau de bord', active: false },
-    { icon: 'document', label: 'Générateur de projets', active: false },
-    { icon: 'academic-cap', label: 'Formation PMP', active: true },
+    { icon: 'home', label: 'Tableau de bord', active: false, route: '/dashboard' },
+    { icon: 'folder', label: 'Générateur de projets', active: false, route: '/project-generator' },
+    { icon: 'book', label: 'Formation PMP', active: true, route: '/training' },
     { icon: 'calculator', label: 'Simulateur PMP', active: false },
-    { icon: 'chart-bar', label: 'Progression', active: false },
+    { icon: 'chart-line', label: 'Progression', active: false, route: '/history' },
     { icon: 'cog', label: 'Paramètres', active: false }
   ];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   onTrainDomain(domainId: string) {
     console.log('S\'entraîner sur le domaine:', domainId);
@@ -127,8 +130,7 @@ export class TrainingComponent {
   }
 
   onReturnToSimulator() {
-    console.log('Retour au simulateur');
-    // Logique pour retourner au simulateur
+    this.router.navigate(['/simulator']);
   }
 
   onAccessFormation() {
@@ -137,8 +139,7 @@ export class TrainingComponent {
   }
 
   onLogout() {
-    console.log('Déconnexion');
-    // Logique de déconnexion
+    this.router.navigate(['/']);
   }
 
   onSidebarItemClick(item: any) {
@@ -146,7 +147,10 @@ export class TrainingComponent {
     this.sidebarItems.forEach(i => i.active = false);
     // Activer l'item cliqué
     item.active = true;
-    console.log('Navigation vers:', item.label);
+    
+    if (item.route) {
+      this.router.navigate([item.route]);
+    }
   }
 
   getScoreColor(score: number): string {
