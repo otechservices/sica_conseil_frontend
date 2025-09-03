@@ -15,7 +15,7 @@ export class TrainingComponent {
     {
       id: 'personnes',
       name: 'Personnes',
-      icon: '👥',
+      iconText: 'P',
       percentage: 42,
       examPercentage: 42,
       description: 'Leadership, gestion d\'équipe, communication et développement des compétences',
@@ -35,7 +35,7 @@ export class TrainingComponent {
     {
       id: 'processus',
       name: 'Processus',
-      icon: '⚙️',
+      iconText: 'P',
       percentage: 50,
       examPercentage: 50,
       description: 'Gestion du cycle de vie du projet, planification et contrôle',
@@ -55,7 +55,7 @@ export class TrainingComponent {
     {
       id: 'environnement',
       name: 'Environnement',
-      icon: '🌍',
+      iconText: 'E',
       percentage: 8,
       examPercentage: 8,
       description: 'Contexte organisationnel, stratégie et conformité',
@@ -80,7 +80,7 @@ export class TrainingComponent {
       step: 1,
       title: 'Identifiez vos faiblesses',
       description: 'Concentrez-vous sur les domaines où votre score est inférieur à 75%',
-      icon: '🎯',
+      icon: '🔍',
       color: '#f59e0b'
     },
     {
