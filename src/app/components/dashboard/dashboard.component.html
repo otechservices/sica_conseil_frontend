@@ -1,62 +1,63 @@
-<!-- Main Layout avec PrimeNG -->
-<div class="min-h-screen bg-gray-50 flex">
+<!-- Layout principal avec sidebar -->
+<div class="d-flex min-vh-100 bg-light">
   <!-- Sidebar -->
-  <div class="w-64 bg-white shadow-sm border-r border-gray-200 flex flex-col">
+  <div class="bg-white shadow-sm border-end" style="width: 280px; min-height: 100vh;">
     <!-- Logo -->
-    <div class="p-6 border-b border-gray-200">
-      <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
-          <span class="text-white font-bold text-sm">SC</span>
+    <div class="p-4 border-bottom">
+      <div class="d-flex align-items-center">
+        <div class="bg-warning rounded-3 p-2 me-3">
+          <span class="text-white fw-bold">SC</span>
         </div>
-        <span class="font-semibold text-gray-900">SICA CONSEIL</span>
+        <span class="fw-semibold text-dark">SICA CONSEIL</span>
       </div>
     </div>
 
-    <!-- Navigation avec PrimeNG -->
-    <nav class="flex-1 p-4">
-      <ul class="space-y-2">
-        <li *ngFor="let item of sidebarItems">
-          <button
-            pButton
-            [label]="item.label"
-            [icon]="'pi pi-' + item.icon"
-            (click)="onSidebarItemClick(item)"
-            class="w-full justify-start text-left"
-            [class]="item.active ? 'p-button-warning p-button-outlined' : 'p-button-text'"
-            [severity]="item.active ? 'warning' : 'secondary'">
-          </button>
-        </li>
-      </ul>
+    <!-- Navigation -->
+    <nav class="p-3">
+      <div class="d-grid gap-2">
+        <p-button
+          *ngFor="let item of sidebarItems"
+          [label]="item.label"
+          [icon]="'pi pi-' + item.icon"
+          (onClick)="onSidebarItemClick(item)"
+          class="justify-content-start text-start"
+          [severity]="item.active ? 'warning' : 'secondary'"
+          [text]="!item.active"
+          [outlined]="item.active">
+        </p-button>
+      </div>
     </nav>
 
     <!-- Déconnexion -->
-    <div class="p-4 border-t border-gray-200">
+    <div class="p-3 mt-auto border-top">
       <p-button
         label="Déconnexion"
         icon="pi pi-sign-out"
         severity="danger"
         [text]="true"
-        class="w-full"
+        class="w-100"
         (onClick)="onLogout()">
       </p-button>
     </div>
   </div>
 
-  <!-- Main Content -->
-  <div class="flex-1 p-8">
+  <!-- Contenu principal -->
+  <div class="flex-fill p-4">
     <!-- Header -->
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 mb-2">Bienvenue sur SICA CONSEIL !</h1>
-      <p class="text-gray-600">Votre plateforme complète pour la gestion de projet et la certification PMP</p>
+    <div class="mb-4">
+      <h1 class="h2 fw-bold text-dark mb-2">Bienvenue sur SICA CONSEIL !</h1>
+      <p class="text-muted">Votre plateforme complète pour la gestion de projet et la certification PMP</p>
     </div>
 
-    <!-- Hero Banner avec PrimeNG Card -->
-    <p-card class="mb-8 bg-gradient-to-r from-orange-400 to-orange-600 text-white">
-      <div class="text-center py-8">
-        <h2 class="text-2xl font-bold mb-4 text-white">Bienvenue sur SICA CONSEIL !</h2>
-        <p class="text-orange-100 mb-6">Votre plateforme complète pour la gestion de projet et la certification PMP</p>
+    <!-- Hero Banner -->
+    <p-card class="mb-4 border-0 shadow-sm" 
+            styleClass="bg-gradient-to-r from-orange-400 to-orange-600" 
+            style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+      <div class="text-center py-4">
+        <h2 class="h3 fw-bold mb-3 text-white">Accélérez votre carrière en gestion de projet</h2>
+        <p class="text-white opacity-75 mb-4">Accédez à tous nos outils et formations pour réussir votre certification PMP</p>
         
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
           <p-button
             label="Générer un projet"
             icon="pi pi-folder-plus"
@@ -74,81 +75,93 @@
       </div>
     </p-card>
 
-    <!-- Statistics Cards avec Bootstrap Grid -->
-    <div class="row g-4 mb-8">
+    <!-- Statistiques -->
+    <div class="row g-4 mb-4">
       <div class="col-md-3" *ngFor="let stat of statistics">
-        <p-card class="h-100 text-center">
+        <p-card class="h-100 text-center border-0 shadow-sm">
           <div class="mb-3">
-            <i [class]="'pi pi-' + stat.icon + ' text-3xl'" [style.color]="stat.color"></i>
+            <div class="rounded-circle d-inline-flex align-items-center justify-content-center" 
+                 style="width: 60px; height: 60px;"
+                 [style.background-color]="stat.color + '20'">
+              <i [class]="'pi pi-' + stat.icon" 
+                 [style.color]="stat.color" 
+                 style="font-size: 1.5rem;"></i>
+            </div>
           </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-1">{{ stat.value }}</h3>
-          <p class="text-sm text-gray-600 mb-0">{{ stat.label }}</p>
+          <h3 class="h4 fw-bold text-dark mb-1">{{ stat.value }}</h3>
+          <p class="text-muted small mb-0">{{ stat.label }}</p>
         </p-card>
       </div>
     </div>
 
-    <!-- Content Grid avec Bootstrap -->
-    <div class="row g-6">
+    <!-- Contenu principal en grille -->
+    <div class="row g-4">
       <!-- Progression -->
       <div class="col-lg-6">
-        <p-card>
+        <p-card class="h-100 border-0 shadow-sm">
           <ng-template pTemplate="header">
-            <div class="p-4 border-bottom">
-              <h3 class="text-xl font-semibold text-gray-900 mb-1">
-                <i class="pi pi-chart-line mr-2"></i>
+            <div class="p-3 border-bottom">
+              <h3 class="h5 fw-semibold text-dark mb-1">
+                <i class="pi pi-chart-line me-2 text-warning"></i>
                 Votre progression
               </h3>
-              <p class="text-gray-600 text-sm mb-0">Suivez vos progrès dans la formation PMP</p>
+              <p class="text-muted small mb-0">Suivez vos progrès dans la formation PMP</p>
             </div>
           </ng-template>
           
-          <div class="space-y-4">
-            <div *ngFor="let progress of progressData">
-              <div class="flex justify-between items-center mb-2">
-                <span class="text-sm font-medium text-gray-700">{{ progress.label }}</span>
-                <span class="text-sm font-semibold text-gray-900">{{ progress.value }}%</span>
+          <div class="p-3">
+            <div class="mb-4" *ngFor="let progress of progressData">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="fw-medium text-dark">{{ progress.label }}</span>
+                <span class="fw-bold text-dark">{{ progress.value }}%</span>
               </div>
-              <p-progressBar 
-                [value]="progress.value" 
-                [style]="{'height': '8px'}"
-                [color]="progress.color">
-              </p-progressBar>
+              <div class="progress" style="height: 8px;">
+                <div class="progress-bar" 
+                     [style.width.%]="progress.value"
+                     [style.background-color]="progress.color">
+                </div>
+              </div>
             </div>
           </div>
           
           <ng-template pTemplate="footer">
-            <p-button
-              label="Voir les détails"
-              [text]="true"
-              severity="secondary"
-              class="w-full">
-            </p-button>
+            <div class="p-3 border-top">
+              <p-button
+                label="Voir les détails"
+                [text]="true"
+                severity="secondary"
+                class="w-100">
+              </p-button>
+            </div>
           </ng-template>
         </p-card>
       </div>
 
       <!-- Activité récente -->
       <div class="col-lg-6">
-        <p-card>
+        <p-card class="h-100 border-0 shadow-sm">
           <ng-template pTemplate="header">
-            <div class="p-4 border-bottom">
-              <h3 class="text-xl font-semibold text-gray-900 mb-1">
-                <i class="pi pi-clock mr-2"></i>
+            <div class="p-3 border-bottom">
+              <h3 class="h5 fw-semibold text-dark mb-1">
+                <i class="pi pi-clock me-2 text-primary"></i>
                 Activité récente
               </h3>
-              <p class="text-gray-600 text-sm mb-0">Vos dernières actions sur la plateforme</p>
+              <p class="text-muted small mb-0">Vos dernières actions sur la plateforme</p>
             </div>
           </ng-template>
           
-          <div class="space-y-4">
-            <div *ngFor="let activity of recentActivity" class="flex items-start space-x-3">
-              <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+          <div class="p-3">
+            <div class="d-flex align-items-start mb-3" *ngFor="let activity of recentActivity">
+              <div class="rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0"
+                   style="width: 40px; height: 40px;"
                    [style.background-color]="activity.color + '20'">
-                <i [class]="'pi pi-' + activity.icon + ' text-sm'" [style.color]="activity.color"></i>
+                <i [class]="'pi pi-' + activity.icon" 
+                   [style.color]="activity.color"
+                   style="font-size: 0.875rem;"></i>
               </div>
-              <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-gray-900">{{ activity.title }}</p>
-                <p class="text-xs text-gray-500">{{ activity.time }}</p>
+              <div class="flex-fill">
+                <p class="fw-medium text-dark mb-1">{{ activity.title }}</p>
+                <p class="text-muted small mb-0">{{ activity.time }}</p>
               </div>
             </div>
           </div>
@@ -157,24 +170,32 @@
     </div>
 
     <!-- Actions rapides -->
-    <p-card class="mt-8">
+    <p-card class="mt-4 border-0 shadow-sm">
       <ng-template pTemplate="header">
-        <div class="p-4 border-bottom">
-          <h3 class="text-xl font-semibold text-gray-900 mb-1">Actions rapides</h3>
-          <p class="text-gray-600 text-sm mb-0">Accédez rapidement aux fonctionnalités principales</p>
+        <div class="p-3 border-bottom">
+          <h3 class="h5 fw-semibold text-dark mb-1">Actions rapides</h3>
+          <p class="text-muted small mb-0">Accédez rapidement aux fonctionnalités principales</p>
         </div>
       </ng-template>
       
-      <div class="row g-4">
-        <div class="col-md-4" *ngFor="let action of quickActions">
-          <div class="text-center p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow cursor-pointer"
-               (click)="onQuickAction(action.action)">
-            <div class="w-16 h-16 mx-auto mb-3 rounded-full flex items-center justify-center"
-                 [style.background-color]="action.color + '20'">
-              <i [class]="'pi pi-' + action.icon + ' text-2xl'" [style.color]="action.color"></i>
+      <div class="p-3">
+        <div class="row g-3">
+          <div class="col-md-4" *ngFor="let action of quickActions">
+            <div class="text-center p-4 border rounded-3 h-100 position-relative overflow-hidden" 
+                 style="cursor: pointer; transition: all 0.2s ease;"
+                 (click)="onQuickAction(action.action)"
+                 (mouseenter)="$event.target.style.transform = 'translateY(-2px)'; $event.target.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'"
+                 (mouseleave)="$event.target.style.transform = 'translateY(0)'; $event.target.style.boxShadow = 'none'">
+              <div class="rounded-circle d-inline-flex align-items-center justify-center mb-3"
+                   style="width: 60px; height: 60px;"
+                   [style.background-color]="action.color + '20'">
+                <i [class]="'pi pi-' + action.icon" 
+                   [style.color]="action.color"
+                   style="font-size: 1.5rem;"></i>
+              </div>
+              <h4 class="h6 fw-semibold text-dark mb-2">{{ action.title }}</h4>
+              <p class="text-muted small mb-0">{{ action.description }}</p>
             </div>
-            <h4 class="font-semibold text-gray-900 mb-2">{{ action.title }}</h4>
-            <p class="text-sm text-gray-600">{{ action.description }}</p>
           </div>
         </div>
       </div>

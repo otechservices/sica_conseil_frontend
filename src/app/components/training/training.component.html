@@ -1,54 +1,55 @@
-<!-- Layout avec PrimeNG et Tailwind -->
-<div class="min-h-screen bg-gray-50 flex">
+<!-- Layout avec sidebar -->
+<div class="d-flex min-vh-100 bg-light">
   <!-- Sidebar -->
-  <div class="w-64 bg-white shadow-sm border-r border-gray-200 flex flex-col">
+  <div class="bg-white shadow-sm border-end" style="width: 280px; min-height: 100vh;">
     <!-- Logo -->
-    <div class="p-6 border-b border-gray-200">
-      <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
-          <span class="text-white font-bold text-sm">SC</span>
+    <div class="p-4 border-bottom">
+      <div class="d-flex align-items-center">
+        <div class="bg-warning rounded-3 p-2 me-3">
+          <span class="text-white fw-bold">SC</span>
         </div>
-        <span class="font-semibold text-gray-900">SICA CONSEIL</span>
+        <span class="fw-semibold text-dark">SICA CONSEIL</span>
       </div>
     </div>
 
     <!-- Navigation -->
-    <nav class="flex-1 p-4">
-      <div class="space-y-2">
+    <nav class="p-3">
+      <div class="d-grid gap-2">
         <p-button
           *ngFor="let item of sidebarItems"
           [label]="item.label"
           [icon]="'pi pi-' + item.icon"
           (onClick)="onSidebarItemClick(item)"
-          class="w-full justify-start text-left"
-          [class]="item.active ? 'p-button-warning p-button-outlined' : 'p-button-text'"
-          [severity]="item.active ? 'warning' : 'secondary'">
+          class="justify-content-start text-start"
+          [severity]="item.active ? 'warning' : 'secondary'"
+          [text]="!item.active"
+          [outlined]="item.active">
         </p-button>
       </div>
     </nav>
 
     <!-- Déconnexion -->
-    <div class="p-4 border-t border-gray-200">
+    <div class="p-3 mt-auto border-top">
       <p-button
         label="Déconnexion"
         icon="pi pi-sign-out"
         severity="danger"
         [text]="true"
-        class="w-full"
+        class="w-100"
         (onClick)="onLogout()">
       </p-button>
     </div>
   </div>
 
-  <!-- Main Content -->
-  <div class="flex-1 p-8">
+  <!-- Contenu principal -->
+  <div class="flex-fill p-4">
     <!-- Header -->
-    <div class="flex justify-between items-center mb-8">
+    <div class="d-flex justify-content-between align-items-center mb-4">
       <div>
-        <h1 class="text-2xl font-bold text-gray-900">Entraînement par domaine</h1>
-        <p class="text-gray-600 mt-1">Concentrez-vous sur vos points faibles avec des questions ciblées</p>
+        <h1 class="h2 fw-bold text-dark mb-1">Entraînement par domaine</h1>
+        <p class="text-muted">Concentrez-vous sur vos points faibles avec des questions ciblées</p>
       </div>
-      <div class="flex items-center space-x-4">
+      <div class="d-flex gap-2">
         <p-button
           label="Retour au simulateur"
           [outlined]="true"
@@ -65,165 +66,171 @@
     </div>
 
     <!-- Vue d'ensemble des domaines -->
-    <p-card class="mb-8">
+    <p-card class="mb-4 border-0 shadow-sm">
       <ng-template pTemplate="header">
-        <div class="p-4">
-          <h2 class="text-xl font-semibold text-gray-900 mb-2">Vue d'ensemble des domaines</h2>
-          <p class="text-gray-600 text-sm">L'examen PMP est structuré autour de 3 domaines principaux selon le PMI</p>
+        <div class="p-4 border-bottom">
+          <h2 class="h4 fw-semibold text-dark mb-2">Vue d'ensemble des domaines</h2>
+          <p class="text-muted small mb-0">L'examen PMP est structuré autour de 3 domaines principaux selon le PMI</p>
         </div>
       </ng-template>
       
-      <div class="row g-4">
-        <div class="col-md-4" *ngFor="let domain of domains">
-          <p-card class="h-100">
-          <!-- Header du domaine -->
-          <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center space-x-3">
-              <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white text-sm font-bold"
-                   [style.background-color]="domain.color">
-                {{ domain.iconText }}
+      <div class="p-4">
+        <div class="row g-4">
+          <div class="col-md-4" *ngFor="let domain of domains">
+            <p-card class="h-100 border-0 shadow-sm">
+              <!-- Header du domaine -->
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <div class="d-flex align-items-center">
+                  <div class="rounded-3 d-flex align-items-center justify-content-center text-white fw-bold me-3"
+                       style="width: 50px; height: 50px;"
+                       [style.background-color]="domain.color">
+                    {{ domain.iconText }}
+                  </div>
+                  <div>
+                    <h3 class="h6 fw-semibold text-dark mb-1">{{ domain.name }}</h3>
+                    <span class="badge bg-light text-dark">{{ domain.percentage }}% de l'examen</span>
+                  </div>
+                </div>
+                <span class="badge text-white"
+                      [style.background-color]="domain.color">
+                  {{ domain.questions }} questions
+                </span>
               </div>
-              <div>
-                <h3 class="font-semibold text-gray-900">{{ domain.name }}</h3>
-                <span class="text-sm text-gray-500">{{ domain.percentage }}% de l'examen</span>
+
+              <!-- Description -->
+              <p class="text-muted small mb-3">{{ domain.description }}</p>
+
+              <!-- Score actuel -->
+              <div class="mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="fw-medium text-dark">Score actuel</span>
+                  <span class="h5 fw-bold mb-0" [style.color]="getScoreColor(domain.currentScore)">
+                    {{ domain.currentScore }}%
+                  </span>
+                </div>
+                <div class="progress mb-2" style="height: 8px;">
+                  <div class="progress-bar" 
+                       [style.width.%]="getProgressWidth(domain.currentScore)"
+                       [style.background-color]="getScoreColor(domain.currentScore)">
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <small class="text-muted">Seuil: {{ domain.threshold }}%</small>
+                  <small class="text-muted">{{ domain.level }}</small>
+                </div>
               </div>
-            </div>
-            <div class="px-3 py-1 rounded-full text-xs font-medium text-white"
-                 [style.background-color]="domain.color">
-              {{ domain.questions }} questions
-            </div>
+
+              <!-- Bouton d'entraînement -->
+              <p-button
+                label="S'entraîner"
+                icon="pi pi-play"
+                severity="warning"
+                class="w-100"
+                (onClick)="onTrainDomain(domain.id)">
+              </p-button>
+            </p-card>
           </div>
-
-          <!-- Description -->
-          <p class="text-sm text-gray-600 mb-4">{{ domain.description }}</p>
-
-          <!-- Score actuel -->
-          <div class="mb-4">
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-sm font-medium text-gray-700">Score actuel</span>
-              <span class="text-lg font-bold" [style.color]="getScoreColor(domain.currentScore)">
-                {{ domain.currentScore }}%
-              </span>
-            </div>
-            <div class="w-full bg-gray-200 rounded-full h-2">
-              <div 
-                class="h-2 rounded-full transition-all duration-300"
-                [style.width.%]="getProgressWidth(domain.currentScore)"
-                [style.background-color]="getScoreColor(domain.currentScore)">
-              </div>
-            </div>
-            <div class="flex justify-between text-xs text-gray-500 mt-1">
-              <span>Seuil: {{ domain.threshold }}%</span>
-              <span>{{ domain.level }}</span>
-            </div>
-          </div>
-
-          <!-- Bouton d'entraînement -->
-          <p-button
-            label="S'entraîner"
-            icon="pi pi-play"
-            severity="warning"
-            class="w-full"
-            (onClick)="onTrainDomain(domain.id)">
-          </p-button>
-          </p-card>
         </div>
       </div>
     </p-card>
 
     <!-- Détails des domaines -->
-    <div class="space-y-8">
-      <p-card *ngFor="let domain of domains">
-        <!-- Header du domaine détaillé -->
-        <div class="flex items-center space-x-4 mb-6">
-          <div class="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold"
-               [style.background-color]="domain.color">
-            {{ domain.iconText }}
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold text-gray-900">{{ domain.name }}</h3>
-            <p class="text-gray-600">{{ domain.questions }} questions ({{ domain.percentage }}% de l'examen)</p>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <!-- Sujets couverts -->
-          <div>
-            <h4 class="font-semibold text-gray-900 mb-4">Sujets couverts :</h4>
-            <ul class="space-y-2">
-              <li *ngFor="let subject of domain.subjects" class="flex items-start space-x-2">
-                <div class="w-2 h-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                <span class="text-sm text-gray-600">{{ subject }}</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Performance et actions -->
-          <div>
-            <div class="flex justify-between items-center mb-4">
-              <h4 class="font-semibold text-gray-900">Performance actuelle</h4>
-              <span class="text-2xl font-bold" [style.color]="getScoreColor(domain.currentScore)">
-                {{ domain.currentScore }}%
-              </span>
+    <div class="row g-4 mb-4">
+      <div class="col-12" *ngFor="let domain of domains">
+        <p-card class="border-0 shadow-sm">
+          <!-- Header du domaine détaillé -->
+          <div class="d-flex align-items-center mb-4">
+            <div class="rounded-3 d-flex align-items-center justify-content-center text-white fw-bold me-3"
+                 style="width: 60px; height: 60px;"
+                 [style.background-color]="domain.color">
+              {{ domain.iconText }}
             </div>
-            
-            <div class="w-full bg-gray-200 rounded-full h-3 mb-6">
-              <div 
-                class="h-3 rounded-full transition-all duration-300"
-                [style.width.%]="getProgressWidth(domain.currentScore)"
-                [style.background-color]="getScoreColor(domain.currentScore)">
+            <div>
+              <h3 class="h4 fw-semibold text-dark mb-1">{{ domain.name }}</h3>
+              <p class="text-muted mb-0">{{ domain.questions }} questions ({{ domain.percentage }}% de l'examen)</p>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            <!-- Sujets couverts -->
+            <div class="col-lg-6">
+              <h4 class="h6 fw-semibold text-dark mb-3">Sujets couverts :</h4>
+              <ul class="list-unstyled">
+                <li *ngFor="let subject of domain.subjects" class="d-flex align-items-start mb-2">
+                  <i class="pi pi-circle-fill text-muted me-2 mt-1" style="font-size: 0.5rem;"></i>
+                  <span class="text-muted">{{ subject }}</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Performance et actions -->
+            <div class="col-lg-6">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="h6 fw-semibold text-dark mb-0">Performance actuelle</h4>
+                <span class="h4 fw-bold mb-0" [style.color]="getScoreColor(domain.currentScore)">
+                  {{ domain.currentScore }}%
+                </span>
+              </div>
+              
+              <div class="progress mb-4" style="height: 12px;">
+                <div class="progress-bar" 
+                     [style.width.%]="getProgressWidth(domain.currentScore)"
+                     [style.background-color]="getScoreColor(domain.currentScore)">
+                </div>
+              </div>
+
+              <div class="d-grid gap-2">
+                <p-button
+                  label="Test approfondi (30 questions - 55 min)"
+                  icon="pi pi-calculator"
+                  severity="warning"
+                  (onClick)="onTakeTest(domain.id)">
+                </p-button>
+                
+                <p-button
+                  label="Étudier"
+                  icon="pi pi-book"
+                  [outlined]="true"
+                  severity="secondary"
+                  (onClick)="onStudyDomain(domain.id)">
+                </p-button>
               </div>
             </div>
-
-            <div class="space-y-3">
-              <p-button
-                label="Test approfondi (30 questions - 55 min)"
-                icon="pi pi-calculator"
-                severity="warning"
-                class="w-full"
-                (onClick)="onTakeTest(domain.id)">
-              </p-button>
-              
-              <p-button
-                label="Étudier"
-                icon="pi pi-book"
-                [outlined]="true"
-                severity="secondary"
-                class="w-full"
-                (onClick)="onStudyDomain(domain.id)">
-              </p-button>
-            </div>
           </div>
-        </div>
-      </p-card>
+        </p-card>
+      </div>
     </div>
 
     <!-- Stratégie d'entraînement recommandée -->
-    <p-card class="mt-8 bg-gradient-to-r from-purple-50 to-pink-50">
+    <p-card class="border-0 shadow-sm" 
+            style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);">
       <ng-template pTemplate="header">
-        <div class="p-4">
-          <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-              <span class="text-white text-lg">🎯</span>
+        <div class="p-4 border-bottom">
+          <div class="d-flex align-items-center">
+            <div class="rounded-circle d-flex align-items-center justify-content-center me-3"
+                 style="width: 50px; height: 50px; background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);">
+              <span class="fs-4">🎯</span>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900">Stratégie d'entraînement recommandée</h3>
+            <h3 class="h4 fw-semibold text-dark mb-0">Stratégie d'entraînement recommandée</h3>
           </div>
         </div>
       </ng-template>
       
-      <div class="row g-4">
-        <div class="col-md-4" *ngFor="let strategy of trainingStrategy">
-          <div class="text-center">
-          <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center text-3xl"
-               [style.background-color]="strategy.color + '20'"
-               [style.color]="strategy.color">
-            {{ strategy.icon }}
+      <div class="p-4">
+        <div class="row g-4">
+          <div class="col-md-4" *ngFor="let strategy of trainingStrategy">
+            <div class="text-center">
+              <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                   style="width: 80px; height: 80px;"
+                   [style.background-color]="strategy.color + '20'">
+                <span class="fs-1" [style.color]="strategy.color">{{ strategy.icon }}</span>
+              </div>
+              <div class="fw-semibold text-dark mb-2">
+                {{ strategy.step }}. {{ strategy.title }}
+              </div>
+              <p class="text-muted small mb-0">{{ strategy.description }}</p>
+            </div>
           </div>
-          <div class="text-base font-semibold text-gray-900 mb-2">
-            {{ strategy.step }}. {{ strategy.title }}
-          </div>
-          <p class="text-sm text-gray-600">{{ strategy.description }}</p>
-        </div>
         </div>
       </div>
     </p-card>

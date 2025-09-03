@@ -1,193 +1,54 @@
 /* Styles personnalisés pour le dashboard */
-.sidebar-item {
-  @apply transition-all duration-200;
+.progress {
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.sidebar-item:hover {
-  @apply bg-gray-50;
-}
-
-.sidebar-item.active {
-  @apply bg-orange-50 text-orange-600;
-}
-
-/* Animation pour les barres de progression */
 .progress-bar {
-  transition: width 0.8s ease-in-out;
+  border-radius: 10px;
+  transition: width 0.6s ease;
 }
 
-/* Hover effects pour les cartes */
-.card-hover {
-  @apply transition-all duration-200;
-}
-
-.card-hover:hover {
-  @apply shadow-lg transform -translate-y-1;
-}
-
-/* Styles pour les boutons d'action */
-.action-button {
-  @apply transition-all duration-200;
-}
-
-.action-button:hover {
-  @apply transform -translate-y-1 shadow-md;
+/* Hover effects pour les cartes d'action */
+.action-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Animation pour les statistiques */
-.stat-number {
-  animation: countUp 1s ease-out;
-}
-
 @keyframes countUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.stat-number {
+  animation: countUp 0.6s ease-out;
+}
+
+/* Styles pour la sidebar */
+.sidebar-item.active {
+  background-color: rgba(245, 158, 11, 0.1);
+  border-color: #f59e0b;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .sidebar {
-    @apply w-16;
+    width: 100% !important;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    z-index: 1000;
+    transition: left 0.3s ease;
   }
   
-  .sidebar .sidebar-text {
-    @apply hidden;
+  .sidebar.show {
+    left: 0;
   }
-}
-
-/* Styles pour les icônes de la sidebar */
-.sidebar-icon {
-  @apply w-5 h-5 flex-shrink-0;
-}
-
-/* Animation pour le changement d'état */
-.status-badge {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
-/* Styles pour les graphiques de performance */
-.performance-chart {
-  @apply relative;
-}
-
-.performance-bar {
-  @apply h-2 rounded-full transition-all duration-500;
-}
-
-/* Styles pour les tooltips */
-.tooltip {
-  @apply absolute z-10 px-2 py-1 text-xs text-white bg-gray-900 rounded opacity-0 pointer-events-none transition-opacity duration-200;
-}
-
-.tooltip.show {
-  @apply opacity-100;
-}
-
-/* Styles pour les modales */
-.modal-overlay {
-  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50;
-}
-
-.modal-content {
-  @apply bg-white rounded-2xl p-6 max-w-md w-full mx-4 transform transition-all duration-200;
-}
-
-/* Animation d'entrée pour les éléments */
-.fade-in {
-  animation: fadeIn 0.5s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Styles pour les notifications */
-.notification {
-  @apply fixed top-4 right-4 bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-50 transform transition-all duration-300;
-}
-
-.notification.success {
-  @apply border-green-200 bg-green-50;
-}
-
-.notification.error {
-  @apply border-red-200 bg-red-50;
-}
-
-.notification.warning {
-  @apply border-yellow-200 bg-yellow-50;
-}
-
-/* Styles pour les loading states */
-.loading-spinner {
-  @apply animate-spin rounded-full h-6 w-6 border-b-2 border-orange-500;
-}
-
-/* Styles pour les empty states */
-.empty-state {
-  @apply text-center py-12;
-}
-
-.empty-state-icon {
-  @apply w-16 h-16 mx-auto mb-4 text-gray-300;
-}
-
-/* Styles pour les focus states */
-button:focus,
-input:focus,
-select:focus {
-  @apply outline-none ring-2 ring-orange-500 ring-offset-2;
-}
-
-/* Styles pour les disabled states */
-button:disabled {
-  @apply opacity-50 cursor-not-allowed;
-}
-
-/* Styles pour les liens */
-a {
-  @apply text-orange-600 hover:text-orange-700 transition-colors;
-}
-
-/* Styles pour les badges */
-.badge {
-  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
-}
-
-.badge.success {
-  @apply bg-green-100 text-green-800;
-}
-
-.badge.error {
-  @apply bg-red-100 text-red-800;
-}
-
-.badge.warning {
-  @apply bg-yellow-100 text-yellow-800;
-}
-
-.badge.info {
-  @apply bg-blue-100 text-blue-800;
 }
