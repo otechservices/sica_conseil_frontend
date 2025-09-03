@@ -1,0 +1,223 @@
+<div class="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center p-4">
+  <div class="w-full max-w-md">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-orange-500 rounded-2xl mb-4">
+        <span class="text-white text-xl font-bold">SC</span>
+      </div>
+      <h1 class="text-2xl font-bold text-gray-900 mb-2">Créer votre compte</h1>
+      <p class="text-gray-600">
+        Rejoignez SICA CONSEIL gratuitement et accédez à tous nos services
+      </p>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <!-- Prénom et Nom -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">
+            Prénom
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
+            </div>
+            <input
+              type="text"
+              id="firstName"
+              formControlName="firstName"
+              placeholder="Votre prénom"
+              class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors"
+              [class.border-red-500]="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched"
+            >
+          </div>
+          <div *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched" class="mt-1 text-sm text-red-600">
+            Le prénom est requis (minimum 2 caractères)
+          </div>
+        </div>
+
+        <div>
+          <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">
+            Nom
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
+            </div>
+            <input
+              type="text"
+              id="lastName"
+              formControlName="lastName"
+              placeholder="Votre nom"
+              class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors"
+              [class.border-red-500]="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched"
+            >
+          </div>
+          <div *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched" class="mt-1 text-sm text-red-600">
+            Le nom est requis (minimum 2 caractères)
+          </div>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+          Email
+        </label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
+            </svg>
+          </div>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="votre@email.com"
+            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors"
+            [class.border-red-500]="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
+          >
+        </div>
+        <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="mt-1 text-sm text-red-600">
+          Veuillez saisir une adresse email valide
+        </div>
+      </div>
+
+      <!-- Mot de passe -->
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+          Mot de passe
+        </label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+          </div>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            formControlName="password"
+            placeholder="••••••••"
+            class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors"
+            [class.border-red-500]="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
+          >
+          <button
+            type="button"
+            (click)="togglePasswordVisibility('password')"
+            class="absolute inset-y-0 right-0 pr-3 flex items-center"
+          >
+            <svg *ngIf="!showPassword" class="h-5 w-5 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+            <svg *ngIf="showPassword" class="h-5 w-5 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path>
+            </svg>
+          </button>
+        </div>
+        <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="mt-1 text-sm text-red-600">
+          Le mot de passe doit contenir au moins 6 caractères
+        </div>
+      </div>
+
+      <!-- Confirmer le mot de passe -->
+      <div>
+        <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-2">
+          Confirmer le mot de passe
+        </label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+          </div>
+          <input
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            placeholder="••••••••"
+            class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors"
+            [class.border-red-500]="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched"
+          >
+          <button
+            type="button"
+            (click)="togglePasswordVisibility('confirmPassword')"
+            class="absolute inset-y-0 right-0 pr-3 flex items-center"
+          >
+            <svg *ngIf="!showConfirmPassword" class="h-5 w-5 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+            <svg *ngIf="showConfirmPassword" class="h-5 w-5 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path>
+            </svg>
+          </button>
+        </div>
+        <div *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched" class="mt-1 text-sm text-red-600">
+          <span *ngIf="signupForm.get('confirmPassword')?.errors?.['required']">
+            La confirmation du mot de passe est requise
+          </span>
+          <span *ngIf="signupForm.get('confirmPassword')?.errors?.['passwordMismatch']">
+            Les mots de passe ne correspondent pas
+          </span>
+        </div>
+      </div>
+
+      <!-- Conditions d'utilisation -->
+      <div class="flex items-start">
+        <div class="flex items-center h-5">
+          <input
+            id="acceptTerms"
+            formControlName="acceptTerms"
+            type="checkbox"
+            class="w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 rounded focus:ring-orange-500 focus:ring-2"
+          >
+        </div>
+        <div class="ml-3 text-sm">
+          <label for="acceptTerms" class="text-gray-700">
+            J'accepte les 
+            <a href="#" class="text-orange-600 hover:text-orange-700 underline">conditions d'utilisation</a>
+            et la 
+            <a href="#" class="text-orange-600 hover:text-orange-700 underline">politique de confidentialité</a>
+          </label>
+          <div *ngIf="signupForm.get('acceptTerms')?.invalid && signupForm.get('acceptTerms')?.touched" class="mt-1 text-red-600">
+            Vous devez accepter les conditions d'utilisation
+          </div>
+        </div>
+      </div>
+
+      <!-- Bouton de soumission -->
+      <button
+        type="submit"
+        [disabled]="signupForm.invalid"
+        class="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+        </svg>
+        Créer mon compte gratuitement
+      </button>
+    </form>
+
+    <!-- Lien de connexion -->
+    <div class="mt-6 text-center">
+      <p class="text-gray-600">
+        Déjà un compte ? 
+        <button 
+          type="button"
+          (click)="onSignIn()"
+          class="text-orange-600 hover:text-orange-700 font-medium underline"
+        >
+          Se connecter
+        </button>
+      </p>
+    </div>
+  </div>
+</div>

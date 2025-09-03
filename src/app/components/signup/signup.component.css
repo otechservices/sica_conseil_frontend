@@ -1,0 +1,44 @@
+/* Styles personnalisés pour le composant signup */
+.form-field-error {
+  @apply border-red-500 focus:ring-red-500 focus:border-red-500;
+}
+
+.checkbox-custom {
+  @apply w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 rounded focus:ring-orange-500 focus:ring-2;
+}
+
+/* Animation pour les transitions */
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+/* Style pour les liens */
+a {
+  @apply transition-colors duration-200;
+}
+
+/* Style pour les boutons */
+button {
+  @apply transition-all duration-200;
+}
+
+/* Style pour les inputs focus */
+input:focus {
+  @apply outline-none;
+}
+
+/* Animation pour les erreurs */
+.error-message {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
