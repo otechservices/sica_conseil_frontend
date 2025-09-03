@@ -1,8 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+/* Bootstrap */
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+@import 'primeflex/primeflex.css';
+
 /* Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Bootstrap */
-@import "bootstrap/dist/css/bootstrap.min.css";
+

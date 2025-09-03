@@ -27,6 +27,10 @@
               }
             ],
             "styles": [
+                "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+                "node_modules/primeng/resources/primeng.min.css",
+                "node_modules/primeicons/primeicons.css",
+                "node_modules/primeflex/primeflex.css",
               "node_modules/quill/dist/quill.snow.css",
               "node_modules/quill/dist/quill.bubble.css",
               "node_modules/quill/dist/quill.core.css",
@@ -103,5 +107,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "a25263fa-21b4-440c-a00f-187e69eea63c"
   }
 }
