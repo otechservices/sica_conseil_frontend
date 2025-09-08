@@ -203,7 +203,9 @@
 
     <!-- Stratégie d'entraînement recommandée -->
     <p-card class="border-0 shadow-sm" 
-            style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);">
+            [ngStyle]="{
+  'background': 'linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%)'
+}">
       <ng-template pTemplate="header">
         <div class="p-4 border-bottom">
           <div class="d-flex align-items-center">

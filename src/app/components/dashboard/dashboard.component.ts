@@ -91,4 +91,16 @@ export class DashboardComponent {
       this.router.navigate([item.route]);
     }
   }
+
+  onMouseEnter(event: MouseEvent) {
+  const target = event.target as HTMLElement;
+  target.style.transform = 'translateY(-2px)';
+  target.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+}
+
+onMouseLeave(event: MouseEvent) {
+  const target = event.target as HTMLElement;
+  target.style.transform = 'translateY(0)';
+  target.style.boxShadow = 'none';
+}
 }

@@ -190,8 +190,8 @@
             <div class="text-center p-4 border rounded-3 h-100 position-relative overflow-hidden" 
                  style="cursor: pointer; transition: all 0.2s ease;"
                  (click)="onQuickAction(action.action)"
-                 (mouseenter)="($event.target as any).style.transform = 'translateY(-2px)'; ($event.target as any).style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'"
-                 (mouseleave)="($event.target as any).style.transform = 'translateY(0)'; ($event.target as any).style.boxShadow = 'none'">
+                 (mouseenter)="onMouseEnter($event)" 
+                 (mouseleave)="onMouseLeave($event)">
               <div class="rounded-circle d-inline-flex align-items-center justify-center mb-3"
                    style="width: 60px; height: 60px;"
                    [style.background-color]="action.color + '20'">

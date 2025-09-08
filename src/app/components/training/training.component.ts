@@ -162,4 +162,8 @@ export class TrainingComponent {
   getProgressWidth(score: number): number {
     return Math.min(score, 100);
   }
+
+  onReturnToDashboard(){
+    
+  }
 }

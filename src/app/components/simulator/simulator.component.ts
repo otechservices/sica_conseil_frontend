@@ -90,4 +90,8 @@ export class SimulatorComponent {
       this.router.navigate([item.route]);
     }
   }
+
+    onReturnToDashboard(){
+    
+  }
 }

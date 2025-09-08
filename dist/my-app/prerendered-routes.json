@@ -1,0 +1,10 @@
+{
+  "routes": [
+    "/",
+    "/auth",
+    "/dashboard",
+    "/project-generator",
+    "/simulator",
+    "/training"
+  ]
+}
