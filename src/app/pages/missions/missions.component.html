@@ -1,0 +1,118 @@
+<div class="min-h-screen bg-white dark:bg-gray-900 transition-colors">
+  <app-header></app-header>
+
+  <!-- Hero Section -->
+  <section
+    class="relative py-20 px-4 bg-cover bg-center bg-no-repeat"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://readdy.ai/api/search-image?query=modern%20business%20consulting%20team%20working%20together%20collaborative%20office%20environment%20project%20management%20charts%20graphs%20on%20wall%20professional%20atmosphere%20bright%20lighting%20corporate%20setting%20strategic%20planning&width=1920&height=600&seq=missions-hero&orientation=landscape')"
+  >
+    <div class="max-w-6xl mx-auto text-center">
+      <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">Nos Missions</h1>
+      <p class="text-xl text-gray-200 mb-8 max-w-3xl mx-auto">Découvrez nos services d'accompagnement personnalisés pour transformer votre approche de la gestion de projet</p>
+      <button (click)="navigate('/contact')" class="bg-orange-500 text-white px-8 py-3 rounded-lg hover:bg-orange-600 cursor-pointer whitespace-nowrap font-semibold transition-colors">
+        <i class="ri-mail-line mr-2"></i>Demander un devis gratuit
+      </button>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="py-16 px-4 bg-gray-50 dark:bg-gray-800 transition-colors">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+        <div><div class="text-4xl font-bold text-orange-500 mb-2">250+</div><div class="text-gray-600 dark:text-gray-300 transition-colors">Missions réalisées</div></div>
+        <div><div class="text-4xl font-bold text-orange-500 mb-2">98%</div><div class="text-gray-600 dark:text-gray-300 transition-colors">Clients satisfaits</div></div>
+        <div><div class="text-4xl font-bold text-orange-500 mb-2">15+</div><div class="text-gray-600 dark:text-gray-300 transition-colors">Années d'expérience</div></div>
+        <div><div class="text-4xl font-bold text-orange-500 mb-2">500+</div><div class="text-gray-600 dark:text-gray-300 transition-colors">Professionnels formés</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="py-20 px-4 bg-white dark:bg-gray-900 transition-colors">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Nos Services</h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto transition-colors">Des solutions sur mesure pour répondre à tous vos besoins en gestion de projet</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div *ngFor="let mission of missions" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden hover:shadow-lg dark:hover:shadow-2xl transition-all">
+          <div class="relative h-48 overflow-hidden">
+            <img [src]="mission.image" [alt]="mission.title" class="w-full h-full object-cover object-top" />
+            <div class="absolute top-4 left-4"><div class="w-12 h-12 rounded-lg flex items-center justify-center" [ngClass]="mission.color"><i class="text-xl text-white" [ngClass]="mission.icon"></i></div></div>
+          </div>
+          <div class="p-8">
+            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3 transition-colors">{{ mission.title }}</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-6 transition-colors">{{ mission.description }}</p>
+            <ul class="space-y-2 mb-6">
+              <li *ngFor="let feature of mission.features" class="flex items-center text-gray-700 dark:text-gray-300 text-sm transition-colors"><i class="ri-check-line text-green-500 mr-3 text-base"></i>{{ feature }}</li>
+            </ul>
+            <div class="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400 mb-6 transition-colors">
+              <span><i class="ri-time-line mr-1"></i>{{ mission.duration }}</span>
+              <span class="font-semibold text-orange-500">{{ mission.price }}</span>
+            </div>
+            <button class="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 cursor-pointer whitespace-nowrap transition-colors"><i class="ri-arrow-right-line mr-2"></i>En savoir plus</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="py-20 px-4 bg-gray-50 dark:bg-gray-800 transition-colors">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Notre Processus</h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto transition-colors">Une méthodologie éprouvée pour garantir le succès de vos projets</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="w-20 h-20 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-6"><span class="text-2xl font-bold text-orange-500">1</span></div>
+          <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3 transition-colors">Analyse</h3>
+          <p class="text-gray-600 dark:text-gray-300 transition-colors">Audit complet de vos processus et identification des opportunités d'amélioration</p>
+        </div>
+        <div class="text-center">
+          <div class="w-20 h-20 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-6"><span class="text-2xl font-bold text-orange-500">2</span></div>
+          <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3 transition-colors">Stratégie</h3>
+          <p class="text-gray-600 dark:text-gray-300 transition-colors">Élaboration d'un plan d'action personnalisé adapté à vos besoins spécifiques</p>
+        </div>
+        <div class="text-center">
+          <div class="w-20 h-20 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-6"><span class="text-2xl font-bold text-orange-500">3</span></div>
+          <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3 transition-colors">Mise en œuvre</h3>
+          <p class="text-gray-600 dark:text-gray-300 transition-colors">Accompagnement dans l'implémentation des solutions avec formation des équipes</p>
+        </div>
+        <div class="text-center">
+          <div class="w-20 h-20 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-6"><span class="text-2xl font-bold text-orange-500">4</span></div>
+          <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3 transition-colors">Suivi</h3>
+          <p class="text-gray-600 dark:text-gray-300 transition-colors">Mesure de l'impact et optimisation continue pour maximiser les résultats</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-20 px-4 bg-white dark:bg-gray-900 transition-colors">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Témoignages Clients</h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300 transition-colors">Découvrez ce que nos clients disent de nos services</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div *ngFor="let testimonial of testimonials" class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 transition-colors">
+          <div class="flex items-center mb-4">
+            <i *ngFor="let i of [].constructor(5)" class="ri-star-fill text-yellow-500" [class.text-gray-300]="i >= testimonial.rating"></i>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 mb-6 italic transition-colors">"{{ testimonial.text }}"</p>
+          <div class="flex items-center">
+            <img [src]="testimonial.avatar" [alt]="testimonial.name" class="w-12 h-12 rounded-full mr-4 object-cover" />
+            <div>
+              <div class="font-semibold text-gray-800 dark:text-white transition-colors">{{ testimonial.name }}</div>
+              <div class="text-sm text-gray-500 dark:text-gray-400 transition-colors">{{ testimonial.position }} - {{ testimonial.company }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
+</div>

@@ -1,0 +1,196 @@
+<div class="min-h-screen bg-white dark:bg-gray-900 transition-colors">
+  <app-header></app-header>
+
+  <!-- Hero Section -->
+  <section
+    class="relative py-20 px-4 bg-cover bg-center bg-no-repeat transition-colors overflow-hidden"
+    style="background-image: linear-gradient(135deg, rgba(249, 115, 22, 0.9) 0%, rgba(234, 88, 12, 0.8) 50%, rgba(194, 65, 12, 0.9) 100%), url('https://static.readdy.ai/image/2ce43ce334b232046883f79f4f3df46a/46d63d94aab362a5e53218267bda1e6a.jfif')"
+  >
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- Left Content -->
+        <div class="text-left">
+          <div class="inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm mb-6">
+            Plateforme Perfectionnée de Secteur de Projet
+          </div>
+
+          <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+            SICA CONSEIL
+          </h1>
+
+          <p class="text-xl text-white/90 mb-8 max-w-lg leading-relaxed">
+            Maîtrisez la gestion de projet avec notre plateforme complète : génération automatique de projets personnalisés et formation certifiante PMP - Accès gratuit !
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 mb-12">
+            <app-button
+              [buttonClass]="'bg-white text-orange-600 px-8 py-3 rounded-lg hover:bg-orange-50 cursor-pointer whitespace-nowrap flex items-center justify-center font-semibold transition-colors shadow-lg'"
+              (onClick)="navigate('/dashboard')"
+            >
+              <i class="ri-play-fill mr-2"></i>
+              Commencer gratuitement
+            </app-button>
+            <app-button
+              [buttonClass]="'border-2 border-white text-white px-8 py-3 rounded-lg hover:bg-white/10 cursor-pointer whitespace-nowrap backdrop-blur-sm transition-colors'"
+            >
+              Découvrir nos services
+            </app-button>
+          </div>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-3 gap-6">
+            <div class="text-center">
+              <div class="text-3xl font-bold text-white mb-1">500+</div>
+              <div class="text-white/80 text-sm">Projets générés</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-white mb-1">95%</div>
+              <div class="text-white/80 text-sm">Taux de réussite PMP</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-white mb-1">1000+</div>
+              <div class="text-white/80 text-sm">Utilisateurs actifs</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right side - Image is now integrated as background -->
+        <div class="hidden lg:block">
+          <!-- This space is intentionally left for the background image to show through -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="py-20 px-4 bg-white dark:bg-gray-900 transition-colors">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-4xl font-bold text-center text-gray-800 dark:text-white mb-4 transition-colors">Nos Services</h2>
+      <p class="text-xl text-gray-600 dark:text-gray-300 text-center mb-16 max-w-3xl mx-auto transition-colors">
+        Une plateforme complète pour développer vos compétences en gestion de projet
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Auto-génération de Projets -->
+        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-8 hover:shadow-lg dark:hover:shadow-2xl transition-all">
+          <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-6">
+            <i class="ri-file-text-line text-2xl text-orange-500"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Auto-génération de Projets</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-6 transition-colors">
+            Créez des projets structurés et personnalisés en quelques clics.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-center text-gray-700 dark:text-gray-300 transition-colors">
+              <i class="ri-check-line text-green-500 mr-3"></i>
+              Formulaire interactif personnalisé
+            </li>
+            <li class="flex items-center text-gray-700 dark:text-gray-300 transition-colors">
+              <i class="ri-check-line text-green-500 mr-3"></i>
+              Génération automatique de charte projet
+            </li>
+            <li class="flex items-center text-gray-700 dark:text-gray-300 transition-colors">
+              <i class="ri-check-line text-green-500 mr-3"></i>
+              Export PDF/DOCX instantané
+            </li>
+            <li class="flex items-center text-gray-700 dark:text-gray-300 transition-colors">
+              <i class="ri-check-line text-green-500 mr-3"></i>
+              Personnalisation avancée
+            </li>
+          </ul>
+        </div>
+
+        <!-- Formation Certifiante PMP -->
+        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-8 hover:shadow-lg dark:hover:shadow-2xl transition-all">
+          <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-6">
+            <i class="ri-graduation-cap-line text-2xl text-orange-500"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Formation Certifiante PMP</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-6 transition-colors">
+            Préparez-vous efficacement à la certification PMP.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-center text-gray-700 dark:text-gray-300 transition-colors">
+              <i class="ri-check-line text-green-500 mr-3"></i>
+              Modules de formation structurés
+            </li>
+            <li class="flex items-center text-gray-700 dark:text-gray-300 transition-colors">
+              <i class="ri-check-line text-green-500 mr-3"></i>
+              Simulateur d'examens PMP
+            </li>
+            <li class="flex items-center text-gray-700 dark:text-gray-300 transition-colors">
+              <i class="ri-check-line text-green-500 mr-3"></i>
+              Feedback détaillé en corrections
+            </li>
+            <li class="flex items-center text-gray-700 dark:text-gray-300 transition-colors">
+              <i class="ri-check-line text-green-500 mr-3"></i>
+              Certificat PMP automatique
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Section -->
+  <section class="py-20 px-4 bg-gray-50 dark:bg-gray-800 transition-colors">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-4xl font-bold text-center text-gray-800 dark:text-white mb-16 transition-colors">
+        Pourquoi choisir SICA CONSEIL ?
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="ri-user-line text-2xl text-orange-500"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Accès gratuit</h3>
+          <p class="text-gray-600 dark:text-gray-300 transition-colors">
+            Accès complet à tous nos services gratuitement - Inscription en quelques accessibles à tous
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="ri-time-line text-2xl text-orange-500"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Résultats immédiats</h3>
+          <p class="text-gray-600 dark:text-gray-300 transition-colors">
+            Suivez instantanés, feedback détaillé et suivi de progression en temps réel
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="ri-money-dollar-circle-line text-2xl text-orange-500"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Prix démocratique</h3>
+          <p class="text-gray-600 dark:text-gray-300 transition-colors">
+            Accès complet à tous nos services pour seulement 1€ - Formule de qualité accessible
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 px-4 bg-orange-500 dark:bg-orange-600 transition-colors">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold text-white mb-6">
+        Prêt à transformer votre approche de la gestion de projet ?
+      </h2>
+      <p class="text-xl text-orange-100 mb-8">
+        Rejoignez des milliers de professionnels qui font confiance à SICA CONSEIL
+      </p>
+      <app-button
+        [buttonClass]="'bg-white text-orange-500 px-8 py-3 rounded-lg hover:bg-orange-50 cursor-pointer whitespace-nowrap font-semibold transition-colors'"
+        (onClick)="navigate('/dashboard')"
+      >
+        <i class="ri-play-fill mr-2"></i>
+        Commencer maintenant - Gratuit
+      </app-button>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
+</div>

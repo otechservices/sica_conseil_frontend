@@ -1,0 +1,108 @@
+<div class="min-h-screen bg-white dark:bg-gray-900 transition-colors">
+  <app-header></app-header>
+
+  <!-- Hero Section -->
+  <section
+    class="relative py-24 px-4 bg-cover bg-center bg-no-repeat"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://readdy.ai/api/search-image?query=SICA%20CONSEIL%20International%20expertise%20consulting%20team%20diverse%20professionals%20strategic%20projects%20transformation%20organizational%20excellence%20modern%20office%20environment%20collaborative%20workspace%20innovation%20leadership%20success&width=1920&height=700&seq=expertise-hero&orientation=landscape')"
+  >
+    <div class="max-w-6xl mx-auto text-center">
+      <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">Notre Expertise</h1>
+      <div class="max-w-4xl mx-auto">
+        <p class="text-xl text-gray-200 mb-8 leading-relaxed">Chez SICA CONSEIL International, nous transformons vos ambitions en réussites concrètes dans vos projets stratégiques. Notre valeur ajoutée repose sur une expertise éprouvée en gestion de projets, gouvernance et transformation organisationnelle.</p>
+        <p class="text-lg text-gray-300 mb-10">De la mise en place de PMO/DPMO, à la gestion de portefeuille, en passant par l'accompagnement aux appels à projets et l'auto-génération de projets en ligne, nous vous offrons des solutions innovantes et adaptées.</p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button (click)="navigate('/contact')" class="bg-orange-500 text-white px-8 py-3 rounded-lg hover:bg-orange-600 cursor-pointer whitespace-nowrap font-semibold transition-colors"><i class="ri-phone-line mr-2"></i>Discuter de votre projet</button>
+        <button (click)="navigate('/missions')" class="border border-white text-white px-8 py-3 rounded-lg hover:bg-white/10 cursor-pointer whitespace-nowrap font-semibold transition-colors"><i class="ri-eye-line mr-2"></i>Voir nos réalisations</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Présentation de l'expertise -->
+  <section class="py-16 px-4 bg-gray-50 dark:bg-gray-800 transition-colors">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-6 transition-colors">Excellence & Innovation</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mb-12 max-w-4xl mx-auto transition-colors">Nos experts certifiés en PMP®, PRINCE2®, PSM et Lean Six Sigma vous accompagnent pour piloter vos projets, optimiser vos performances et accélérer votre transformation. Nous combinons rigueur méthodologique, excellence opérationnelle et intelligence humaine pour transformer vos projets en résultats durables.</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="text-center"><div class="text-4xl font-bold text-orange-500 mb-2">200+</div><div class="text-gray-600 dark:text-gray-300 transition-colors">Projets réalisés</div></div>
+        <div class="text-center"><div class="text-4xl font-bold text-orange-500 mb-2">15+</div><div class="text-gray-600 dark:text-gray-300 transition-colors">Années d'expérience</div></div>
+        <div class="text-center"><div class="text-4xl font-bold text-orange-500 mb-2">25+</div><div class="text-gray-600 dark:text-gray-300 transition-colors">Experts certifiés</div></div>
+        <div class="text-center"><div class="text-4xl font-bold text-orange-500 mb-2">95%</div><div class="text-gray-600 dark:text-gray-300 transition-colors">Taux de réussite</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation Tabs -->
+  <section class="py-8 px-4 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 sticky top-0 z-10 transition-colors">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-wrap justify-center gap-2">
+        <button *ngFor="let tab of [{ id: 'expertise', label: 'Domaines clés', icon: 'ri-star-line' }, { id: 'secteurs', label: 'Secteurs', icon: 'ri-building-line' }, { id: 'equipe', label: 'Notre équipe', icon: 'ri-team-line' }]" (click)="activeTab = tab.id" class="px-6 py-3 rounded-full text-sm font-medium cursor-pointer whitespace-nowrap transition-colors flex items-center" [ngClass]="activeTab === tab.id ? 'bg-orange-500 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'"><i class="mr-2" [ngClass]="tab.icon"></i>{{ tab.label }}</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Sections -->
+  <section class="py-16 px-4 bg-white dark:bg-gray-900 transition-colors">
+    <div class="max-w-6xl mx-auto">
+      <div *ngIf="activeTab === 'expertise'">
+        <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Nos Domaines Clés</h2><p class="text-xl text-gray-600 dark:text-gray-300 transition-colors">Une expertise complète pour accompagner tous vos projets stratégiques</p></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div *ngFor="let domaine of domainesCles" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden hover:shadow-xl dark:hover:shadow-2xl transition-all">
+            <div class="relative"><img [src]="domaine.image" [alt]="domaine.title" class="w-full h-48 object-cover object-top" /><div class="absolute top-4 right-4 w-12 h-12 rounded-lg flex items-center justify-center" [ngClass]="domaine.color"><i class="text-xl text-white" [ngClass]="domaine.icon"></i></div></div>
+            <div class="p-6"><h3 class="text-lg font-bold text-gray-800 dark:text-white mb-3 transition-colors">{{ domaine.title }}</h3><p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed transition-colors">{{ domaine.description }}</p></div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="activeTab === 'secteurs'">
+        <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Expérience Multisectorielle</h2><p class="text-xl text-gray-600 dark:text-gray-300 transition-colors">Une expertise éprouvée dans tous les secteurs d'activité</p></div>
+        <div class="max-w-4xl mx-auto mb-12"><div class="relative"><img src="https://readdy.ai/api/search-image?query=business%20sectors%20pyramid%20infographic%20industry%20energy%20finance%20IT%20public%20sector%20multisectorial%20expertise%20professional%20consulting%20visual%20representation%20modern%20design%20clean%20background%20corporate%20style&width=800&height=500&seq=secteurs-pyramid&orientation=landscape" alt="Expérience multisectorielle" class="w-full rounded-xl shadow-lg" /></div></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div *ngFor="let secteur of secteurs" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-center hover:shadow-lg transition-all">
+            <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4"><i class="text-2xl text-orange-500" [ngClass]="secteur.icon"></i></div>
+            <h3 class="font-bold text-gray-800 dark:text-white mb-2 transition-colors">{{ secteur.name }}</h3>
+            <div class="text-2xl font-bold text-orange-500 mb-1">{{ secteur.projects }}</div>
+            <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors">projets réalisés</div>
+          </div>
+        </div>
+        <div class="mt-16 bg-gray-50 dark:bg-gray-800 rounded-xl p-8 transition-colors">
+          <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-8 text-center transition-colors">Experts Certifiés</h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div *ngFor="let cert of certifications" class="text-center">
+              <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3" [ngClass]="cert.color"><i class="ri-medal-line text-2xl text-white"></i></div>
+              <div class="font-bold text-gray-800 dark:text-white transition-colors">{{ cert.name }}</div>
+              <div class="text-2xl font-bold text-orange-500 mt-1">{{ cert.count }}</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors">experts</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="activeTab === 'equipe'">
+        <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Notre Équipe</h2><p class="text-xl text-gray-600 dark:text-gray-300 transition-colors">Savoir-faire et excellence au service de vos projets</p></div>
+        <div class="bg-orange-50 dark:bg-orange-900/30 rounded-xl p-12 text-center transition-colors">
+          <div class="w-24 h-24 bg-orange-100 dark:bg-orange-900/50 rounded-full flex items-center justify-center mx-auto mb-6"><i class="ri-user-star-line text-4xl text-orange-500"></i></div>
+          <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Présentation de l'équipe en cours</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto transition-colors">Nous préparons une présentation détaillée de notre équipe d'experts certifiés et de leur savoir-faire multisectoriel. Cette section sera bientôt enrichie avec les profils LinkedIn et l'expertise de chaque membre.</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button (click)="navigate('/contact')" class="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 cursor-pointer whitespace-nowrap font-semibold transition-colors"><i class="ri-phone-line mr-2"></i>Nous contacter</button>
+            <button (click)="navigate('/formations')" class="border border-orange-500 text-orange-500 px-6 py-3 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/30 cursor-pointer whitespace-nowrap font-semibold transition-colors"><i class="ri-graduation-cap-line mr-2"></i>Voir nos formations</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 px-4 bg-orange-500 dark:bg-orange-600 transition-colors">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold text-white mb-6">Transformons ensemble vos projets en succès</h2>
+      <p class="text-xl text-orange-100 mb-8">Bénéficiez de notre expertise éprouvée et de nos solutions innovantes pour accélérer votre transformation</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button (click)="navigate('/contact')" class="bg-white text-orange-500 px-8 py-3 rounded-lg hover:bg-orange-50 cursor-pointer whitespace-nowrap font-semibold transition-colors"><i class="ri-phone-line mr-2"></i>Planifier un échange</button>
+        <button (click)="navigate('/project-generator')" class="border border-white text-white px-8 py-3 rounded-lg hover:bg-white/10 cursor-pointer whitespace-nowrap font-semibold transition-colors"><i class="ri-rocket-line mr-2"></i>Auto-génération de projets</button>
+      </div>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
+</div>

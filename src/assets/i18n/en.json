@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "home": "Home",
+    "missions": "Our missions",
+    "trainings": "Trainings",
+    "generator": "Auto-generation of projects",
+    "expertise": "Our expertise",
+    "contact": "Contact",
+    "login": "Login",
+    "getStarted": "Free access"
+  },
+  "hero": {
+    "pretitle": "Advanced Project Sector Platform",
+    "title": "SICA CONSEIL",
+    "subtitle": "Master project management with our complete platform: automatic generation of personalized projects and PMP certification training - Free access!",
+    "cta_primary": "Get started for free",
+    "cta_secondary": "Discover our services"
+  }
+}

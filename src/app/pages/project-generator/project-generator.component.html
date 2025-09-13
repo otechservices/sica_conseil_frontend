@@ -1,0 +1,251 @@
+<div class="flex h-screen bg-gray-50">
+  <!-- Sidebar -->
+  <div class="w-64 bg-white border-r border-gray-200">
+    <div class="p-6">
+      <div class="flex items-center space-x-2 mb-8">
+        <div class="w-8 h-8 bg-orange-500 rounded flex items-center justify-center">
+          <span class="text-white text-sm font-bold">SC</span>
+        </div>
+        <span class="font-bold text-gray-800">SICA CONSEIL</span>
+      </div>
+
+      <nav class="space-y-2">
+        <button
+          (click)="navigate('/dashboard')"
+          class="w-full flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg cursor-pointer"
+        >
+          <i class="ri-dashboard-line w-5 h-5 flex items-center justify-center"></i>
+          <span>Tableau de bord</span>
+        </button>
+
+        <button class="w-full flex items-center space-x-3 px-3 py-2 bg-orange-100 text-orange-600 rounded-lg cursor-pointer">
+          <i class="ri-file-text-line w-5 h-5 flex items-center justify-center"></i>
+          <span>Générateur de projets</span>
+        </button>
+
+        <a [routerLink]="['/pmp-simulator']" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-orange-50 hover:text-orange-600 rounded-lg transition-colors">
+          <i class="ri-graduation-cap-line w-5 h-5 flex items-center justify-center"></i>
+          <span>Formation PMP</span>
+        </a>
+        <a [routerLink]="['/pmp-history']" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-orange-50 hover:text-orange-600 rounded-lg transition-colors">
+          <i class="ri-line-chart-line w-5 h-5 flex items-center justify-center"></i>
+          <span>Simulateur PMP</span>
+        </a>
+
+        <button class="w-full flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg cursor-pointer">
+          <i class="ri-bar-chart-line w-5 h-5 flex items-center justify-center"></i>
+          <span>Progression</span>
+        </button>
+
+        <button class="w-full flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg cursor-pointer">
+          <i class="ri-settings-line w-5 h-5 flex items-center justify-center"></i>
+          <span>Paramètres</span>
+        </button>
+      </nav>
+    </div>
+
+    <div class="absolute bottom-6 left-6">
+      <button
+        (click)="navigate('/')"
+        class="flex items-center space-x-2 text-gray-500 hover:text-gray-700 cursor-pointer"
+      >
+        <i class="ri-logout-box-line w-4 h-4 flex items-center justify-center"></i>
+        <span class="text-sm">Déconnexion</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-1 overflow-auto">
+    <div class="p-6">
+      <!-- Header -->
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-800 mb-2">Générateur de Projets</h1>
+          <p class="text-gray-600">Créez des projets structurés et professionnels en quelques clics</p>
+        </div>
+        <button class="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 cursor-pointer whitespace-nowrap">
+          Nouveau Projet
+        </button>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-gray-600 text-sm">Projets générés</span>
+            <i class="ri-file-text-line text-orange-500 w-5 h-5 flex items-center justify-center"></i>
+          </div>
+          <div class="text-2xl font-bold text-gray-800">12</div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-gray-600 text-sm">En cours</span>
+            <i class="ri-time-line text-orange-500 w-5 h-5 flex items-center justify-center"></i>
+          </div>
+          <div class="text-2xl font-bold text-gray-800">3</div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-gray-600 text-sm">Complétés</span>
+            <i class="ri-check-line text-green-500 w-5 h-5 flex items-center justify-center"></i>
+          </div>
+          <div class="text-2xl font-bold text-gray-800">8</div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-gray-600 text-sm">Taux de réussite</span>
+            <i class="ri-trophy-line text-purple-500 w-5 h-5 flex items-center justify-center"></i>
+          </div>
+          <div class="text-2xl font-bold text-gray-800">89%</div>
+        </div>
+      </div>
+
+      <!-- Search and Filters -->
+      <div class="mb-8">
+        <div class="flex flex-col md:flex-row gap-4 mb-6">
+          <div class="flex-1 relative">
+            <i class="ri-search-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 flex items-center justify-center"></i>
+            <input
+              type="text"
+              placeholder="Rechercher un template..."
+              [(ngModel)]="searchTerm"
+              class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"
+            />
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          <button
+            *ngFor="let category of categories"
+            (click)="activeCategory = category"
+            [ngClass]="{
+              'bg-orange-500 text-white': activeCategory === category,
+              'bg-gray-100 text-gray-600 hover:bg-gray-200': activeCategory !== category
+            }"
+            class="px-4 py-2 rounded-full text-sm cursor-pointer whitespace-nowrap"
+          >
+            {{ category }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Templates Grid -->
+      <div class="mb-12">
+        <h2 class="text-xl font-bold text-gray-800 mb-6">Choisir un template</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div *ngFor="let template of filteredTemplates" class="bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
+            <div class="p-6">
+              <div class="flex items-center justify-between mb-4">
+                <div [class]="'w-12 h-12 ' + template.color + ' rounded-lg flex items-center justify-center'">
+                  <i [class]="template.icon + ' text-white text-xl'"></i>
+                </div>
+                <span class="text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full">
+                  {{ template.category }}
+                </span>
+              </div>
+
+              <h3 class="text-lg font-bold text-gray-800 mb-2">{{ template.title }}</h3>
+              <p class="text-gray-600 text-sm mb-4">{{ template.description }}</p>
+
+              <div class="space-y-2 mb-6">
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-500">Durée estimée:</span>
+                  <span class="text-gray-800">{{ template.duration }}</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-500">Complexité:</span>
+                  <span [class]="template.complexityColor">{{ template.complexity }}</span>
+                </div>
+              </div>
+
+              <button class="w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 cursor-pointer whitespace-nowrap">
+                <i class="ri-add-line mr-2"></i>
+                Utiliser ce template
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Projects -->
+      <div>
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-xl font-bold text-gray-800">Projets récents</h2>
+          <span class="text-sm text-gray-500">Vos derniers projets générés</span>
+        </div>
+
+        <div class="bg-white rounded-lg border border-gray-200">
+          <div *ngFor="let project of recentProjects; let i = index" [ngClass]="{'border-b border-gray-100': i !== recentProjects.length - 1}" class="p-6 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+              <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                <i class="ri-file-text-line text-orange-500"></i>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-800">{{ project.title }}</h3>
+                <div class="flex items-center space-x-4 text-sm text-gray-500">
+                  <span>{{ project.category }}</span>
+                  <span>•</span>
+                  <span>{{ project.date }}</span>
+                  <span>•</span>
+                  <span>{{ project.budget }}</span>
+                  <span>•</span>
+                  <span>{{ project.duration }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center space-x-3">
+              <span [ngClass]="project.statusColor" class="px-2 py-1 rounded-full text-xs">
+                {{ project.status }}
+              </span>
+              <button class="text-gray-400 hover:text-gray-600 cursor-pointer">
+                <i class="ri-eye-line w-4 h-4 flex items-center justify-center"></i>
+              </button>
+              <button class="text-gray-400 hover:text-gray-600 cursor-pointer">
+                <i class="ri-download-line w-4 h-4 flex items-center justify-center"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- How it works -->
+      <div class="mt-12 bg-orange-50 rounded-lg p-8">
+        <div class="flex items-center mb-6">
+          <i class="ri-lightbulb-line text-2xl text-orange-500 mr-3"></i>
+          <h2 class="text-xl font-bold text-gray-800">Comment ça marche ?</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div class="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-lg font-bold">
+              1
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">Choisissez un template</h3>
+            <p class="text-gray-600 text-sm">Sélectionnez le type de projet qui correspond à vos besoins</p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-lg font-bold">
+              2
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">Remplissez le formulaire</h3>
+            <p class="text-gray-600 text-sm">Complétez les informations spécifiques à votre projet</p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-lg font-bold">
+              3
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">Générez et exportez</h3>
+            <p class="text-gray-600 text-sm">Obtenez votre charte de projet complète en PDF/DOCX</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

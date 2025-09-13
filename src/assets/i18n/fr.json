@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "missions": "Nos missions",
+    "trainings": "Formations",
+    "generator": "Auto-génération de projets",
+    "expertise": "Notre expertise",
+    "contact": "Contact",
+    "login": "Connexion",
+    "getStarted": "Accès gratuit"
+  },
+  "hero": {
+    "pretitle": "Plateforme Perfectionnée de Secteur de Projet",
+    "title": "SICA CONSEIL",
+    "subtitle": "Maîtrisez la gestion de projet avec notre plateforme complète : génération automatique de projets personnalisés et formation certifiante PMP - Accès gratuit !",
+    "cta_primary": "Commencer gratuitement",
+    "cta_secondary": "Découvrir nos services"
+  }
+}

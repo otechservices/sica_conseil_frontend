@@ -1,0 +1,88 @@
+<div class="min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50 flex items-center justify-center px-4 py-8">
+  <div class="w-full max-w-md">
+    <!-- Logo and Title -->
+    <div class="text-center mb-8">
+      <div class="flex items-center justify-center space-x-2 mb-4">
+        <img src="https://static.readdy.ai/image/2ce43ce334b232046883f79f4f3df46a/c6cb1acae9564517d1d164cc8ef92b11.jfif" alt="SICA CONSEIL" class="h-12 w-auto" />
+      </div>
+      <h1 class="text-2xl font-bold text-gray-800 mb-2">Créer votre compte</h1>
+      <p class="text-gray-600">Rejoignez SICA CONSEIL gratuitement et accédez à tous nos services</p>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+      <form [formGroup]="registerForm" (ngSubmit)="handleSubmit()" class="space-y-6">
+        <!-- First Name and Last Name -->
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">Prénom</label>
+            <div class="relative"><i class="ri-user-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 flex items-center justify-center"></i>
+              <input type="text" id="firstName" formControlName="firstName" placeholder="Votre prénom" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm" />
+            </div>
+          </div>
+          <div>
+            <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Nom</label>
+            <div class="relative"><i class="ri-user-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 flex items-center justify-center"></i>
+              <input type="text" id="lastName" formControlName="lastName" placeholder="Votre nom" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+          <div class="relative"><i class="ri-mail-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 flex items-center justify-center"></i>
+            <input type="email" id="email" formControlName="email" placeholder="votre@email.com" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm" />
+          </div>
+        </div>
+
+        <!-- Password Group -->
+        <div formGroupName="passwordGroup">
+          <div>
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
+            <div class="relative"><i class="ri-lock-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 flex items-center justify-center"></i>
+              <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password" placeholder="••••••••" class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm" />
+              <button type="button" (click)="showPassword = !showPassword" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer"><i [ngClass]="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'"></i></button>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-2">Confirmer le mot de passe</label>
+            <div class="relative"><i class="ri-lock-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 flex items-center justify-center"></i>
+              <input [type]="showConfirmPassword ? 'text' : 'password'" id="confirmPassword" formControlName="confirmPassword" placeholder="••••••••" class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm" />
+              <button type="button" (click)="showConfirmPassword = !showConfirmPassword" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer"><i [ngClass]="showConfirmPassword ? 'ri-eye-off-line' : 'ri-eye-line'"></i></button>
+            </div>
+            <div *ngIf="registerForm.get('passwordGroup')?.hasError('passwordMismatch') && registerForm.get('passwordGroup.confirmPassword')?.touched" class="text-red-500 text-sm mt-1">Les mots de passe ne correspondent pas.</div>
+          </div>
+        </div>
+
+        <!-- Terms and Conditions -->
+        <div class="flex items-start space-x-3">
+          <input type="checkbox" id="acceptTerms" formControlName="acceptTerms" class="mt-1 h-4 w-4 text-orange-500 focus:ring-orange-500 border-gray-300 rounded cursor-pointer" />
+          <label for="acceptTerms" class="text-sm text-gray-600 leading-relaxed">J'accepte les <a href="#" class="text-orange-500 hover:text-orange-600 cursor-pointer">conditions d'utilisation</a> et la <a href="#" class="text-orange-500 hover:text-orange-600 cursor-pointer">politique de confidentialité</a></label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" [disabled]="registerForm.invalid" class="w-full bg-orange-500 text-white py-3 px-4 rounded-lg hover:bg-orange-600 focus:ring-4 focus:ring-orange-200 font-medium transition-colors cursor-pointer whitespace-nowrap disabled:bg-gray-400 disabled:cursor-not-allowed"><i class="ri-user-add-line mr-2"></i>Créer mon compte gratuitement</button>
+      </form>
+
+      <!-- Divider -->
+      <div class="relative my-6"><div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-300"></div></div><div class="relative flex justify-center text-sm"><span class="px-2 bg-white text-gray-500">ou</span></div></div>
+
+      <!-- Social Login -->
+      <div class="space-y-3">
+        <button class="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer whitespace-nowrap"><i class="ri-google-fill text-red-500 mr-3"></i><span class="text-gray-700">Continuer avec Google</span></button>
+        <button class="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer whitespace-nowrap"><i class="ri-linkedin-fill text-blue-600 mr-3"></i><span class="text-gray-700">Continuer avec LinkedIn</span></button>
+      </div>
+
+      <!-- Login Link -->
+      <div class="text-center mt-6">
+        <p class="text-gray-600">Déjà un compte ? <a [routerLink]="['/login']" class="text-orange-500 hover:text-orange-600 font-medium cursor-pointer">Se connecter</a></p>
+      </div>
+    </div>
+
+    <!-- Back to Home -->
+    <div class="text-center mt-6">
+      <a [routerLink]="['/']" class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">← Retour à l'accueil</a>
+    </div>
+  </div>
+</div>

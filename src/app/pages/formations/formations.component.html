@@ -1,0 +1,118 @@
+<div class="min-h-screen bg-white dark:bg-gray-900 transition-colors">
+  <app-header></app-header>
+
+  <!-- Hero Section -->
+  <section class="py-20 px-4 bg-gradient-to-br from-orange-50 to-yellow-50 dark:from-gray-800 dark:to-gray-900 transition-colors">
+    <div class="max-w-6xl mx-auto text-center">
+      <div class="inline-block bg-orange-500 text-white px-4 py-2 rounded-full text-sm mb-6">Formations Certifiantes Reconnues Mondialement</div>
+      <h1 class="text-5xl md:text-6xl font-bold text-gray-800 dark:text-white mb-6 transition-colors">Développez vos compétences</h1>
+      <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed transition-colors">Avec nos formations certifiantes reconnues mondialement en gestion de projet, méthodes agiles et amélioration continue</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+        <button (click)="navigate('/dashboard')" class="bg-orange-500 text-white px-8 py-3 rounded-lg hover:bg-orange-600 cursor-pointer whitespace-nowrap flex items-center justify-center transition-colors"><i class="ri-play-fill mr-2"></i>Commencer maintenant</button>
+        <button class="border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-8 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer whitespace-nowrap transition-colors">Voir le catalogue complet</button>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="text-center"><div class="text-4xl font-bold text-orange-500 mb-2">20+</div><div class="text-gray-600 dark:text-gray-400 transition-colors">Formations certifiantes</div></div>
+        <div class="text-center"><div class="text-4xl font-bold text-orange-500 mb-2">3500+</div><div class="text-gray-600 dark:text-gray-400 transition-colors">Professionnels formés</div></div>
+        <div class="text-center"><div class="text-4xl font-bold text-orange-500 mb-2">4.8/5</div><div class="text-gray-600 dark:text-gray-400 transition-colors">Note moyenne</div></div>
+        <div class="text-center"><div class="text-4xl font-bold text-orange-500 mb-2">97%</div><div class="text-gray-600 dark:text-gray-400 transition-colors">Taux de certification</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filters -->
+  <section class="py-8 px-4 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 transition-colors">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-wrap justify-center gap-2">
+        <button *ngFor="let category of categories" (click)="activeCategory = category" class="px-6 py-3 rounded-full text-sm font-medium cursor-pointer whitespace-nowrap transition-colors" [ngClass]="activeCategory === category ? 'bg-orange-500 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'">{{ category }}</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formations Grid -->
+  <section class="py-16 px-4 bg-white dark:bg-gray-900 transition-colors">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div *ngFor="let formation of filteredFormations" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden hover:shadow-lg dark:hover:shadow-2xl transition-all">
+          <div class="relative">
+            <img [src]="formation.image" [alt]="formation.title" class="w-full h-48 object-cover object-top" />
+            <span *ngIf="formation.badge" class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold" [ngClass]="{'bg-orange-500 text-white': formation.badge === 'Certifiant', 'bg-blue-500 text-white': formation.badge === 'Présentiel', 'bg-green-500 text-white': formation.badge === 'Gratuit', 'bg-green-600 text-white': formation.badge === 'Foundation', 'bg-green-700 text-white': formation.badge === 'Practitioner', 'bg-yellow-600 text-white': formation.badge.includes('PSPO'), 'bg-yellow-700 text-white': formation.badge.includes('PSM'), 'bg-red-600 text-white': formation.badge.includes('Belt'), 'bg-purple-500 text-white': !formation.badge.includes('Certifiant') && !formation.badge.includes('Présentiel') && !formation.badge.includes('Gratuit') && !formation.badge.includes('Foundation') && !formation.badge.includes('Practitioner') && !formation.badge.includes('PSPO') && !formation.badge.includes('PSM') && !formation.badge.includes('Belt')}">{{ formation.badge }}</span>
+            <div class="absolute top-4 right-4 text-2xl">{{ formation.logo }}</div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-600 px-2 py-1 rounded-full">{{ formation.category }}</span>
+              <span class="text-xs text-gray-500 dark:text-gray-400 transition-colors">{{ formation.level }}</span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 transition-colors line-clamp-2">{{ formation.title }}</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2 transition-colors">{{ formation.description }}</p>
+            <div class="flex items-center mb-4">
+              <div class="flex items-center">
+                <i *ngFor="let i of [].constructor(5)" class="ri-star-fill text-yellow-500 text-sm" [class.text-gray-300]="i >= formation.rating"></i>
+                <span class="text-sm text-gray-600 dark:text-gray-400 ml-2 transition-colors">{{ formation.rating }} ({{ formation.students }} étudiants)</span>
+              </div>
+            </div>
+            <ul class="space-y-1 mb-6">
+              <li *ngFor="let feature of formation.features.slice(0, 3)" class="flex items-center text-gray-700 dark:text-gray-300 text-sm transition-colors"><i class="ri-check-line text-green-500 mr-2 text-base"></i>{{ feature }}</li>
+            </ul>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center">
+                <span class="text-2xl font-bold text-orange-500">{{ formation.price }}</span>
+                <span *ngIf="formation.originalPrice !== '0€'" class="text-sm text-gray-500 dark:text-gray-400 line-through ml-2 transition-colors">{{ formation.originalPrice }}</span>
+              </div>
+              <div class="text-sm text-gray-500 dark:text-gray-400 transition-colors"><i class="ri-time-line mr-1"></i>{{ formation.duration }}</div>
+            </div>
+            <button class="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 cursor-pointer whitespace-nowrap transition-colors"><i class="ri-graduation-cap-line mr-2"></i>{{ formation.price === 'Gratuit' ? 'Accès gratuit' : 'S\'inscrire maintenant' }}</button>
+            <div class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-400 transition-colors"><span>Instructeur: {{ formation.instructor }}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instructors Section -->
+  <section class="py-16 px-4 bg-gray-50 dark:bg-gray-800 transition-colors">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Nos Experts Formateurs</h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300 transition-colors">Apprenez auprès des meilleurs experts certifiés du secteur</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div *ngFor="let instructor of instructors" class="bg-white dark:bg-gray-900 rounded-xl p-8 text-center transition-colors">
+          <img [src]="instructor.image" [alt]="instructor.name" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" />
+          <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2 transition-colors">{{ instructor.name }}</h3>
+          <p class="text-orange-500 font-semibold mb-2">{{ instructor.title }}</p>
+          <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 transition-colors">{{ instructor.experience }} d'expérience</p>
+          <div class="flex flex-wrap justify-center gap-2 mb-4">
+            <span *ngFor="let cert of instructor.certifications" class="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-600 px-2 py-1 rounded">{{ cert }}</span>
+          </div>
+          <div class="flex items-center justify-center space-x-4 text-sm text-gray-500 dark:text-gray-400 transition-colors"><span>⭐ {{ instructor.rating }}</span><span>{{ instructor.courses }} formations</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="py-16 px-4 bg-white dark:bg-gray-900 transition-colors">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Pourquoi choisir nos formations ?</h2></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center"><div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4"><i class="ri-medal-line text-2xl text-orange-500"></i></div><h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 transition-colors">Certifications Reconnues</h3><p class="text-gray-600 dark:text-gray-300 text-sm transition-colors">Obtenez des certifications reconnues internationalement</p></div>
+        <div class="text-center"><div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4"><i class="ri-user-line text-2xl text-orange-500"></i></div><h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 transition-colors">Support Personnalisé</h3><p class="text-gray-600 dark:text-gray-300 text-sm transition-colors">Accompagnement individuel tout au long de votre parcours</p></div>
+        <div class="text-center"><div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4"><i class="ri-time-line text-2xl text-orange-500"></i></div><h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 transition-colors">Formation Flexible</h3><p class="text-gray-600 dark:text-gray-300 text-sm transition-colors">E-learning ou formation assistée selon vos préférences</p></div>
+        <div class="text-center"><div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4"><i class="ri-check-line text-2xl text-orange-500"></i></div><h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 transition-colors">Taux de Réussite Élevé</h3><p class="text-gray-600 dark:text-gray-300 text-sm transition-colors">97% de taux de réussite aux certifications</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 px-4 bg-orange-500 dark:bg-orange-600 transition-colors">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold text-white mb-6">Prêt à obtenir votre certification ?</h2>
+      <p class="text-xl text-orange-100 mb-8">Rejoignez plus de 3500 professionnels qui ont transformé leur carrière avec nos formations certifiantes</p>
+      <button (click)="navigate('/dashboard')" class="bg-white text-orange-500 px-8 py-3 rounded-lg hover:bg-orange-50 cursor-pointer whitespace-nowrap font-semibold transition-colors"><i class="ri-graduation-cap-line mr-2"></i>Commencer ma formation</button>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
+</div>

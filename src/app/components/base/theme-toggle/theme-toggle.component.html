@@ -1,0 +1,4 @@
+<button (click)="toggleTheme()" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">
+  <i class="ri-sun-line text-xl" *ngIf="!themeService.isDarkMode()"></i>
+  <i class="ri-moon-line text-xl" *ngIf="themeService.isDarkMode()"></i>
+</button>
