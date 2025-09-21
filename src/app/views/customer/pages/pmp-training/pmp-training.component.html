@@ -1,0 +1,233 @@
+  <div *ngIf="showProfileDropdown" class="fixed inset-0 z-40" (click)="showProfileDropdown = false"></div>
+
+  <div class="flex">
+
+
+    <!-- Main Content -->
+    <div class="flex-1 p-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="mb-8">
+          <h1 class="text-3xl font-bold text-gray-800 mb-2">Entraînement par domaine</h1>
+          <p class="text-gray-600">Concentrez-vous sur vos points faibles avec des questions ciblées</p>
+        </div>
+        <div class="bg-white rounded-lg border border-gray-200 p-8 mb-8">
+          <h2 class="text-xl font-bold text-gray-800 mb-4">Vue d'ensemble des domaines</h2>
+          <p class="text-gray-600 mb-6">L'examen PMP est structuré autour de 3 domaines principaux selon le PMI</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div *ngFor="let domain of domains" class="bg-orange-50 rounded-lg p-6">
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center" [ngClass]="domain.color"><i class="text-2xl text-white" [ngClass]="domain.icon"></i></div>
+                <span class="text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full">{{ domain.level }}</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-800 mb-1">{{ domain.title }}</h3>
+              <p class="text-sm text-gray-600 mb-3">{{ domain.subtitle }}</p>
+              <p class="text-sm text-gray-700 mb-4">{{ domain.description }}</p>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-sm text-gray-600">Score actuel</span>
+                <span class="text-lg font-bold" [ngClass]="getScoreColor(domain.score)">{{ domain.score }}%</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+                <div class="h-2 rounded-full" [ngClass]="getScoreBarColor(domain.score)" [style.width]="domain.score + '%'"></div>
+              </div>
+              <button (click)="navigate('/pmp-test?domain=' + domain.id)" class="w-full bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 cursor-pointer whitespace-nowrap"><i class="ri-play-fill mr-2"></i>S'entraîner</button>
+            </div>
+          </div>
+        </div>
+
+        <div *ngFor="let domain of domains" class="bg-white rounded-lg border border-gray-200 p-8 mb-6">
+          <div class="flex items-center space-x-4 mb-6">
+            <div class="w-12 h-12 rounded-lg flex items-center justify-center" [ngClass]="domain.color"><i class="text-2xl text-white" [ngClass]="domain.icon"></i></div>
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-gray-800">{{ domain.title }}</h3>
+              <p class="text-gray-600">{{ domain.subtitle }}</p>
+            </div>
+            <div class="text-right">
+              <div class="text-sm text-gray-600">Performance actuelle</div>
+              <div class="text-2xl font-bold" [ngClass]="getScoreColor(domain.score)">{{ domain.score }}%</div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+              <h4 class="font-semibold text-gray-800 mb-4">Sujets couverts :</h4>
+              <ul class="space-y-2">
+                <li *ngFor="let topic of domain.topics" class="flex items-center text-gray-700"><div class="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>{{ topic }}</li>
+              </ul>
+            </div>
+            <div class="flex flex-col justify-center">
+              <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                <div class="h-3 rounded-full" [ngClass]="getScoreBarColor(domain.score)" [style.width]="domain.score + '%'"></div>
+              </div>
+              <div class="flex space-x-3">
+                <button (click)="navigate('/pmp-test?domain=' + domain.id)" class="flex-1 bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 cursor-pointer whitespace-nowrap"><i class="ri-play-fill mr-2"></i>Test approfondi (30 questions - 55 min)</button>
+                <button (click)="openStudyModal(domain.id)" class="bg-gray-100 text-gray-700 py-2 px-4 rounded hover:bg-gray-200 cursor-pointer whitespace-nowrap"><i class="ri-book-line mr-2"></i>Étudier</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg p-8">
+          <div class="flex items-center space-x-3 mb-6">
+            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center"><i class="ri-lightbulb-line text-2xl text-orange-500"></i></div>
+            <h2 class="text-xl font-bold text-gray-800">Stratégie d'entraînement recommandée</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="ri-focus-3-line text-2xl text-orange-500"></i></div>
+              <h3 class="font-bold text-gray-800 mb-2">1. Identifiez vos faiblesses</h3>
+              <p class="text-sm text-gray-600">Concentrez-vous sur les domaines où votre score est inférieur à 75%</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="ri-book-open-line text-2xl text-orange-500"></i></div>
+              <h3 class="font-bold text-gray-800 mb-2">2. Étudiez puis pratiquez</h3>
+              <p class="text-sm text-gray-600">Alternez entre formation théorique et tests pratiques</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="ri-repeat-line text-2xl text-orange-500"></i></div>
+              <h3 class="font-bold text-gray-800 mb-2">3. Testez régulièrement</h3>
+              <p class="text-sm text-gray-600">Faites des tests courts mais fréquents pour maintenir votre niveau</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Study Modal -->
+  <div *ngIf="studyModal && currentDomain" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-200 p-6 flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center" [ngClass]="currentDomain.color"><i class="text-2xl text-white" [ngClass]="currentDomain.icon"></i></div>
+          <div>
+            <h2 class="text-2xl font-bold text-gray-800">Formation - {{ currentDomain.title }}</h2>
+            <p class="text-gray-600">{{ currentDomain.subtitle }}</p>
+          </div>
+        </div>
+        <button (click)="closeStudyModal()" class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 cursor-pointer"><i class="ri-close-line text-2xl"></i></button>
+      </div>
+      <div class="p-6">
+        <div class="mb-8">
+          <h3 class="text-xl font-bold text-gray-800 mb-4">Vue d'ensemble</h3>
+          <p class="text-gray-700 leading-relaxed">{{ currentDomain.studyContent.overview }}</p>
+        </div>
+        <div class="mb-8">
+          <h3 class="text-xl font-bold text-gray-800 mb-4">Points clés à retenir</h3>
+          <ul class="space-y-3">
+            <li *ngFor="let point of currentDomain.studyContent.keyPoints" class="flex items-start">
+              <div class="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3 mt-0.5"><i class="ri-check-line text-orange-500 text-sm"></i></div>
+              <span class="text-gray-700">{{ point }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="mb-8">
+          <h3 class="text-xl font-bold text-gray-800 mb-4">Modules de formation</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div *ngFor="let module of currentDomain.studyContent.modules; let i = index" class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+              <div class="flex items-center justify-between mb-2">
+                <h4 class="font-semibold text-gray-800">{{ module.title }}</h4>
+                <span class="text-sm text-orange-500 bg-orange-50 px-2 py-1 rounded">{{ module.duration }}</span>
+              </div>
+              <p class="text-gray-600 text-sm mb-3">{{ module.description }}</p>
+              <button (click)="openModuleModal(currentDomain.id, i)" class="w-full bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 cursor-pointer whitespace-nowrap text-sm"><i class="ri-play-fill mr-2"></i>Commencer le module</button>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200">
+          <button (click)="closeStudyModal(); navigate('/pmp-test?domain=' + currentDomain.id)" class="flex-1 bg-orange-500 text-white py-3 px-6 rounded-lg hover:bg-orange-600 cursor-pointer whitespace-nowrap"><i class="ri-play-fill mr-2"></i>Passer au test pratique</button>
+          <button (click)="closeStudyModal()" class="flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 cursor-pointer whitespace-nowrap"><i class="ri-bookmark-line mr-2"></i>Marquer comme étudié</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Module Training Modal -->
+  <div *ngIf="moduleModal && currentModule && currentModuleDomain" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-200 p-6 flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center" [ngClass]="currentModuleDomain.color"><i class="text-2xl text-white" [ngClass]="currentModuleDomain.icon"></i></div>
+          <div>
+            <h2 class="text-2xl font-bold text-gray-800">{{ currentModule.title }}</h2>
+            <p class="text-gray-600">{{ currentModuleDomain.title }} • {{ currentModule.duration }}</p>
+          </div>
+        </div>
+        <button (click)="closeModuleModal()" class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 cursor-pointer"><i class="ri-close-line text-2xl"></i></button>
+      </div>
+      <div class="p-6">
+        <div class="mb-8">
+          <div class="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg p-6 mb-6">
+            <div class="flex items-center space-x-3 mb-4"><i class="ri-graduation-cap-line text-2xl text-orange-500"></i>
+              <h3 class="text-xl font-bold text-gray-800">Objectifs du module</h3>
+            </div>
+            <p class="text-gray-700">{{ currentModule.description }}</p>
+          </div>
+          <div class="space-y-6">
+            <div *ngFor="let lesson of lessons; let lessonIndex = index" class="border border-gray-200 rounded-lg p-6">
+              <div class="flex items-center justify-between mb-4">
+                <h4 class="text-lg font-semibold text-gray-800 flex items-center"><i class="text-orange-500 mr-2" [ngClass]="lesson.icon"></i>Leçon {{ lessonIndex + 1 }} : {{ lesson.title }}
+                  <i *ngIf="isLessonCompleted(currentModuleDomain.id, moduleModal.moduleIndex, lessonIndex)" class="ri-check-circle-fill text-green-500 ml-2"></i>
+                </h4>
+                <span class="text-sm text-gray-500">{{ lesson.duration }}</span>
+              </div>
+              <p class="text-gray-700 mb-4">{{ lesson.content.introduction }}</p>
+              <div class="border rounded-lg p-4 mb-4" [ngClass]="{'bg-blue-50 border-blue-200': lessonIndex === 0, 'bg-green-50 border-green-200': lessonIndex === 1, 'bg-purple-50 border-purple-200': lessonIndex === 2}">
+                <h5 class="font-semibold mb-2" [ngClass]="{'text-blue-800': lessonIndex === 0, 'text-green-800': lessonIndex === 1, 'text-purple-800': lessonIndex === 2}">{{ lessonIndex === 0 ? 'Points clés :' : lessonIndex === 1 ? 'Vous apprendrez :' : 'Activités incluses :' }}</h5>
+                <ul class="text-sm space-y-1" [ngClass]="{'text-blue-700': lessonIndex === 0, 'text-green-700': lessonIndex === 1, 'text-purple-700': lessonIndex === 2}">
+                  <li *ngFor="let point of lesson.content.keyPoints">• {{ point }}</li>
+                </ul>
+              </div>
+              <button *ngIf="isLessonUnlocked(currentModuleDomain.id, moduleModal.moduleIndex, lessonIndex)" (click)="openLessonModal(currentModuleDomain.id, moduleModal.moduleIndex, lessonIndex)" class="px-4 py-2 rounded cursor-pointer whitespace-nowrap" [ngClass]="isLessonCompleted(currentModuleDomain.id, moduleModal.moduleIndex, lessonIndex) ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-orange-500 text-white hover:bg-orange-600'">
+                <i class="mr-2" [ngClass]="isLessonCompleted(currentModuleDomain.id, moduleModal.moduleIndex, lessonIndex) ? 'ri-check-line' : 'ri-play-fill'"></i>{{ isLessonCompleted(currentModuleDomain.id, moduleModal.moduleIndex, lessonIndex) ? 'Revoir la leçon' : 'Commencer la leçon' }}
+              </button>
+              <button *ngIf="!isLessonUnlocked(currentModuleDomain.id, moduleModal.moduleIndex, lessonIndex)" class="bg-gray-300 text-gray-600 px-4 py-2 rounded cursor-not-allowed" disabled><i class="ri-lock-line mr-2"></i>Terminer la leçon {{ lessonIndex }} d'abord</button>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 rounded-lg p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h4 class="font-semibold text-gray-800">Progression du module</h4>
+            <span class="text-sm text-gray-600">{{ getModuleProgress(currentModuleDomain.id, moduleModal.moduleIndex) }}% terminé</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2 mb-6">
+            <div class="bg-orange-500 h-2 rounded-full transition-all duration-300" [style.width]="getModuleProgress(currentModuleDomain.id, moduleModal.moduleIndex) + '%'"></div>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button (click)="closeModuleModal(); navigate('/pmp-test?domain=' + currentModuleDomain.id)" class="flex-1 bg-orange-500 text-white py-3 px-6 rounded-lg hover:bg-orange-600 cursor-pointer whitespace-nowrap"><i class="ri-question-line mr-2"></i>Passer au test après formation</button>
+            <button (click)="closeModuleModal(); openStudyModal(currentModuleDomain.id)" class="flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 cursor-pointer whitespace-nowrap"><i class="ri-arrow-left-line mr-2"></i>Retour aux modules</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lesson Content Modal -->
+  <div *ngIf="lessonModal && currentLessonData" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-200 p-6 flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center" [ngClass]="currentLessonData.domain?.color"><i class="text-2xl text-white" [ngClass]="lessons[lessonModal.lessonIndex].icon"></i></div>
+          <div>
+            <h2 class="text-2xl font-bold text-gray-800">Leçon {{ lessonModal.lessonIndex + 1 }} : {{ lessons[lessonModal.lessonIndex].title }}</h2>
+            <p class="text-gray-600">{{ currentLessonData.module?.title }} • {{ lessons[lessonModal.lessonIndex].duration }}</p>
+          </div>
+        </div>
+        <button (click)="closeLessonModal()" class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 cursor-pointer"><i class="ri-close-line text-2xl"></i></button>
+      </div>
+      <div class="p-6">
+        <div class="prose max-w-none mb-8">
+          <div class="text-gray-700 leading-relaxed" [innerHTML]="getSanitizedHtml(lessons[lessonModal.lessonIndex].content.detailedContent)"></div>
+        </div>
+        <div class="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg p-6 mb-8">
+          <h4 class="font-bold text-gray-800 mb-4 flex items-center"><i class="ri-questionnaire-line text-orange-500 mr-2"></i>Vérification des connaissances</h4>
+          <p class="text-gray-700 mb-4">Avant de passer à la suite, assurez-vous d'avoir bien compris les concepts clés de cette leçon.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div *ngFor="let point of lessons[lessonModal.lessonIndex].content.keyPoints" class="flex items-center bg-white rounded-lg p-3 border border-orange-200"><i class="ri-check-line text-green-500 mr-3"></i><span class="text-gray-700">{{ point }}</span></div>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200">
+          <button (click)="completeLesson(lessonModal.domainId, lessonModal.moduleIndex, lessonModal.lessonIndex); goBackToModuleFromLesson()" class="flex-1 bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-600 cursor-pointer whitespace-nowrap"><i class="ri-check-line mr-2"></i>Marquer comme terminée</button>
+          <button (click)="goBackToModuleFromLesson()" class="flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 cursor-pointer whitespace-nowrap"><i class="ri-arrow-left-line mr-2"></i>Retour au module</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,40 @@
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 flex transition-colors">
+    <aside class="w-64 bg-white dark:bg-gray-800 shadow-sm border-r border-gray-200 dark:border-gray-700 transition-colors">
+        <div class="p-6">
+        <div class="flex items-center space-x-3 mb-8">
+            <img
+            src="https://static.readdy.ai/image/2ce43ce334b232046883f79f4f3df46a/b61b027bf4d42918b4ae2ae5a241e2c2.jfif"
+            alt="Sica Conseil Int"
+            class="h-10 w-auto"
+            />
+        </div>
+
+        <nav class="space-y-2">
+            <button
+            *ngFor="let item of menuItems"
+            (click)="setSelectedMenu(item.id)"
+            [ngClass]="{
+                'bg-orange-100 dark:bg-orange-900/30 text-orange-600 border-r-2 border-orange-500': selectedMenu === item.id,
+                'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700': selectedMenu !== item.id
+            }"
+            class="w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-colors cursor-pointer"
+            >
+            <i [class]="item.icon + ' text-lg'"></i>
+            <span class="font-medium">{{ item.label }}</span>
+            </button>
+        </nav>
+
+        <div class="absolute bottom-6 left-6">
+            <button class="flex items-center space-x-3 text-gray-600 dark:text-gray-300 hover:text-orange-500 cursor-pointer transition-colors">
+            <i class="ri-logout-box-line text-lg"></i>
+            <span>Déconnexion</span>
+            </button>
+        </div>
+        </div>
+    </aside>
+    <main class="flex-1 overflow-y-auto">
+        <app-customer-header></app-customer-header>
+        <router-outlet></router-outlet>
+        <app-customer-footer></app-customer-footer>
+    </main>
+</div>
