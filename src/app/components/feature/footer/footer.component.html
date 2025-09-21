@@ -5,7 +5,7 @@
         <div class="flex items-center space-x-3 mb-6">
           <img
             src="https://static.readdy.ai/image/2ce43ce334b232046883f79f4f3df46a/b61b027bf4d42918b4ae2ae5a241e2c2.jfif"
-            alt="SICA CONSEIL"
+            alt="Sica Conseil Int"
             class="h-8 w-auto"
           />
         </div>
@@ -42,10 +42,32 @@
     </div>
 
     <div class="border-t border-gray-700 dark:border-gray-600 pt-8 flex flex-col md:flex-row justify-between items-center transition-colors">
-      <p class="text-gray-400 dark:text-gray-500 mb-4 md:mb-0 transition-colors">© 2024 SICA CONSEIL. Tous droits réservés.</p>
+      <p class="text-gray-400 dark:text-gray-500 mb-4 md:mb-0 transition-colors">© 2025 Sica Conseil Int. Tous droits réservés.</p>
       <div class="flex items-center space-x-4">
-        <a href="https://readdy.ai/?origin=logo" class="text-gray-400 dark:text-gray-500 hover:text-orange-400 cursor-pointer transition-colors">Made with Readdy</a>
       </div>
     </div>
   </div>
 </footer>
+
+
+<div class="fixed bottom-6 right-6 flex flex-col items-center space-y-3">
+  <!-- Réseaux (affichés seulement si isOpen est vrai) -->
+  <a *ngIf="isOpen" 
+     href="https://wa.me/2290143178658" target="_blank"
+     class="w-12 h-12 flex items-center justify-center rounded-full bg-green-500 shadow-lg text-white hover:scale-110 transition">
+    <i class="fab fa-whatsapp text-2xl"></i>
+  </a>
+
+  <a *ngIf="isOpen" 
+     href="https://m.me/tonpage" target="_blank"
+     class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-500 shadow-lg text-white hover:scale-110 transition">
+    <i class="fab fa-facebook-messenger text-2xl"></i>
+  </a>
+
+  <!-- Bouton toggle -->
+  <button (click)="toggleMenu()" 
+          class="w-14 h-14 flex items-center justify-center rounded-full shadow-lg text-white hover:scale-110 transition" style="background-color: rgba(234, 88, 12, 1);">
+    <i *ngIf="!isOpen" class="fas fa-plus text-2xl"></i>
+    <i *ngIf="isOpen" class="fas fa-times text-2xl"></i>
+  </button>
+</div>

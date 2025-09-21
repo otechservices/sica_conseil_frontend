@@ -7,7 +7,7 @@
     style="background-image: linear-gradient(135deg, rgba(249, 115, 22, 0.9) 0%, rgba(234, 88, 12, 0.8) 50%, rgba(194, 65, 12, 0.9) 100%), url('https://static.readdy.ai/image/2ce43ce334b232046883f79f4f3df46a/46d63d94aab362a5e53218267bda1e6a.jfif')"
   >
     <div class="max-w-6xl mx-auto">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="grid grid-cols-1  gap-12 items-center">
         <!-- Left Content -->
         <div class="text-left">
           <div class="inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm mb-6">
@@ -15,12 +15,13 @@
           </div>
 
           <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            SICA CONSEIL
+           Sica Conseil International
+           <br>
+           Votre Partenaire Stratégique
           </h1>
 
           <p class="text-xl text-white/90 mb-8 max-w-lg leading-relaxed">
-            Maîtrisez la gestion de projet avec notre plateforme complète : génération automatique de projets personnalisés et formation certifiante PMP - Accès gratuit !
-          </p>
+            Cabinet spécialisé dans le conseil stratégique, la gestion optimisée de portefeuille et programme, la transformation digitale et le développement des compétences. Nous aidons les entreprises à optimiser leur positionnement, gérer leur portefeuille et programme,  renforcer leur efficacité opérationnelle et réussir leurs transitions stratégiques grâce à des solutions adaptées et innovantes.          </p>
 
           <div class="flex flex-col sm:flex-row gap-4 mb-12">
             <app-button
@@ -65,78 +66,39 @@
   <!-- Services Section -->
   <section class="py-20 px-4 bg-white dark:bg-gray-900 transition-colors">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold text-center text-gray-800 dark:text-white mb-4 transition-colors">Nos Services</h2>
-      <p class="text-xl text-gray-600 dark:text-gray-300 text-center mb-16 max-w-3xl mx-auto transition-colors">
-        Une plateforme complète pour développer vos compétences en gestion de projet
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Auto-génération de Projets -->
-        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-8 hover:shadow-lg dark:hover:shadow-2xl transition-all">
-          <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-6">
-            <i class="ri-file-text-line text-2xl text-orange-500"></i>
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Nos Services</h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto transition-colors">Des solutions sur mesure pour répondre à tous vos besoins en gestion de projet</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div *ngFor="let mission of missions" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden hover:shadow-lg dark:hover:shadow-2xl transition-all">
+          <div class="relative h-48 overflow-hidden">
+            <img [src]="mission.image" [alt]="mission.title" class="w-full h-full object-cover object-top" />
+            <div class="absolute top-4 left-4"><div class="w-12 h-12 rounded-lg flex items-center justify-center" [ngClass]="mission.color"><i class="text-xl text-white" [ngClass]="mission.icon"></i></div></div>
           </div>
-          <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Auto-génération de Projets</h3>
-          <p class="text-gray-600 dark:text-gray-300 mb-6 transition-colors">
-            Créez des projets structurés et personnalisés en quelques clics.
-          </p>
-          <ul class="space-y-3">
-            <li class="flex items-center text-gray-700 dark:text-gray-300 transition-colors">
-              <i class="ri-check-line text-green-500 mr-3"></i>
-              Formulaire interactif personnalisé
-            </li>
-            <li class="flex items-center text-gray-700 dark:text-gray-300 transition-colors">
-              <i class="ri-check-line text-green-500 mr-3"></i>
-              Génération automatique de charte projet
-            </li>
-            <li class="flex items-center text-gray-700 dark:text-gray-300 transition-colors">
-              <i class="ri-check-line text-green-500 mr-3"></i>
-              Export PDF/DOCX instantané
-            </li>
-            <li class="flex items-center text-gray-700 dark:text-gray-300 transition-colors">
-              <i class="ri-check-line text-green-500 mr-3"></i>
-              Personnalisation avancée
-            </li>
-          </ul>
-        </div>
-
-        <!-- Formation Certifiante PMP -->
-        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-8 hover:shadow-lg dark:hover:shadow-2xl transition-all">
-          <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-6">
-            <i class="ri-graduation-cap-line text-2xl text-orange-500"></i>
+          <div class="p-8">
+            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3 transition-colors">{{ mission.title }}</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-6 transition-colors">{{ mission.description }}</p>
+            <ul class="space-y-2 mb-6">
+              <li *ngFor="let feature of mission.features" class="flex items-center text-gray-700 dark:text-gray-300 text-sm transition-colors"><i class="ri-check-line text-green-500 mr-3 text-base"></i>{{ feature }}</li>
+            </ul>
+            <div class="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400 mb-6 transition-colors">
+              <span><i class="ri-time-line mr-1"></i>{{ mission.duration }}</span>
+              <span class="font-semibold text-orange-500">{{ mission.price }}</span>
+            </div>
+            <button class="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 cursor-pointer whitespace-nowrap transition-colors"><i class="ri-arrow-right-line mr-2"></i>En savoir plus</button>
           </div>
-          <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Formation Certifiante PMP</h3>
-          <p class="text-gray-600 dark:text-gray-300 mb-6 transition-colors">
-            Préparez-vous efficacement à la certification PMP.
-          </p>
-          <ul class="space-y-3">
-            <li class="flex items-center text-gray-700 dark:text-gray-300 transition-colors">
-              <i class="ri-check-line text-green-500 mr-3"></i>
-              Modules de formation structurés
-            </li>
-            <li class="flex items-center text-gray-700 dark:text-gray-300 transition-colors">
-              <i class="ri-check-line text-green-500 mr-3"></i>
-              Simulateur d'examens PMP
-            </li>
-            <li class="flex items-center text-gray-700 dark:text-gray-300 transition-colors">
-              <i class="ri-check-line text-green-500 mr-3"></i>
-              Feedback détaillé en corrections
-            </li>
-            <li class="flex items-center text-gray-700 dark:text-gray-300 transition-colors">
-              <i class="ri-check-line text-green-500 mr-3"></i>
-              Certificat PMP automatique
-            </li>
-          </ul>
         </div>
       </div>
     </div>
   </section>
 
+
   <!-- Why Choose Section -->
   <section class="py-20 px-4 bg-gray-50 dark:bg-gray-800 transition-colors">
     <div class="max-w-6xl mx-auto">
       <h2 class="text-4xl font-bold text-center text-gray-800 dark:text-white mb-16 transition-colors">
-        Pourquoi choisir SICA CONSEIL ?
+        Pourquoi choisir Sica Conseil Int ?
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -180,7 +142,7 @@
         Prêt à transformer votre approche de la gestion de projet ?
       </h2>
       <p class="text-xl text-orange-100 mb-8">
-        Rejoignez des milliers de professionnels qui font confiance à SICA CONSEIL
+        Rejoignez des milliers de professionnels qui font confiance à Sica Conseil Int
       </p>
       <app-button
         [buttonClass]="'bg-white text-orange-500 px-8 py-3 rounded-lg hover:bg-orange-50 cursor-pointer whitespace-nowrap font-semibold transition-colors'"

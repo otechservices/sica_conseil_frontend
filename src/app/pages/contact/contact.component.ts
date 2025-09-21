@@ -50,12 +50,12 @@ export class ContactComponent implements OnInit {
     });
 
     this.seoService.setPageMetadata(
-      "Contactez-nous - SICA CONSEIL | Gestion de Projet et Formation",
-      "Contactez SICA CONSEIL pour vos projets de gestion, formations PMP, conseil en transformation. Consultation gratuite. +33 1 23 45 67 89"
+      "Contactez-nous - Sica Conseil Int | Gestion de Projet et Formation",
+      "Contactez Sica Conseil Int pour vos projets de gestion, formations PMP, conseil en transformation. Consultation gratuite. +33 1 23 45 67 89"
     );
     this.seoService.generateWebPageSchema(
-      "Contactez-nous - SICA CONSEIL",
-      "Contactez SICA CONSEIL pour vos projets de gestion, formations PMP, conseil en transformation. Consultation gratuite. +33 1 23 45 67 89",
+      "Contactez-nous - Sica Conseil Int",
+      "Contactez Sica Conseil Int pour vos projets de gestion, formations PMP, conseil en transformation. Consultation gratuite. +33 1 23 45 67 89",
       "/contact"
     );
     this.seoService.generateBreadcrumbSchema([

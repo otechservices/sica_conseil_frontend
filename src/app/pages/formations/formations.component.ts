@@ -7,6 +7,10 @@ import { SeoService } from '../../services/seo.service';
   templateUrl: './formations.component.html',
 })
 export class FormationsComponent implements OnInit {
+
+  timeLeft: string | undefined;
+  timer: any;
+
   isMenuOpen = false;
   activeCategory = 'Tous';
 
@@ -25,11 +29,14 @@ export class FormationsComponent implements OnInit {
   constructor(
     private navigationService: NavigationService,
     private seoService: SeoService
-  ) {}
+  ) {
+      const targetTime = new Date().getTime() + 6 * 60 * 60 * 1000 + 23 * 60 * 1000 + 44 * 1000; // 6 hours, 23 minutes, 44 seconds
+    this.startCountdown(targetTime);
+  }
 
   ngOnInit(): void {
     this.seoService.setPageMetadata(
-      "Formations Certifiantes PMP, PRINCE2, Scrum, Lean Six Sigma | SICA CONSEIL",
+      "Formations Certifiantes PMP, PRINCE2, Scrum, Lean Six Sigma | Sica Conseil Int",
       "Formations certifiantes reconnues mondialement : PMP, CAPM, PRINCE2, PSPO, PSM, Lean Six Sigma. E-learning et formation assistée. Taux de réussite 97%."
     );
     this.seoService.generateWebPageSchema(
@@ -57,5 +64,28 @@ export class FormationsComponent implements OnInit {
 
   navigate(path: string) {
     this.navigationService.navigate(path);
+  }
+
+    startCountdown(targetTime: number): void {
+    this.timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetTime - now;
+
+      if (distance <= 0) {
+        clearInterval(this.timer);
+        this.timeLeft = "00:00:00:00"; // Countdown finished
+      } else {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        this.timeLeft = `${this.formatTime(days)}d ${this.formatTime(hours)}h ${this.formatTime(minutes)}m ${this.formatTime(seconds)}s`;
+      }
+    }, 1000);
+  }
+
+  formatTime(time: number): string {
+    return time < 10 ? '0' + time : time.toString();
   }
 }

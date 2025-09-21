@@ -37,7 +37,7 @@ export class ExpertiseComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.setPageMetadata(
-      "Notre Expertise en Gestion de Projet et Transformation | SICA CONSEIL",
+      "Notre Expertise en Gestion de Projet et Transformation | Sica Conseil Int",
       "Expertise éprouvée en gestion de projets, gouvernance, PMO/DPMO, transformation organisationnelle. 15+ années d'expérience, 25+ experts certifiés."
     );
     this.seoService.generateWebPageSchema(

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationService } from '../../../services/navigation.service';
-import { I18nService } from '../../../services/i18n.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -11,8 +11,12 @@ export class HeaderComponent {
 
   constructor(
     private navigationService: NavigationService,
-    public i18n: I18nService
-  ) {}
+    private translate: TranslateService,
+  ) {
+        this.translate.setDefaultLang('fr'); // langue par défaut
+        this.translate.use('fr');            // active la langue
+
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;

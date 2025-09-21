@@ -19,7 +19,7 @@ export class MissionsComponent implements OnInit {
   ];
 
   testimonials = [
-    { name: 'Marie Dubois', position: 'Chef de Projet IT', company: 'TechCorp', text: "Grâce à SICA CONSEIL, j'ai obtenu ma certification PMP en 3 mois. L'accompagnement était parfait !", rating: 5, avatar: 'https://readdy.ai/api/search-image?query=professional%20business%20woman%20smiling%20portrait%20headshot%20corporate%20attire%20confident%20friendly%20modern%20office%20background%20clean%20lighting&width=80&height=80&seq=testimonial1&orientation=squarish' },
+    { name: 'Marie Dubois', position: 'Chef de Projet IT', company: 'TechCorp', text: "Grâce à Sica Conseil Int, j'ai obtenu ma certification PMP en 3 mois. L'accompagnement était parfait !", rating: 5, avatar: 'https://readdy.ai/api/search-image?query=professional%20business%20woman%20smiling%20portrait%20headshot%20corporate%20attire%20confident%20friendly%20modern%20office%20background%20clean%20lighting&width=80&height=80&seq=testimonial1&orientation=squarish' },
     { name: 'Jean Martin', position: 'Directeur Technique', company: 'InnovSoft', text: "L'audit de nos processus a révolutionné notre façon de gérer les projets. ROI exceptionnel.", rating: 5, avatar: 'https://readdy.ai/api/search-image?query=professional%20business%20man%20smiling%20portrait%20headshot%20suit%20tie%20confident%20experienced%20mature%20modern%20office%20background%20clean%20lighting&width=80&height=80&seq=testimonial2&orientation=squarish' },
     { name: 'Sophie Laurent', position: 'PMO Manager', company: 'GlobalTech', text: "Formation sur mesure exceptionnelle. Nos équipes ont gagné en efficacité de 40%.", rating: 5, avatar: 'https://readdy.ai/api/search-image?query=professional%20business%20woman%20confident%20smile%20portrait%20headshot%20blazer%20corporate%20attire%20leadership%20modern%20office%20background%20clean%20lighting&width=80&height=80&seq=testimonial3&orientation=squarish' }
   ];
@@ -31,7 +31,7 @@ export class MissionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.setPageMetadata(
-      "Nos Missions - Services de Conseil en Gestion de Projet | SICA CONSEIL",
+      "Nos Missions - Services de Conseil en Gestion de Projet | Sica Conseil Int",
       "Découvrez nos services d'accompagnement en gestion de projet : conseil stratégique, PMO, formations certifiantes PMP, PRINCE2, transformation organisationnelle."
     );
     this.seoService.generateWebPageSchema(

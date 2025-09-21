@@ -3,30 +3,30 @@
     <div class="flex items-center space-x-3">
       <img
         src="https://static.readdy.ai/image/2ce43ce334b232046883f79f4f3df46a/b61b027bf4d42918b4ae2ae5a241e2c2.jfif"
-        alt="SICA CONSEIL"
+        alt="Sica Conseil Int"
         class="h-10 w-auto"
       />
     </div>
 
     <div class="hidden md:flex items-center space-x-8">
-      <a (click)="navigate('/')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ i18n.translate('nav.home') }}</a>
-      <a (click)="navigate('/missions')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ i18n.translate('nav.missions') }}</a>
-      <a (click)="navigate('/formations')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ i18n.translate('nav.trainings') }}</a>
-      <a (click)="navigate('/project-generator')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ i18n.translate('nav.generator') }}</a>
-      <a (click)="navigate('/expertise')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ i18n.translate('nav.expertise') }}</a>
-      <a (click)="navigate('/contact')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ i18n.translate('nav.contact') }}</a>
+      <a (click)="navigate('/')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ 'nav.home' | translate  }}</a>
+      <a (click)="navigate('/missions')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ 'nav.missions' | translate  }}</a>
+      <a (click)="navigate('/formations')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ 'nav.trainings' | translate }}</a>
+      <a (click)="navigate('/project-generator')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ 'nav.generator' | translate }}</a>
+      <a (click)="navigate('/expertise')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ 'nav.expertise' | translate }}</a>
+      <a (click)="navigate('/contact')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ 'nav.contact' | translate }}</a>
       <app-theme-toggle></app-theme-toggle>
       <button
         (click)="navigate('/login')"
         class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors"
       >
-        {{ i18n.translate('nav.login') }}
+        {{ 'nav.login'| translate }}
       </button>
       <button
         (click)="navigate('/dashboard')"
         class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 cursor-pointer whitespace-nowrap transition-colors"
       >
-        {{ i18n.translate('nav.getStarted') }}
+        {{ 'nav.getStarted'| translate  }}
       </button>
     </div>
 
@@ -41,12 +41,12 @@
   <!-- Mobile Menu -->
   <div *ngIf="isMenuOpen" class="md:hidden mt-4 pb-4 border-t border-gray-100 dark:border-gray-800">
     <div class="flex flex-col space-y-3 pt-4">
-      <a (click)="navigate('/')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ i18n.translate('nav.home') }}</a>
-      <a (click)="navigate('/missions')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer text-left transition-colors">{{ i18n.translate('nav.missions') }}</a>
-      <a (click)="navigate('/formations')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ i18n.translate('nav.trainings') }}</a>
-      <a (click)="navigate('/project-generator')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ i18n.translate('nav.generator') }}</a>
-      <a (click)="navigate('/expertise')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ i18n.translate('nav.expertise') }}</a>
-      <a (click)="navigate('/contact')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ i18n.translate('nav.contact') }}</a>
+      <a (click)="navigate('/')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ 'nav.home' | translate }}</a>
+      <a (click)="navigate('/missions')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer text-left transition-colors">{{ 'nav.missions' | translate }}</a>
+      <a (click)="navigate('/formations')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ 'nav.trainings' | translate }}</a>
+      <a (click)="navigate('/project-generator')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ 'nav.generator' | translate  }}</a>
+      <a (click)="navigate('/expertise')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ 'nav.expertise' | translate }}</a>
+      <a (click)="navigate('/contact')" class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer transition-colors">{{ 'nav.contact' | translate }}</a>
       <div class="flex items-center justify-between">
         <span class="text-gray-600 dark:text-gray-300">Mode sombre</span>
         <app-theme-toggle></app-theme-toggle>
@@ -55,13 +55,13 @@
         (click)="navigate('/login')"
         class="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer text-left transition-colors"
       >
-        {{ i18n.translate('nav.login') }}
+        {{ 'nav.login'| translate  }}
       </button>
       <button
         (click)="navigate('/dashboard')"
         class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 cursor-pointer whitespace-nowrap w-fit transition-colors"
       >
-        {{ i18n.translate('nav.getStarted') }}
+        {{ 'nav.getStarted'| translate  }}
       </button>
     </div>
   </div>

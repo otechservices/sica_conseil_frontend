@@ -1,11 +1,9 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { I18nService } from './services/i18n.service';
-import { AppComponent } from './app.component';
 
 import { ButtonComponent } from './components/base/button/button.component';
 import { CardComponent } from './components/base/card/card.component';
@@ -31,9 +29,12 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { CommonModule } from '@angular/common';
 
-export function appInitializerFactory(i18nService: I18nService) {
-  return () => i18nService.init();
-}
+
+// Import ngx-translate
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { provideTranslateHttpLoader, TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+
 
 @NgModule({
   declarations: [
@@ -64,16 +65,16 @@ export function appInitializerFactory(i18nService: I18nService) {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+        TranslateModule.forRoot({
+      loader: { provide: TranslateLoader, useClass: TranslateHttpLoader }
+    })
   ],
-  providers: [
-    I18nService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: appInitializerFactory,
-      deps: [I18nService],
-      multi: true
-    }
+   providers: [
+    provideTranslateHttpLoader({   // 👈 injection de la config
+      prefix: './assets/i18n/',
+      suffix: '.json'
+    })
   ],
 })
 export class AppModule { }

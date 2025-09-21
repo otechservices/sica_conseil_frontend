@@ -42,7 +42,7 @@ export class SeoService {
     const schema = {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "SICA CONSEIL",
+      "name": "Sica Conseil Int",
       "url": "https://www.sica-conseil.com", // Replace with actual URL
       "logo": "https://static.readdy.ai/image/2ce43ce334b232046883f79f4f3df46a/b61b027bf4d42918b4ae2ae5a241e2c2.jfif",
       "contactPoint": {
@@ -89,7 +89,7 @@ export class SeoService {
       "description": description,
       "provider": {
         "@type": "Organization",
-        "name": "SICA CONSEIL"
+        "name": "Sica Conseil Int"
       },
       "offers": {
         "@type": "Offer",
@@ -109,7 +109,7 @@ export class SeoService {
       "description": description,
       "provider": {
         "@type": "Organization",
-        "name": "SICA CONSEIL"
+        "name": "Sica Conseil Int"
       },
       "offers": {
         "@type": "Offer",
