@@ -5,7 +5,6 @@ import { catchError, retry, throwError } from "rxjs";
 import { Router } from "@angular/router";
 import { LocalStorageService } from "./local-stoarge-service";
 import { GlobalName } from "./global-name";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 
 @Injectable()
@@ -15,7 +14,6 @@ export class AppHttpInterceptor implements HttpInterceptor {
     private authService: AuthService,
     private router: Router,
     private lsService:LocalStorageService,
-    private modalService:NgbModal,
     ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
@@ -44,8 +42,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
                     this.lsService.remove(GlobalName.expireIn)
                     this.lsService.remove(GlobalName.userName)
                     this.lsService.remove(GlobalName.exercice)
-                    this.modalService.dismissAll()
-                    this.router.navigate(['//login'])
+                    this.router.navigate(['/auth/login'])
                     break;
                   case 403:
                     break;

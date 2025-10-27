@@ -5,13 +5,14 @@ import { RegisterComponent } from './pages/register/register.component';
 import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 import { AuthGuard } from '../../core/guards/auth.guard';
 import { IsVerifiedAccountStateGuard } from '../../core/guards/is-verified-account-state.guard';
+import { IsAuthedGuard } from '../../core/guards/is-authed.guard';
 
 const routes: Routes = [
 
     { 
       path: '', 
       component: AuthLayoutComponent, 
-    //  canActivate:[AuthGuard,IsVerifiedAccountStateGuard],
+      canActivate:[IsAuthedGuard],
       children:[
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },

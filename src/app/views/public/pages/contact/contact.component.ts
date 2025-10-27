@@ -11,9 +11,9 @@ export class ContactComponent implements OnInit {
   contactForm: FormGroup = new FormGroup({});
 
   contactInfo = [
-    { icon: 'ri-phone-line', title: 'Téléphone', value: '+33 1 23 45 67 89', description: 'Lun-Ven: 9h-18h' },
-    { icon: 'ri-mail-line', title: 'Email', value: 'contact@sica-conseil.fr', description: 'Réponse sous 24h' },
-    { icon: 'ri-map-pin-line', title: 'Adresse', value: '123 Avenue des Champs-Élysées', description: '75008 Paris, France' },
+    { icon: 'ri-phone-line', title: 'Téléphone', value: '(BURKINA FASO) +226 75093372 /  (BENIN) +229 01 43178658', description: 'Lun-Ven: 9h-18h' },
+    { icon: 'ri-mail-line', title: 'Email', value: 'sicaconseilaes@gmail.com', description: 'Réponse sous 24h' },
+    { icon: 'ri-map-pin-line', title: 'Adresse', value: 'OUAGADOUGOU, BURKINA FASE', description: '' },
     { icon: 'ri-time-line', title: 'Horaires', value: 'Lundi - Vendredi', description: '9h00 - 18h00' }
   ];
 
@@ -50,11 +50,11 @@ export class ContactComponent implements OnInit {
 
     this.seoService.setPageMetadata(
       "Contactez-nous - Sica Conseil Int | Gestion de Projet et Formation",
-      "Contactez Sica Conseil Int pour vos projets de gestion, formations PMP, conseil en transformation. Consultation gratuite. +33 1 23 45 67 89"
+      "Contactez Sica Conseil Int pour vos projets de gestion, formations PMP, conseil en transformation. Consultation gratuite. (BURKINA FASO) +226 75093372 /  (BENIN) +229 01 43178658"
     );
     this.seoService.generateWebPageSchema(
       "Contactez-nous - Sica Conseil Int",
-      "Contactez Sica Conseil Int pour vos projets de gestion, formations PMP, conseil en transformation. Consultation gratuite. +33 1 23 45 67 89",
+      "Contactez Sica Conseil Int pour vos projets de gestion, formations PMP, conseil en transformation. Consultation gratuite. (BURKINA FASO) +226 75093372 /  (BENIN) +229 01 43178658",
       "/contact"
     );
     this.seoService.generateBreadcrumbSchema([

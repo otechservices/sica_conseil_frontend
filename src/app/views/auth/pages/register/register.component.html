@@ -1,75 +1,184 @@
 
+    <app-auth-header [title]="title" [subtitle]="subtitle"></app-auth-header>
+
 
     <!-- Registration Form -->
-    <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
-      <form [formGroup]="registerForm" (ngSubmit)="handleSubmit()" class="space-y-6">
-        <!-- First Name and Last Name -->
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">Prénom</label>
-            <div class="relative"><i class="ri-user-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 flex items-center justify-center"></i>
-              <input type="text" id="firstName" formControlName="firstName" placeholder="Votre prénom" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm" />
-            </div>
-          </div>
-          <div>
-            <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Nom</label>
-            <div class="relative"><i class="ri-user-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 flex items-center justify-center"></i>
-              <input type="text" id="lastName" formControlName="lastName" placeholder="Votre nom" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm" />
-            </div>
-          </div>
-        </div>
+<div class="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+  <form [formGroup]="registerForm" (ngSubmit)="handleSubmit()" class="space-y-6">
 
-        <!-- Email -->
-        <div>
-          <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-          <div class="relative"><i class="ri-mail-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 flex items-center justify-center"></i>
-            <input type="email" id="email" formControlName="email" placeholder="votre@email.com" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm" />
-          </div>
-        </div>
+ <div class="text-center mb-6">
+  <p class="text-lg md:text-xl font-medium text-gray-800 leading-relaxed">
+    🎓 Rejoignez la communauté <span class="text-orange-500 font-semibold">Sica Conseil</span> pour seulement 
+    <span class="font-bold">$1</span> et accédez à 
+    <span class="font-semibold">tous nos modules de cours en ligne</span>, 
+    ainsi qu’à <span class="font-semibold text-orange-500">jusqu’à 75 % de réduction</span> 
+    sur nos formations en présentiel&nbsp;!
+  </p>
+</div>
 
-        <!-- Password Group -->
-        <div formGroupName="passwordGroup">
-          <div>
-            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
-            <div class="relative"><i class="ri-lock-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 flex items-center justify-center"></i>
-              <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password" placeholder="••••••••" class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm" />
-              <button type="button" (click)="showPassword = !showPassword" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer"><i [ngClass]="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'"></i></button>
-            </div>
-          </div>
-          <div class="mt-4">
-            <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-2">Confirmer le mot de passe</label>
-            <div class="relative"><i class="ri-lock-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 flex items-center justify-center"></i>
-              <input [type]="showConfirmPassword ? 'text' : 'password'" id="confirmPassword" formControlName="confirmPassword" placeholder="••••••••" class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm" />
-              <button type="button" (click)="showConfirmPassword = !showConfirmPassword" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer"><i [ngClass]="showConfirmPassword ? 'ri-eye-off-line' : 'ri-eye-line'"></i></button>
-            </div>
-            <div *ngIf="registerForm.get('passwordGroup')?.hasError('passwordMismatch') && registerForm.get('passwordGroup.confirmPassword')?.touched" class="text-red-500 text-sm mt-1">Les mots de passe ne correspondent pas.</div>
-          </div>
-        </div>
+    <!-- Type d'utilisateur -->
+    <div>
+      <label for="userType" class="block text-sm font-medium text-gray-700 mb-2">
+        Type d'utilisateur
+      </label>
+      <select id="userType"
+              formControlName="userType"
+              class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm">
+        <option value="">-- Sélectionnez --</option>
+        <option value="morale">Personne morale</option>
+        <option value="physique">Personne physique</option>
+      </select>
+    </div>
 
-        <!-- Terms and Conditions -->
-        <div class="flex items-start space-x-3">
-          <input type="checkbox" id="acceptTerms" formControlName="acceptTerms" class="mt-1 h-4 w-4 text-orange-500 focus:ring-orange-500 border-gray-300 rounded cursor-pointer" />
-          <label for="acceptTerms" class="text-sm text-gray-600 leading-relaxed">J'accepte les <a href="#" class="text-orange-500 hover:text-orange-600 cursor-pointer">conditions d'utilisation</a> et la <a href="#" class="text-orange-500 hover:text-orange-600 cursor-pointer">politique de confidentialité</a></label>
-        </div>
+    <!-- Options pour Personnes Morales -->
+    <div *ngIf="registerForm.get('userType')?.value === 'morale'" class="space-y-4">
+      <label class="block text-sm font-medium text-gray-700 mb-2">Catégorie</label>
+      <select formControlName="moraleType"
+              class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm">
+        <option value="">-- Sélectionnez une catégorie --</option>
+        <option value="gouvernement">Gouvernements / Partis politiques</option>
+        <option value="societe">Sociétés</option>
+      </select>
 
-        <!-- Submit Button -->
-        <button type="submit" [disabled]="registerForm.invalid" class="w-full bg-orange-500 text-white py-3 px-4 rounded-lg hover:bg-orange-600 focus:ring-4 focus:ring-orange-200 font-medium transition-colors cursor-pointer whitespace-nowrap disabled:bg-gray-400 disabled:cursor-not-allowed"><i class="ri-user-add-line mr-2"></i>Créer mon compte gratuitement</button>
-      </form>
-
-      <!-- Divider -->
-      <div class="relative my-6"><div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-300"></div></div><div class="relative flex justify-center text-sm"><span class="px-2 bg-white text-gray-500">ou</span></div></div>
-
-      <!-- Social Login -->
-      <div class="space-y-3">
-        <button class="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer whitespace-nowrap"><i class="ri-google-fill text-red-500 mr-3"></i><span class="text-gray-700">Continuer avec Google</span></button>
-        <button class="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer whitespace-nowrap"><i class="ri-linkedin-fill text-blue-600 mr-3"></i><span class="text-gray-700">Continuer avec LinkedIn</span></button>
+      <!-- Description dynamique -->
+      <div *ngIf="registerForm.get('moraleType')?.value === 'gouvernement'" class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-200">
+        <strong>Gouvernements / Partis politiques :</strong> accompagnement dans la définition de visions et la rédaction des projets et programmes de société ainsi que le suivi de leur exécution.
       </div>
 
-      <!-- Login Link -->
-      <div class="text-center mt-6">
-        <p class="text-gray-600">Déjà un compte ? <a [routerLink]="['/login']" class="text-orange-500 hover:text-orange-600 font-medium cursor-pointer">Se connecter</a></p>
+      <div *ngIf="registerForm.get('moraleType')?.value === 'societe'" class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-200 space-y-1">
+        <strong>Sociétés :</strong>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Accompagnement dans la définition de visions et la rédaction des projets et programmes en alignement avec la vision stratégique de l’entreprise.</li>
+          <li>Fournir des compétences professionnelles selon les besoins de l’entreprise.</li>
+        </ul>
       </div>
     </div>
+
+    <!-- Options pour Personnes Physiques -->
+    <div *ngIf="registerForm.get('userType')?.value === 'physique'" class="space-y-4">
+      <label class="block text-sm font-medium text-gray-700 mb-2">Catégorie</label>
+      <select formControlName="physiqueType"
+              class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm">
+        <option value="">-- Sélectionnez une catégorie --</option>
+        <option value="consultant">Consultant (formateur, auditeur, ...)</option>
+        <option value="consultant_technique">Consultant technique</option>
+        <option value="volontaire">Volontaire</option>
+        <option value="benevole">Bénévole</option>
+      </select>
+
+      <!-- Description dynamique -->
+      <div *ngIf="registerForm.get('physiqueType')?.value === 'consultant'" class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-200">
+        <strong>Consultants :</strong> experts techniques sollicités pour leur expertise dans des domaines spécifiques.
+      </div>
+
+      <div *ngIf="registerForm.get('physiqueType')?.value === 'consultant_technique'" class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-200">
+        <strong>Consultants techniques :</strong> experts en management dont les sociétés partenaires peuvent recruter, et que Sica Conseil promeut activement.
+      </div>
+
+      <div *ngIf="registerForm.get('physiqueType')?.value === 'volontaire'" class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-200">
+        <strong>Volontaires :</strong> Ce sont des personnes physiques certifiées qui souhaitent collaborer avec nous en tant que formateurs, examinateurs de projets auto-générés sur notre plateforme, ou rédacteurs de dossiers d’appels à projets.
+        Ils doivent posséder un minimum de compétences en gestion de projets et sont rémunérés en fonction de leurs prestations.
+      </div>
+
+    <div *ngIf="registerForm.get('physiqueType')?.value === 'benevole'" 
+     class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-200">
+      <strong>Bénévoles :</strong> 
+      Ce sont des étudiants stagiaires formés par <strong>Sica Conseil</strong> qui souhaitent renforcer leurs compétences et s’immerger dans le milieu professionnel.  
+      En contrepartie, <strong>Sica Conseil</strong> assure la promotion de leur profil auprès de ses universités partenaires afin de favoriser leur insertion professionnelle et leur offre une réduction de 3/4 sur toutes les formations.
+    </div>
+    </div>
+
+    <!-- Nom / Prénom -->
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label for="firstname" class="block text-sm font-medium text-gray-700 mb-2">Prénom</label>
+        <div class="relative">
+          <i class="ri-user-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+          <input type="text" id="firstname" formControlName="firstname"
+                 placeholder="Votre prénom"
+                 class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"/>
+        </div>
+      </div>
+      <div>
+        <label for="lastname" class="block text-sm font-medium text-gray-700 mb-2">Nom</label>
+        <div class="relative">
+          <i class="ri-user-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+          <input type="text" id="lastname" formControlName="lastname"
+                 placeholder="Votre nom"
+                 class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+      <div class="relative">
+        <i class="ri-mail-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        <input type="email" id="email" formControlName="email" placeholder="votre@email.com"
+               class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"/>
+      </div>
+    </div>
+
+    <!-- Téléphone -->
+    <div>
+      <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Téléphone</label>
+      <div class="relative">
+        <i class="ri-phone-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        <input type="text" id="phone" formControlName="phone" placeholder="Votre numéro de téléphone"
+               class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"/>
+      </div>
+    </div>
+
+    <!-- Mot de passe et confirmation -->
+    <div>
+      <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
+      <div class="relative">
+        <i class="ri-lock-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password"
+               placeholder="••••••••"
+               class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"/>
+        <button type="button" (click)="showPassword = !showPassword"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+          <i [ngClass]="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'"></i>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-2">Confirmer le mot de passe</label>
+      <div class="relative">
+        <i class="ri-lock-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        <input [type]="showConfirmPassword ? 'text' : 'password'" id="password_confirmation"
+               formControlName="password_confirmation" placeholder="••••••••"
+               class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"/>
+        <button type="button" (click)="showConfirmPassword = !showConfirmPassword"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+          <i [ngClass]="showConfirmPassword ? 'ri-eye-off-line' : 'ri-eye-line'"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Accept terms -->
+    <div class="flex items-start space-x-3">
+      <input type="checkbox" id="acceptTerms" formControlName="acceptTerms"
+             class="mt-1 h-4 w-4 text-orange-500 focus:ring-orange-500 border-gray-300 rounded cursor-pointer"/>
+      <label for="acceptTerms" class="text-sm text-gray-600 leading-relaxed">
+        J'accepte les
+        <a href="#" class="text-orange-500 hover:text-orange-600">conditions d'utilisation</a> et la
+        <a href="#" class="text-orange-500 hover:text-orange-600">politique de confidentialité</a>.
+      </label>
+    </div>
+
+    <!-- Submit -->
+    <button type="submit"
+            [disabled]="registerForm.invalid"
+            class="w-full bg-orange-500 text-white py-3 px-4 rounded-lg hover:bg-orange-600 focus:ring-4 focus:ring-orange-200 font-medium transition-colors cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed">
+      <i class="ri-user-add-line mr-2"></i>Créer mon compte gratuitement
+    </button>
+  </form>
+</div>
+
 
 
 

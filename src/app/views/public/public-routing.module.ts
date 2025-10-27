@@ -15,10 +15,12 @@ import { PmpTrainingComponent } from '../customer/pages/pmp-training/pmp-trainin
 import { ProjectGeneratorComponent } from '../customer/pages/project-generator/project-generator.component';
 import { RegisterComponent } from '../auth/pages/register/register.component';
 import { PublicLayoutComponent } from './public-layout/public-layout.component';
+import { AuthGuard } from '../../core/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', 
     component: PublicLayoutComponent,
+   // canActivate:[AuthGuard],
     children:[
     { path: '', component: HomeComponent },
     { path: 'missions', component: MissionsComponent },

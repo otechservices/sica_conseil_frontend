@@ -18,7 +18,7 @@ export class IsAuthedGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
         if (this.lsService.get(GlobalName.tokenName) != null) {
-          let url="/auth/login"
+          let url="/customer/dashboard"
           this.router.navigate([url]);
           return false;
 

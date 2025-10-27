@@ -9,13 +9,14 @@ import { PmpTestComponent } from './pages/pmp-test/pmp-test.component';
 import { PmpTrainingComponent } from './pages/pmp-training/pmp-training.component';
 import { ProjectGeneratorComponent } from './pages/project-generator/project-generator.component';
 import { IsAuthedGuard } from '../../core/guards/is-authed.guard';
+import { AuthGuard } from '../../core/guards/auth.guard';
 
 const routes: Routes = [
 
     { 
       path: '', 
       component: CustomerLayoutComponent,
-    //  canActivate:[IsAuthedGuard],
+      canActivate:[AuthGuard],
       children:[
           { path: '', redirectTo: 'dashboard',pathMatch:"full" },
           { path: 'dashboard', component: DashboardComponent },
