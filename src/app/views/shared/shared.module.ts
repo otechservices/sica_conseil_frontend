@@ -31,8 +31,8 @@ import { ColorPickerModule } from 'primeng/colorpicker';
 import { ButtonComponent } from './components/button/button.component';
 import { CardComponent } from './components/card/card.component';
 import { ModalComponent } from './components/modal/modal.component';
-import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 
 
 @NgModule({
@@ -40,7 +40,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
      ButtonComponent,
         CardComponent,
         ModalComponent,
-        ThemeToggleComponent,
+        ThemeToggleComponent
   ],
   imports: [
     CommonModule,
@@ -76,10 +76,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   exports: [
+    ThemeToggleComponent,
     ButtonComponent,
     CardComponent,
     ModalComponent,
-    ThemeToggleComponent,
     ButtonModule,
     IconFieldModule,
     InputIconModule,
