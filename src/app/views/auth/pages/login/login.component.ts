@@ -38,10 +38,9 @@ subtitle="Accédez gratuitement à votre espace Sica Conseil Int"
 
         this.authService.login(this.loginForm.value).subscribe((res:any)=>{
           this.toastrService.success(res.message)
-
           this.lsService.set(GlobalName.tokenName,res.data.access_token)
 
-            this.authService.me().subscribe((res:any)=>{
+          this.authService.me().subscribe((res:any)=>{
           this.toastrService.success(res.message)
 
           this.lsService.set(GlobalName.userName,res.data)
@@ -53,7 +52,7 @@ subtitle="Accédez gratuitement à votre espace Sica Conseil Int"
     
           console.log(err)
             AppSweetAlert.simpleAlert("error","Connexion",err.error.message)
-        })
+           })
     
         },
         (err:any)=>{

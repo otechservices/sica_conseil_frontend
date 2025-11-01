@@ -6,9 +6,28 @@
         </div>
         <div class="flex items-center space-x-3">
           <app-theme-toggle></app-theme-toggle>
-          <button class="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer transition-colors">
-            <i class="ri-user-line text-gray-600 dark:text-gray-300"></i>
-          </button>
+          <div class="relative" #dropdownWrapper>
+              <!-- Bouton utilisateur -->
+              <button (click)="toggleDropdown()" 
+                      class="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center 
+                            hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer transition-colors">
+                  <i class="ri-user-line text-gray-600 dark:text-gray-300"></i>
+              </button>
+
+              <!-- Dropdown -->
+              <div *ngIf="isOpen" class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 shadow-lg rounded-md z-50">
+                <ul class="py-1">
+                  <li>
+                    <a (click)="logout()" 
+                      class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                      Déconnexion
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+
         </div>
       </div>
     </header>

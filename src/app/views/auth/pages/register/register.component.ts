@@ -54,7 +54,11 @@ subtitle=""
     
             this.toastrService.success(res.message)
 
-            this.navigationService.navigate('/customer/dashboard');
+
+            window.open(res.data,'_blank')
+            
+
+          //  this.navigationService.navigate('/customer/dashboard');
     
         },
         (err:any)=>{
