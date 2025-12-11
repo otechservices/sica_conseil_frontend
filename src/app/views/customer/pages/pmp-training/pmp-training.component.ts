@@ -26,7 +26,7 @@ export class PmpTrainingComponent {
       description: 'Leadership, gestion d\'équipe, communication et développement des compétences',
       score: 78,
       level: 'Faible',
-      color: 'bg-orange-500',
+      color: 'bg-primary-500',
       icon: 'ri-team-line',
       topics: ['Leadership et influence', 'Gestion d\'équipe', 'Communication', 'Négociation', 'Développement des compétences'],
       studyContent: {
@@ -157,9 +157,9 @@ export class PmpTrainingComponent {
   }
 
   handleProfileClick = () => this.showProfileDropdown = !this.showProfileDropdown;
-  handleLogout = () => { this.showProfileDropdown = false; this.navigate('/login'); };
-  handleGoToDashboard = () => { this.showProfileDropdown = false; this.navigate('/dashboard'); };
-  handleGoToProfile = () => { this.showProfileDropdown = false; this.navigate('/dashboard'); };
+  handleLogout = () => { this.showProfileDropdown = false; this.navigate('/customer/login'); };
+  handleGoToDashboard = () => { this.showProfileDropdown = false; this.navigate('/customer/dashboard'); };
+  handleGoToProfile = () => { this.showProfileDropdown = false; this.navigate('/customer/dashboard'); };
 
   navigate(path: string) {
     this.navigationService.navigate(path);

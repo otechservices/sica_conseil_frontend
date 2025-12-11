@@ -24,11 +24,11 @@
 
           <div class="flex flex-col sm:flex-row gap-4 mb-12">
             <app-button
-              [buttonClass]="'bg-white text-orange-600 px-8 py-3 rounded-lg hover:bg-orange-50 cursor-pointer whitespace-nowrap flex items-center justify-center font-semibold transition-colors shadow-lg'"
-              (onClick)="navigate('/dashboard')"
+              [buttonClass]="'bg-white text-primary-600 px-8 py-3 rounded-lg hover:bg-primary-50 cursor-pointer whitespace-nowrap flex items-center justify-center font-semibold transition-colors shadow-lg'"
+              (onClick)="navigate('/customer/dashboard')"
             >
               <i class="ri-play-fill mr-2"></i>
-              Commencer gratuitement
+              Devenez certifié à partir de 800F CFA
             </app-button>
             <app-button
               [buttonClass]="'border-2 border-white text-white px-8 py-3 rounded-lg hover:bg-white/10 cursor-pointer whitespace-nowrap backdrop-blur-sm transition-colors'"
@@ -83,9 +83,9 @@
             </ul>
             <div class="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400 mb-6 transition-colors">
               <span><i class="ri-time-line mr-1"></i>{{ mission.duration }}</span>
-              <span class="font-semibold text-orange-500">{{ mission.price }}</span>
+              <span class="font-semibold text-primary-500">{{ mission.price }}</span>
             </div>
-            <button class="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 cursor-pointer whitespace-nowrap transition-colors"><i class="ri-arrow-right-line mr-2"></i>En savoir plus</button>
+            <button class="w-full bg-primary-500 text-white py-3 rounded-lg hover:bg-primary-600 cursor-pointer whitespace-nowrap transition-colors"><i class="ri-arrow-right-line mr-2"></i>En savoir plus</button>
           </div>
         </div>
       </div>
@@ -102,8 +102,8 @@
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="text-center">
-          <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
-            <i class="ri-user-line text-2xl text-orange-500"></i>
+          <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="ri-user-line text-2xl text-primary-500"></i>
           </div>
           <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Accès gratuit</h3>
           <p class="text-gray-600 dark:text-gray-300 transition-colors">
@@ -112,8 +112,8 @@
         </div>
 
         <div class="text-center">
-          <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
-            <i class="ri-time-line text-2xl text-orange-500"></i>
+          <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="ri-time-line text-2xl text-primary-500"></i>
           </div>
           <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Résultats immédiats</h3>
           <p class="text-gray-600 dark:text-gray-300 transition-colors">
@@ -122,12 +122,12 @@
         </div>
 
         <div class="text-center">
-          <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
-            <i class="ri-money-dollar-circle-line text-2xl text-orange-500"></i>
+          <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="ri-money-dollar-circle-line text-2xl text-primary-500"></i>
           </div>
           <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Prix démocratique</h3>
           <p class="text-gray-600 dark:text-gray-300 transition-colors">
-            Accès complet à tous nos services pour seulement 1€ - Formule de qualité accessible
+            Accès complet à tous nos services pour seulement 800 FCFA - Formule de qualité accessible
           </p>
         </div>
       </div>
@@ -135,20 +135,20 @@
   </section>
 
   <!-- CTA Section -->
-  <section class="py-20 px-4 bg-orange-500 dark:bg-orange-600 transition-colors">
+  <section class="py-20 px-4 bg-primary-500 dark:bg-primary-600 transition-colors">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-4xl font-bold text-white mb-6">
         Prêt à transformer votre approche de la gestion de projet ?
       </h2>
-      <p class="text-xl text-orange-100 mb-8">
+      <p class="text-xl text-primary-100 mb-8">
         Rejoignez des milliers de professionnels qui font confiance à Sica Conseil Int
       </p>
       <app-button
-        [buttonClass]="'bg-white text-orange-500 px-8 py-3 rounded-lg hover:bg-orange-50 cursor-pointer whitespace-nowrap font-semibold transition-colors'"
-        (onClick)="navigate('/dashboard')"
+        [buttonClass]="'bg-white text-primary-500 px-8 py-3 rounded-lg hover:bg-primary-50 cursor-pointer whitespace-nowrap font-semibold transition-colors'"
+        (onClick)="navigate('/customer/dashboard')"
       >
         <i class="ri-play-fill mr-2"></i>
-        Commencer maintenant - Gratuit
+        Devenez certifié à partir de 800F CFA
       </app-button>
     </div>
   </section>

@@ -10,18 +10,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#fff7ed',
-          100: '#ffedd5',
-          200: '#fed7aa',
-          300: '#fdba74',
-          400: '#fb923c',
-          500: '#f97316',
-          600: '#ea580c',
-          700: '#c2410c',
-          800: '#9a3412',
-          900: '#7c2d12',
+     primary: {
+          50:  '#FFFAE6',
+          100: '#FFF3C4',
+          200: '#FFE89A',
+          300: '#FFD86E',
+          400: '#FFCA45',
+          500: '#FFBF00', // Or principal (Gold)
+          600: '#E6AC00',
+          700: '#CC9900',
+          800: '#A67E00',
+          900: '#735700',
         },
+
         gold: {
           50: '#fffbeb',
           100: '#fef3c7',

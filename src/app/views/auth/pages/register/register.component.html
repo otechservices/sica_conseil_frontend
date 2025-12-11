@@ -8,10 +8,10 @@
 
  <div class="text-center mb-6">
   <p class="text-lg md:text-xl font-medium text-gray-800 leading-relaxed">
-    🎓 Rejoignez la communauté <span class="text-orange-500 font-semibold">Sica Conseil</span> pour seulement 
-    <span class="font-bold">$1</span> et accédez à 
+    🎓 Rejoignez la communauté <span class="text-primary-500 font-semibold">Sica Conseil</span> pour seulement 
+    <span class="font-bold">800F CFA</span> et accédez à 
     <span class="font-semibold">tous nos modules de cours en ligne</span>, 
-    ainsi qu’à <span class="font-semibold text-orange-500">jusqu’à 75 % de réduction</span> 
+    ainsi qu’à <span class="font-semibold text-primary-500">jusqu’à 75 % de réduction</span> 
     sur nos formations en présentiel&nbsp;!
   </p>
 </div>
@@ -23,7 +23,7 @@
       </label>
       <select id="userType"
               formControlName="userType"
-              class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm">
+              class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm">
         <option value="">-- Sélectionnez --</option>
         <option value="morale">Personne morale</option>
         <option value="physique">Personne physique</option>
@@ -34,7 +34,7 @@
     <div *ngIf="registerForm.get('userType')?.value === 'morale'" class="space-y-4">
       <label class="block text-sm font-medium text-gray-700 mb-2">Catégorie</label>
       <select formControlName="moraleType"
-              class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm">
+              class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm">
         <option value="">-- Sélectionnez une catégorie --</option>
         <option value="gouvernement">Gouvernements / Partis politiques</option>
         <option value="societe">Sociétés</option>
@@ -58,12 +58,12 @@
     <div *ngIf="registerForm.get('userType')?.value === 'physique'" class="space-y-4">
       <label class="block text-sm font-medium text-gray-700 mb-2">Catégorie</label>
       <select formControlName="physiqueType"
-              class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm">
+              class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm">
         <option value="">-- Sélectionnez une catégorie --</option>
         <option value="consultant">Consultant (formateur, auditeur, ...)</option>
         <option value="consultant_technique">Consultant technique</option>
         <option value="volontaire">Volontaire</option>
-        <option value="benevole">Bénévole</option>
+        <option value="benevole">Étudiants/Bénévoles</option>
       </select>
 
       <!-- Description dynamique -->
@@ -71,21 +71,64 @@
         <strong>Consultants :</strong> experts techniques sollicités pour leur expertise dans des domaines spécifiques.
       </div>
 
-      <div *ngIf="registerForm.get('physiqueType')?.value === 'consultant_technique'" class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-200">
-        <strong>Consultants techniques :</strong> experts en management dont les sociétés partenaires peuvent recruter, et que Sica Conseil promeut activement.
-      </div>
+    <div *ngIf="registerForm.get('physiqueType')?.value === 'consultant_technique'" 
+     class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-200">
+
+  <strong>Consultants techniques :</strong><br><br>
+
+  Les consultants techniques peuvent s’enregistrer à <strong>Sica Conseil</strong> pour un montant de 
+  <strong>8 000 F CFA</strong>.
+
+  <br><br><strong>Avantages :</strong><br>
+  Ils/Elles ont le droit d’accéder :
+  <ul class="list-disc pl-6 mt-2">
+
+    <li>À tous les cours du catalogue e-learning gratuitement 
+        (hors attestations qui sont payantes).</li>
+
+    <li>À tous les cours en présentiel programmés avec une réduction allant jusqu’à 
+        <strong>–50 %</strong>.</li>
+
+    <li>
+      <strong>Exception – Formations PMP :</strong><br>
+      Lorsque les formations PMP sont dispensées par le CEO en tant qu’instructor dans un autre cabinet,  
+      le consultant bénéficie de <strong>–50 %</strong> sur les frais de formation.<br>
+      Toutefois, il/elle doit s’acquitter des <strong>615 USD</strong> de frais de formalités PMI,  
+      sur présentation d’une attestation d’affiliation à <strong>Sica Conseil International</strong>.
+    </li>
+
+    <li>Ils/Elles peuvent être associés à des projets innovants relevant de leur domaine de formation,  
+        au sein d’entreprises partenaires, en tant que consultant Sica Conseil.</li>
+  </ul>
+
+</div>
+
 
       <div *ngIf="registerForm.get('physiqueType')?.value === 'volontaire'" class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-200">
         <strong>Volontaires :</strong> Ce sont des personnes physiques certifiées qui souhaitent collaborer avec nous en tant que formateurs, examinateurs de projets auto-générés sur notre plateforme, ou rédacteurs de dossiers d’appels à projets.
         Ils doivent posséder un minimum de compétences en gestion de projets et sont rémunérés en fonction de leurs prestations.
       </div>
 
-    <div *ngIf="registerForm.get('physiqueType')?.value === 'benevole'" 
+   <div *ngIf="registerForm.get('physiqueType')?.value === 'benevole'" 
      class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-200">
-      <strong>Bénévoles :</strong> 
-      Ce sont des étudiants stagiaires formés par <strong>Sica Conseil</strong> qui souhaitent renforcer leurs compétences et s’immerger dans le milieu professionnel.  
-      En contrepartie, <strong>Sica Conseil</strong> assure la promotion de leur profil auprès de ses universités partenaires afin de favoriser leur insertion professionnelle et leur offre une réduction de 3/4 sur toutes les formations.
-    </div>
+
+  <strong>Étudiants / Bénévoles :</strong><br><br>
+
+  Les étudiants et bénévoles peuvent s’enregistrer à <strong>Sica Conseil</strong> pour un montant de 
+  <strong>800 F CFA</strong>, depuis n’importe où.
+
+  <br><br><strong>Avantages :</strong><br>
+  Ils/Elles ont le droit d’accéder :
+  <ul class="list-disc pl-6 mt-2">
+    <li>À l’ensemble des cours du catalogue e-learning gratuitement 
+        (hors attestations qui sont payantes).</li>
+    <li>À tous les cours en présentiel programmés avec une réduction pouvant aller jusqu’à <strong>–75 %</strong>.</li>
+    <li>À des projets innovants en lien avec leur domaine de formation, au sein d’entreprises partenaires, en tant que stagiaires consultants Sica Conseil.</li>
+    <li>À une immersion en entreprise (stage obligatoire) après la fin de leur formation académique, sur présentation d’une attestation de fin de cycle, ainsi qu’à au moins une attestation en management délivrée par Sica Conseil, s’ils/elles le souhaitent.</li>
+  </ul>
+
+</div>
+
     </div>
 
     <!-- Nom / Prénom -->
@@ -96,7 +139,7 @@
           <i class="ri-user-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
           <input type="text" id="firstname" formControlName="firstname"
                  placeholder="Votre prénom"
-                 class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"/>
+                 class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"/>
         </div>
       </div>
       <div>
@@ -105,7 +148,7 @@
           <i class="ri-user-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
           <input type="text" id="lastname" formControlName="lastname"
                  placeholder="Votre nom"
-                 class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"/>
+                 class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"/>
         </div>
       </div>
     </div>
@@ -116,7 +159,7 @@
       <div class="relative">
         <i class="ri-mail-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
         <input type="email" id="email" formControlName="email" placeholder="votre@email.com"
-               class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"/>
+               class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"/>
       </div>
     </div>
 
@@ -126,7 +169,7 @@
       <div class="relative">
         <i class="ri-phone-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
         <input type="text" id="phone" formControlName="phone" placeholder="Votre numéro de téléphone"
-               class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"/>
+               class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"/>
       </div>
     </div>
 
@@ -137,7 +180,7 @@
         <i class="ri-lock-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
         <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password"
                placeholder="••••••••"
-               class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"/>
+               class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"/>
         <button type="button" (click)="showPassword = !showPassword"
                 class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
           <i [ngClass]="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'"></i>
@@ -151,7 +194,7 @@
         <i class="ri-lock-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
         <input [type]="showConfirmPassword ? 'text' : 'password'" id="password_confirmation"
                formControlName="password_confirmation" placeholder="••••••••"
-               class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"/>
+               class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"/>
         <button type="button" (click)="showConfirmPassword = !showConfirmPassword"
                 class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
           <i [ngClass]="showConfirmPassword ? 'ri-eye-off-line' : 'ri-eye-line'"></i>
@@ -162,19 +205,19 @@
     <!-- Accept terms -->
     <div class="flex items-start space-x-3">
       <input type="checkbox" id="acceptTerms" formControlName="acceptTerms"
-             class="mt-1 h-4 w-4 text-orange-500 focus:ring-orange-500 border-gray-300 rounded cursor-pointer"/>
+             class="mt-1 h-4 w-4 text-primary-500 focus:ring-primary-500 border-gray-300 rounded cursor-pointer"/>
       <label for="acceptTerms" class="text-sm text-gray-600 leading-relaxed">
         J'accepte les
-        <a href="#" class="text-orange-500 hover:text-orange-600">conditions d'utilisation</a> et la
-        <a href="#" class="text-orange-500 hover:text-orange-600">politique de confidentialité</a>.
+        <a href="#" class="text-primary-500 hover:text-primary-600">conditions d'utilisation</a> et la
+        <a href="#" class="text-primary-500 hover:text-primary-600">politique de confidentialité</a>.
       </label>
     </div>
 
     <!-- Submit -->
     <button type="submit"
             [disabled]="registerForm.invalid"
-            class="w-full bg-orange-500 text-white py-3 px-4 rounded-lg hover:bg-orange-600 focus:ring-4 focus:ring-orange-200 font-medium transition-colors cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed">
-      <i class="ri-user-add-line mr-2"></i>Créer mon compte gratuitement
+            class="w-full bg-primary-500 text-white py-3 px-4 rounded-lg hover:bg-primary-600 focus:ring-4 focus:ring-primary-200 font-medium transition-colors cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed">
+      <i class="ri-user-add-line mr-2"></i>Créer mon compte
     </button>
   </form>
 </div>

@@ -3,7 +3,7 @@
   <div class="w-64 bg-white shadow-sm border-r border-gray-200">
     <div class="p-6">
       <div class="flex items-center space-x-2 mb-8">
-        <div class="w-8 h-8 bg-orange-500 rounded flex items-center justify-center">
+        <div class="w-8 h-8 bg-primary-500 rounded flex items-center justify-center">
           <span class="text-white text-sm font-bold">SC</span>
         </div>
         <span class="font-bold text-gray-800">Sica Conseil Int</span>
@@ -11,7 +11,7 @@
 
       <nav class="space-y-2">
         <button
-          (click)="navigate('/dashboard')"
+          (click)="navigate('/customer/dashboard')"
           class="w-full flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg cursor-pointer"
         >
           <i class="ri-dashboard-line w-5 h-5 flex items-center justify-center"></i>
@@ -24,11 +24,11 @@
           <i class="ri-file-text-line w-5 h-5 flex items-center justify-center"></i>
           <span>Générateur de projets</span>
         </button>
-        <a [routerLink]="['/pmp-training']" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-orange-50 hover:text-orange-600 rounded-lg transition-colors">
+        <a [routerLink]="['/pmp-training']" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-primary-50 hover:text-primary-600 rounded-lg transition-colors">
           <i class="ri-graduation-cap-line w-5 h-5 flex items-center justify-center"></i>
           <span>Formation PMP</span>
         </a>
-        <a [routerLink]="['/pmp-simulator']" class="flex items-center space-x-3 px-4 py-3 bg-orange-50 text-orange-600 rounded-lg">
+        <a [routerLink]="['/pmp-simulator']" class="flex items-center space-x-3 px-4 py-3 bg-primary-50 text-primary-600 rounded-lg">
           <i class="ri-flask-line w-5 h-5 flex items-center justify-center"></i>
           <span>Simulateur PMP</span>
         </a>
@@ -44,10 +44,10 @@
     </div>
 
     <div class="absolute bottom-4 left-4 right-4">
-      <div class="bg-orange-50 p-4 rounded-lg">
+      <div class="bg-primary-50 p-4 rounded-lg">
         <div class="flex items-center space-x-2 mb-2">
-          <i class="ri-trophy-line text-orange-500"></i>
-          <span class="text-sm font-medium text-orange-700">Recommencer</span>
+          <i class="ri-trophy-line text-primary-500"></i>
+          <span class="text-sm font-medium text-primary-700">Recommencer</span>
         </div>
       </div>
     </div>
@@ -73,7 +73,7 @@
           </button>
           <button
             (click)="navigate('/pmp-training')"
-            class="flex items-center space-x-2 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 cursor-pointer whitespace-nowrap"
+            class="flex items-center space-x-2 px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 cursor-pointer whitespace-nowrap"
           >
             <i class="ri-graduation-cap-line"></i>
             <span>Formation</span>
@@ -88,7 +88,7 @@
         <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
           <div class="flex items-center justify-between mb-2">
             <span class="text-gray-600 text-sm">Tests réalisés</span>
-            <i class="ri-file-list-line text-orange-500"></i>
+            <i class="ri-file-list-line text-primary-500"></i>
           </div>
           <div class="text-3xl font-bold text-gray-800">24</div>
         </div>
@@ -129,10 +129,10 @@
               *ngFor="let mode of examModes"
               (click)="selectedMode = mode.id"
               [ngClass]="{
-                'border-orange-500 bg-orange-50': selectedMode === mode.id,
+                'border-primary-500 bg-primary-50': selectedMode === mode.id,
                 'border-gray-200': selectedMode !== mode.id
               }"
-              class="border rounded-lg p-4 cursor-pointer transition-all hover:border-orange-300"
+              class="border rounded-lg p-4 cursor-pointer transition-all hover:border-primary-300"
             >
               <div class="flex items-center justify-between mb-2">
                 <h3 class="font-semibold text-gray-800">{{ mode.title }}</h3>
@@ -154,7 +154,7 @@
             </div>
           </div>
 
-          <button class="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 cursor-pointer whitespace-nowrap font-medium">
+          <button class="w-full bg-primary-500 text-white py-3 rounded-lg hover:bg-primary-600 cursor-pointer whitespace-nowrap font-medium">
             <i class="ri-play-fill mr-2"></i>
             Commencer l'examen
           </button>
@@ -182,7 +182,7 @@
               </div>
               <div class="flex items-center justify-between mt-2 text-sm">
                 <span class="text-gray-500">Seuil de réussite: 61%</span>
-                <button class="text-orange-500 hover:text-orange-600 cursor-pointer">
+                <button class="text-primary-500 hover:text-primary-600 cursor-pointer">
                   <i class="ri-refresh-line mr-1"></i>
                   Réviser
                 </button>
@@ -206,7 +206,7 @@
       <div class="mt-8 bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <div class="flex items-center justify-between mb-6">
           <h2 class="text-xl font-bold text-gray-800">Résultats récents</h2>
-          <button class="text-orange-500 hover:text-orange-600 cursor-pointer text-sm">
+          <button class="text-primary-500 hover:text-primary-600 cursor-pointer text-sm">
             Voir tous les résultats
           </button>
         </div>

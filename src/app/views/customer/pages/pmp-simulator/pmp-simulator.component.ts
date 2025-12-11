@@ -10,7 +10,7 @@ export class PmpSimulatorComponent {
 
   examModes = [
     { id: 'complet', title: 'Examen complet PMP', description: '180 questions - 230 minutes (timing officiel)', questions: 180, duration: '230 min', badge: 'Réel', badgeColor: 'bg-red-500' },
-    { id: 'entrainement', title: "Test d'entraînement", description: '50 questions - 90 minutes (confortable)', questions: 50, duration: '90 min', badge: 'Moyen', badgeColor: 'bg-orange-500' },
+    { id: 'entrainement', title: "Test d'entraînement", description: '50 questions - 90 minutes (confortable)', questions: 50, duration: '90 min', badge: 'Moyen', badgeColor: 'bg-primary-500' },
     { id: 'rapide', title: 'Quiz rapide', description: '20 questions - 35 minutes (détente)', questions: 20, duration: '35 min', badge: 'Facile', badgeColor: 'bg-yellow-500' },
     { id: 'domaine', title: 'Par domaine', description: '30 questions - 55 minutes (approfondi)', questions: 30, duration: '55 min', badge: 'Variable', badgeColor: 'bg-purple-500' }
   ];
@@ -23,7 +23,7 @@ export class PmpSimulatorComponent {
   ];
 
   domainPerformances = [
-    { name: 'Personnes', score: 78, questions: 42, color: 'bg-orange-400' },
+    { name: 'Personnes', score: 78, questions: 42, color: 'bg-primary-400' },
     { name: 'Processus', score: 82, questions: 50, color: 'bg-blue-400' },
     { name: 'Environnement', score: 75, questions: 88, color: 'bg-green-400' }
   ];

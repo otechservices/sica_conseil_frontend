@@ -8,9 +8,9 @@ import { NavigationService } from '../../../../core/services/navigation.service'
 export class DashboardComponent {
 
   progressData = [
-    { label: 'Formation PMP', progress: 53, color: 'bg-orange-500' },
-    { label: 'Simulateur d\'examen', progress: 78, color: 'bg-orange-500' },
-    { label: 'Projets générés', progress: 100, color: 'bg-orange-500' }
+    { label: 'Formation PMP', progress: 53, color: 'bg-primary-500' },
+    { label: 'Simulateur d\'examen', progress: 78, color: 'bg-primary-500' },
+    { label: 'Projets générés', progress: 100, color: 'bg-primary-500' }
   ];
 
   recentActivities = [
@@ -25,8 +25,8 @@ export class DashboardComponent {
       icon: 'ri-file-line',
       title: 'Projet "Application mobile" généré',
       time: 'Hier',
-      bgColor: 'bg-orange-100 dark:bg-orange-900/30',
-      iconColor: 'text-orange-600'
+      bgColor: 'bg-primary-100 dark:bg-primary-900/30',
+      iconColor: 'text-primary-600'
     },
     {
       icon: 'ri-award-line',

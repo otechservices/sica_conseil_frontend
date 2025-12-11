@@ -8,19 +8,19 @@
           <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" [ngClass]="currentDomainInfo?.color || 'bg-gray-500'"><i class="text-3xl text-white" [ngClass]="currentDomainInfo?.icon || 'ri-question-line'"></i></div>
           <h1 class="text-3xl font-bold text-gray-800 mb-4">Test approfondi - {{ currentDomainInfo?.title || 'Domaine' }}</h1>
           <p class="text-gray-600 mb-8">{{ currentDomainInfo?.description || 'Description du domaine' }}</p>
-          <div class="bg-orange-50 rounded-lg p-6 mb-8">
+          <div class="bg-primary-50 rounded-lg p-6 mb-8">
             <h2 class="text-lg font-semibold text-gray-800 mb-4">Détails du test</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
               <div>
-                <div class="text-2xl font-bold text-orange-500 mb-1">30</div>
+                <div class="text-2xl font-bold text-primary-500 mb-1">30</div>
                 <div class="text-sm text-gray-600">Questions</div>
               </div>
               <div>
-                <div class="text-2xl font-bold text-orange-500 mb-1">55</div>
+                <div class="text-2xl font-bold text-primary-500 mb-1">55</div>
                 <div class="text-sm text-gray-600">Minutes</div>
               </div>
               <div>
-                <div class="text-2xl font-bold text-orange-500 mb-1">75%</div>
+                <div class="text-2xl font-bold text-primary-500 mb-1">75%</div>
                 <div class="text-sm text-gray-600">Score requis</div>
               </div>
             </div>
@@ -40,7 +40,7 @@
               </div>
             </div>
           </div>
-          <button (click)="handleStartTest()" class="bg-orange-500 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-orange-600 cursor-pointer whitespace-nowrap"><i class="ri-play-fill mr-2"></i>Commencer le test</button>
+          <button (click)="handleStartTest()" class="bg-primary-500 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-primary-600 cursor-pointer whitespace-nowrap"><i class="ri-play-fill mr-2"></i>Commencer le test</button>
         </div>
       </div>
     </div>
@@ -74,7 +74,7 @@
               </div>
             </div>
             <div class="flex justify-center space-x-4">
-              <button (click)="handleStartTest()" class="bg-orange-500 text-white px-6 py-2 rounded hover:bg-orange-600 cursor-pointer whitespace-nowrap"><i class="ri-refresh-line mr-2"></i>Recommencer le test</button>
+              <button (click)="handleStartTest()" class="bg-primary-500 text-white px-6 py-2 rounded hover:bg-primary-600 cursor-pointer whitespace-nowrap"><i class="ri-refresh-line mr-2"></i>Recommencer le test</button>
               <button (click)="navigate('/pmp-training')" class="bg-gray-100 text-gray-700 px-6 py-2 rounded hover:bg-gray-200 cursor-pointer whitespace-nowrap"><i class="ri-arrow-left-line mr-2"></i>Retour à la formation</button>
             </div>
           </div>
@@ -121,9 +121,9 @@
           </div>
           <div class="mb-8"><p class="text-lg text-gray-800 leading-relaxed">{{ currentQ.question }}</p></div>
           <div class="space-y-3 mb-8">
-            <button *ngFor="let option of currentQ.options; let i = index" (click)="handleAnswerSelect(currentQ.id, i)" class="w-full text-left p-4 rounded-lg border-2 transition-colors cursor-pointer" [ngClass]="selectedAnswers[currentQ.id] === i ? 'border-orange-500 bg-orange-50' : 'border-gray-200 hover:border-gray-300'">
+            <button *ngFor="let option of currentQ.options; let i = index" (click)="handleAnswerSelect(currentQ.id, i)" class="w-full text-left p-4 rounded-lg border-2 transition-colors cursor-pointer" [ngClass]="selectedAnswers[currentQ.id] === i ? 'border-primary-500 bg-primary-50' : 'border-gray-200 hover:border-gray-300'">
               <div class="flex items-center">
-                <div class="w-4 h-4 rounded-full border-2 mr-3" [ngClass]="selectedAnswers[currentQ.id] === i ? 'border-orange-500 bg-orange-500' : 'border-gray-300'"><div *ngIf="selectedAnswers[currentQ.id] === i" class="w-2 h-2 bg-white rounded-full mx-auto mt-0.5"></div></div>
+                <div class="w-4 h-4 rounded-full border-2 mr-3" [ngClass]="selectedAnswers[currentQ.id] === i ? 'border-primary-500 bg-primary-500' : 'border-gray-300'"><div *ngIf="selectedAnswers[currentQ.id] === i" class="w-2 h-2 bg-white rounded-full mx-auto mt-0.5"></div></div>
                 <span class="text-gray-800">{{ option }}</span>
               </div>
             </button>
@@ -139,7 +139,7 @@
           <div class="flex justify-between items-center">
             <button (click)="handlePreviousQuestion()" [disabled]="currentQuestion === 0" class="px-6 py-2 rounded cursor-pointer whitespace-nowrap" [ngClass]="currentQuestion === 0 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"><i class="ri-arrow-left-line mr-2"></i>Précédent</button>
             <div class="text-sm text-gray-600">{{ answeredQuestionsCount }} / {{ questions.length }} réponses</div>
-            <button (click)="handleNextQuestion()" [disabled]="currentQuestion === questions.length - 1" class="px-6 py-2 rounded cursor-pointer whitespace-nowrap" [ngClass]="currentQuestion === questions.length - 1 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-orange-500 text-white hover:bg-orange-600'"><i class="ri-arrow-right-line ml-2"></i>Suivant</button>
+            <button (click)="handleNextQuestion()" [disabled]="currentQuestion === questions.length - 1" class="px-6 py-2 rounded cursor-pointer whitespace-nowrap" [ngClass]="currentQuestion === questions.length - 1 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-primary-500 text-white hover:bg-primary-600'"><i class="ri-arrow-right-line ml-2"></i>Suivant</button>
           </div>
         </div>
       </div>

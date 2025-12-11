@@ -21,6 +21,6 @@ export class NavigationService {
   }
 
   navigateToDashboard(): Promise<boolean> {
-    return this.router.navigate(['/dashboard']);
+    return this.router.navigate(['/customer/dashboard']);
   }
 }

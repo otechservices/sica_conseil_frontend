@@ -14,7 +14,7 @@
             *ngFor="let item of menuItems"
             (click)="setSelectedMenu(item.id)"
             [ngClass]="{
-                'bg-orange-100 dark:bg-orange-900/30 text-orange-600 border-r-2 border-orange-500': selectedMenu === item.id,
+                'bg-primary-100 dark:bg-primary-900/30 text-primary-600 border-r-2 border-primary-500': selectedMenu === item.id,
                 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700': selectedMenu !== item.id
             }"
             class="w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-colors cursor-pointer"
@@ -25,7 +25,7 @@
         </nav>
 
         <div class="absolute bottom-6 left-6">
-            <button class="flex items-center space-x-3 text-gray-600 dark:text-gray-300 hover:text-orange-500 cursor-pointer transition-colors">
+            <button class="flex items-center space-x-3 text-gray-600 dark:text-gray-300 hover:text-primary-500 cursor-pointer transition-colors">
             <i class="ri-logout-box-line text-lg"></i>
             <span>Déconnexion</span>
             </button>

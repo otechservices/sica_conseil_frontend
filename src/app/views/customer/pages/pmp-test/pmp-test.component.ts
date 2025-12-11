@@ -28,7 +28,7 @@ export class PmpTestComponent implements OnInit, OnDestroy {
   timerSubscription: Subscription | undefined;
 
   domainInfo: { [key: string]: any } = {
-    personnes: { title: 'Personnes', color: 'bg-orange-500', icon: 'ri-team-line', description: 'Leadership, gestion d\'équipe, communication et développement des compétences' },
+    personnes: { title: 'Personnes', color: 'bg-primary-500', icon: 'ri-team-line', description: 'Leadership, gestion d\'équipe, communication et développement des compétences' },
     processus: { title: 'Processus', color: 'bg-yellow-500', icon: 'ri-settings-line', description: 'Gestion du cycle de vie du projet, planification et contrôle' },
     environnement: { title: 'Environnement', color: 'bg-green-500', icon: 'ri-building-line', description: 'Contexte organisationnel, stratégie et conformité' }
   };
