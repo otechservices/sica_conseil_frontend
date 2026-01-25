@@ -33,9 +33,8 @@ subtitle=""
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      userType: ['', Validators.required],
-      moraleType: [''],
-      physiqueType: [''],
+      type: ['', Validators.required],
+      category: ['',Validators.required],
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
