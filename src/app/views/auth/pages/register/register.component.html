@@ -33,7 +33,7 @@
     <!-- Options pour Personnes Morales -->
     <div *ngIf="registerForm.get('type')?.value === 'morale'" class="space-y-4">
       <label class="block text-sm font-medium text-gray-700 mb-2">Catégorie</label>
-      <select formControlName="moraleType"
+      <select formControlName="category"
               class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm">
         <option value="">-- Sélectionnez une catégorie --</option>
         <option value="gouvernement">Gouvernements / Partis politiques</option>
@@ -41,11 +41,11 @@
       </select>
 
       <!-- Description dynamique -->
-      <div *ngIf="registerForm.get('moraleType')?.value === 'gouvernement'" class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-200">
+      <div *ngIf="registerForm.get('category')?.value === 'gouvernement'" class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-200">
         <strong>Gouvernements / Partis politiques :</strong> accompagnement dans la définition de visions et la rédaction des projets et programmes de société ainsi que le suivi de leur exécution.
       </div>
 
-      <div *ngIf="registerForm.get('moraleType')?.value === 'societe'" class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-200 space-y-1">
+      <div *ngIf="registerForm.get('category')?.value === 'societe'" class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-200 space-y-1">
         <strong>Sociétés :</strong>
         <ul class="list-disc pl-6 space-y-1">
           <li>Accompagnement dans la définition de visions et la rédaction des projets et programmes en alignement avec la vision stratégique de l’entreprise.</li>
