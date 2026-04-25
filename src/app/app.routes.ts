@@ -15,6 +15,10 @@ export const routes: Routes = [
         loadChildren: () => import('./views/customer/customer.module').then(m => m.CustomerModule)
       },
   
+      {
+        path: 'admin',
+        loadChildren: () => import('./views/admin/admin.module').then(m => m.AdminModule)
+      },
       { path: '**', component: NotFoundComponent },
       
 ];

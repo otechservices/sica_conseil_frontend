@@ -1,0 +1,9 @@
+<div class="flex h-screen bg-gray-100 dark:bg-gray-900">
+  <app-admin-sidebar></app-admin-sidebar>
+  <div class="flex-1 flex flex-col overflow-hidden">
+    <app-admin-header></app-admin-header>
+    <main class="flex-1 overflow-y-auto p-6">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

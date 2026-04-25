@@ -1,0 +1,35 @@
+<div class="space-y-6">
+  <div class="flex items-center justify-between">
+    <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Contenu des pages</h2>
+    <button (click)="saveAll()" [disabled]="saving" class="bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-colors flex items-center gap-2 disabled:opacity-50">
+      <i [ngClass]="saving ? 'ri-loader-4-line animate-spin' : 'ri-save-line'"></i>
+      {{ saving ? 'Enregistrement...' : 'Tout sauvegarder' }}
+    </button>
+  </div>
+
+  <!-- Filtre par page -->
+  <div class="flex gap-2 flex-wrap">
+    <button *ngFor="let p of pages" (click)="activePageFilter = p"
+      class="px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer"
+      [ngClass]="activePageFilter === p ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'">
+      {{ p }}
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="p-12 text-center text-gray-500"><i class="ri-loader-4-line animate-spin text-2xl"></i></div>
+
+  <div *ngIf="!loading" class="space-y-4">
+    <div *ngFor="let c of filteredContents" class="bg-white dark:bg-gray-800 rounded-xl p-5 shadow border border-gray-200 dark:border-gray-700">
+      <div class="flex items-center gap-2 mb-2">
+        <code class="text-xs bg-gray-100 dark:bg-gray-700 text-primary-600 px-2 py-0.5 rounded">{{ c.key }}</code>
+        <span class="text-xs text-gray-400 dark:text-gray-500">{{ c.type }}</span>
+      </div>
+      <textarea *ngIf="c.type !== 'image_url'" [(ngModel)]="c.value" rows="2" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg px-3 py-2 text-sm resize-none"></textarea>
+      <div *ngIf="c.type === 'image_url'" class="flex gap-3 items-start">
+        <input [(ngModel)]="c.value" class="flex-1 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg px-3 py-2 text-sm" />
+        <img *ngIf="c.value" [src]="c.value" class="w-20 h-12 object-cover rounded-lg border border-gray-200 dark:border-gray-600" />
+      </div>
+    </div>
+    <div *ngIf="filteredContents.length === 0" class="text-center py-12 text-gray-400">Aucun contenu pour cette page.</div>
+  </div>
+</div>

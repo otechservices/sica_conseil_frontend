@@ -1,0 +1,48 @@
+<div class="space-y-6">
+  <div class="flex items-center justify-between">
+    <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Témoignages</h2>
+    <button (click)="openCreate()" class="bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-colors flex items-center gap-2"><i class="ri-add-line"></i> Nouveau</button>
+  </div>
+
+  <div *ngIf="showForm" class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 space-y-4">
+    <h3 class="text-lg font-bold text-gray-800 dark:text-white">{{ editing ? 'Modifier' : 'Créer' }} un témoignage</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nom *</label><input [(ngModel)]="form.name" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg px-3 py-2 text-sm" /></div>
+      <div><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Poste *</label><input [(ngModel)]="form.position" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg px-3 py-2 text-sm" /></div>
+      <div><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Entreprise *</label><input [(ngModel)]="form.company" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg px-3 py-2 text-sm" /></div>
+      <div><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Note (1-5)</label><input type="number" min="1" max="5" [(ngModel)]="form.rating" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg px-3 py-2 text-sm" /></div>
+      <div><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Avatar (URL)</label><input [(ngModel)]="form.avatar" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg px-3 py-2 text-sm" /></div>
+      <div><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ordre</label><input type="number" [(ngModel)]="form.order" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg px-3 py-2 text-sm" /></div>
+      <div class="flex items-center gap-3 pt-5"><label class="text-sm font-medium text-gray-700 dark:text-gray-300">Visible</label><input type="checkbox" [(ngModel)]="form.is_active" class="w-4 h-4 accent-primary-500" /></div>
+    </div>
+    <div><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Témoignage *</label><textarea [(ngModel)]="form.text" rows="4" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg px-3 py-2 text-sm resize-none"></textarea></div>
+    <div class="flex gap-3">
+      <button (click)="submit()" class="bg-primary-500 text-white px-6 py-2 rounded-lg hover:bg-primary-600 transition-colors text-sm">Enregistrer</button>
+      <button (click)="showForm = false" class="border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 px-6 py-2 rounded-lg text-sm">Annuler</button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div *ngFor="let t of testimonials" class="bg-white dark:bg-gray-800 rounded-xl p-5 shadow border border-gray-200 dark:border-gray-700 space-y-3">
+      <div class="flex items-center gap-3">
+        <img *ngIf="t.avatar" [src]="t.avatar" class="w-10 h-10 rounded-full object-cover" />
+        <div *ngIf="!t.avatar" class="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center"><i class="ri-user-line text-primary-500"></i></div>
+        <div>
+          <div class="font-semibold text-gray-800 dark:text-white text-sm">{{ t.name }}</div>
+          <div class="text-xs text-gray-500 dark:text-gray-400">{{ t.position }} - {{ t.company }}</div>
+        </div>
+        <span class="ml-auto px-2 py-0.5 rounded-full text-xs" [ngClass]="t.is_active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600'">{{ t.is_active ? 'Visible' : 'Masqué' }}</span>
+      </div>
+      <p class="text-gray-600 dark:text-gray-300 text-sm italic line-clamp-3">"{{ t.text }}"</p>
+      <div class="flex items-center justify-between">
+        <div class="text-yellow-500 text-sm">{{ '⭐'.repeat(t.rating) }}</div>
+        <div class="flex gap-2">
+          <button (click)="openEdit(t)" class="text-blue-500 hover:text-blue-700 p-1"><i class="ri-edit-line"></i></button>
+          <button (click)="toggle(t)" class="p-1" [ngClass]="t.is_active ? 'text-yellow-500' : 'text-green-500'"><i [ngClass]="t.is_active ? 'ri-eye-off-line' : 'ri-eye-line'"></i></button>
+          <button (click)="delete(t)" class="text-red-500 hover:text-red-700 p-1"><i class="ri-delete-bin-line"></i></button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="testimonials.length === 0 && !loading" class="col-span-3 text-center py-12 text-gray-400">Aucun témoignage.</div>
+  </div>
+</div>

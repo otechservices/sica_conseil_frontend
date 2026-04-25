@@ -44,7 +44,9 @@ subtitle="Accédez gratuitement à votre espace Sica Conseil Int"
           this.toastrService.success(res.message)
 
           this.lsService.set(GlobalName.userName,res.data)
-                this.navigationService.navigate('/customer/dashboard');
+          const roles: string[] = (res.data?.roles ?? []).map((r: any) => r.name);
+          const isAdmin = roles.some(r => ['Super Admin', 'Admin'].includes(r));
+          this.navigationService.navigate(isAdmin ? '/admin' : '/customer/dashboard');
 
     
         },

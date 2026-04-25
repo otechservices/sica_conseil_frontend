@@ -23,10 +23,10 @@
       <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-6 transition-colors">Excellence & Innovation</h2>
       <p class="text-lg text-gray-600 dark:text-gray-300 mb-12 max-w-4xl mx-auto transition-colors">Nos experts certifiés en PMP®, PRINCE2®, PSM et Lean Six Sigma vous accompagnent pour piloter vos projets, optimiser vos performances et accélérer votre transformation. Nous combinons rigueur méthodologique, excellence opérationnelle et intelligence humaine pour transformer vos projets en résultats durables.</p>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-        <div class="text-center"><div class="text-4xl font-bold text-primary-500 mb-2">200+</div><div class="text-gray-600 dark:text-gray-300 transition-colors">Projets réalisés</div></div>
-        <div class="text-center"><div class="text-4xl font-bold text-primary-500 mb-2">15+</div><div class="text-gray-600 dark:text-gray-300 transition-colors">Années d'expérience</div></div>
-        <div class="text-center"><div class="text-4xl font-bold text-primary-500 mb-2">25+</div><div class="text-gray-600 dark:text-gray-300 transition-colors">Experts certifiés</div></div>
-        <div class="text-center"><div class="text-4xl font-bold text-primary-500 mb-2">95%</div><div class="text-gray-600 dark:text-gray-300 transition-colors">Taux de réussite</div></div>
+        <div class="text-center"><div class="text-4xl font-bold text-primary-500 mb-2">{{ statsProjects }}</div><div class="text-gray-600 dark:text-gray-300 transition-colors">Projets réalisés</div></div>
+        <div class="text-center"><div class="text-4xl font-bold text-primary-500 mb-2">{{ statsYears }}</div><div class="text-gray-600 dark:text-gray-300 transition-colors">Années d'expérience</div></div>
+        <div class="text-center"><div class="text-4xl font-bold text-primary-500 mb-2">{{ statsExperts }}</div><div class="text-gray-600 dark:text-gray-300 transition-colors">Experts certifiés</div></div>
+        <div class="text-center"><div class="text-4xl font-bold text-primary-500 mb-2">{{ statsSuccess }}</div><div class="text-gray-600 dark:text-gray-300 transition-colors">Taux de réussite</div></div>
       </div>
     </div>
   </section>
@@ -58,8 +58,8 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           <div *ngFor="let secteur of secteurs" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-center hover:shadow-lg transition-all">
             <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4"><i class="text-2xl text-primary-500" [ngClass]="secteur.icon"></i></div>
-            <h3 class="font-bold text-gray-800 dark:text-white mb-2 transition-colors">{{ secteur.name }}</h3>
-            <div class="text-2xl font-bold text-primary-500 mb-1">{{ secteur.projects }}</div>
+            <h3 class="font-bold text-gray-800 dark:text-white mb-2 transition-colors">{{ secteur.title }}</h3>
+            <div class="text-2xl font-bold text-primary-500 mb-1">{{ secteur.price }}</div>
             <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors">projets réalisés</div>
           </div>
         </div>
@@ -77,10 +77,27 @@
       </div>
       <div *ngIf="activeTab === 'equipe'">
         <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Notre Équipe</h2><p class="text-xl text-gray-600 dark:text-gray-300 transition-colors">Savoir-faire et excellence au service de vos projets</p></div>
-        <div class="bg-primary-50 dark:bg-primary-900/30 rounded-xl p-12 text-center transition-colors">
+
+        <!-- Membres dynamiques -->
+        <div *ngIf="teamMembers.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div *ngFor="let member of teamMembers" class="bg-white dark:bg-gray-900 rounded-xl p-8 text-center transition-colors border border-gray-200 dark:border-gray-700">
+            <img *ngIf="member.photo" [src]="member.photo" [alt]="member.name" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" />
+            <div *ngIf="!member.photo" class="w-24 h-24 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center mx-auto mb-4"><i class="ri-user-star-line text-4xl text-primary-500"></i></div>
+            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2 transition-colors">{{ member.name }}</h3>
+            <p class="text-primary-500 font-semibold mb-2">{{ member.title }}</p>
+            <p *ngIf="member.bio" class="text-gray-600 dark:text-gray-300 text-sm mb-4 transition-colors">{{ member.bio }}</p>
+            <div *ngIf="member.certifications?.length" class="flex flex-wrap justify-center gap-2 mb-4">
+              <span *ngFor="let cert of member.certifications" class="text-xs bg-primary-100 dark:bg-primary-900/30 text-primary-600 px-2 py-1 rounded">{{ cert }}</span>
+            </div>
+            <a *ngIf="member.linkedin" [href]="member.linkedin" target="_blank" class="inline-flex items-center text-sm text-primary-500 hover:underline"><i class="ri-linkedin-line mr-1"></i>LinkedIn</a>
+          </div>
+        </div>
+
+        <!-- Placeholder si aucun membre -->
+        <div *ngIf="teamMembers.length === 0" class="bg-primary-50 dark:bg-primary-900/30 rounded-xl p-12 text-center transition-colors">
           <div class="w-24 h-24 bg-primary-100 dark:bg-primary-900/50 rounded-full flex items-center justify-center mx-auto mb-6"><i class="ri-user-star-line text-4xl text-primary-500"></i></div>
           <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4 transition-colors">Présentation de l'équipe en cours</h3>
-          <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto transition-colors">Nous préparons une présentation détaillée de notre équipe d'experts certifiés et de leur savoir-faire multisectoriel. Cette section sera bientôt enrichie avec les profils LinkedIn et l'expertise de chaque membre.</p>
+          <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto transition-colors">Nous préparons une présentation détaillée de notre équipe d'experts certifiés.</p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <button (click)="navigate('/contact')" class="bg-primary-500 text-white px-6 py-3 rounded-lg hover:bg-primary-600 cursor-pointer whitespace-nowrap font-semibold transition-colors"><i class="ri-phone-line mr-2"></i>Nous contacter</button>
             <button (click)="navigate('/formations')" class="border border-primary-500 text-primary-500 px-6 py-3 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/30 cursor-pointer whitespace-nowrap font-semibold transition-colors"><i class="ri-graduation-cap-line mr-2"></i>Voir nos formations</button>

@@ -18,10 +18,11 @@ export class IsAuthedGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
         if (this.lsService.get(GlobalName.tokenName) != null) {
-          let url="/customer/dashboard"
-          this.router.navigate([url]);
+          const user = this.lsService.get(GlobalName.userName);
+          const roles: string[] = (user?.roles ?? []).map((r: any) => r.name);
+          const isAdmin = roles.some((r: string) => ['Super Admin', 'Admin'].includes(r));
+          this.router.navigate([isAdmin ? '/admin' : '/customer/dashboard']);
           return false;
-
         } else {
           return true;
         }
