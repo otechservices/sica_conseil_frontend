@@ -57,4 +57,19 @@ export class AdminContentService {
   updatePageContent(id: number, data: any) { return this.http.put<any>(`${this.base}page-contents/${id}`, data); }
   deletePageContent(id: number) { return this.http.delete<any>(`${this.base}page-contents/${id}`); }
   bulkUpdatePageContents(items: any[]) { return this.http.post<any>(`${this.base}page-contents/bulk-update`, { items }); }
+
+  // Simulator — banque de questions
+  getSimulatorStats() { return this.http.get<any>(`${this.base}simulator/stats`); }
+  getSimulatorQuestions(params?: any) {
+    const qs = params ? '?' + new URLSearchParams(params).toString() : '';
+    return this.http.get<any>(`${this.base}simulator/questions${qs}`);
+  }
+  createSimulatorQuestion(data: any) { return this.http.post<any>(`${this.base}simulator/questions`, data); }
+  updateSimulatorQuestion(id: number, data: any) { return this.http.put<any>(`${this.base}simulator/questions/${id}`, data); }
+  deleteSimulatorQuestion(id: number) { return this.http.delete<any>(`${this.base}simulator/questions/${id}`); }
+  toggleSimulatorQuestion(id: number, state: 0 | 1) { return this.http.get<any>(`${this.base}simulator/questions/${id}/toggle/${state}`); }
+  getMoodleQuizzes(courseId: number) { return this.http.get<any>(`${this.base}simulator/moodle-quizzes?course_id=${courseId}`); }
+  importFromMoodle(data: { quiz_id: number; domain: string; difficulty: string }) {
+    return this.http.post<any>(`${this.base}simulator/import-moodle`, data);
+  }
 }

@@ -14,6 +14,7 @@ import { TeamMembersAdminComponent } from './pages/team-members/team-members-adm
 import { FaqsAdminComponent } from './pages/faqs/faqs-admin.component';
 import { ContactInfosAdminComponent } from './pages/contact-infos/contact-infos-admin.component';
 import { PageContentsAdminComponent } from './pages/page-contents/page-contents-admin.component';
+import { SimulatorQuestionsAdminComponent } from './pages/simulator-questions/simulator-questions-admin.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { PageContentsAdminComponent } from './pages/page-contents/page-contents-
     FaqsAdminComponent,
     ContactInfosAdminComponent,
     PageContentsAdminComponent,
+    SimulatorQuestionsAdminComponent,
   ],
   imports: [
     CommonModule,

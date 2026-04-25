@@ -1,40 +1,79 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NavigationService } from '../../../../core/services/navigation.service';
+import { SimulatorService, SimulatorSession, SimulatorStats } from '../../../../core/services/simulator.service';
 
 @Component({
   selector: 'app-pmp-history',
   templateUrl: './pmp-history.component.html',
 })
-export class PmpHistoryComponent {
-  filterType = 'all';
+export class PmpHistoryComponent implements OnInit {
+  sessions: SimulatorSession[] = [];
+  stats: SimulatorStats | null = null;
+  isLoading = true;
+  filterMode = 'all';
 
-  historyData = [
-    { id: 1, type: 'Complet', date: '2024-01-15', score: 82, duration: 180, status: 'Réussi' },
-    { id: 2, type: 'Entraînement', date: '2024-01-14', score: 76, duration: 45, status: 'Réussi' },
-    { id: 3, type: 'Quiz', date: '2024-01-10', score: 68, duration: 20, status: 'Échoué' },
-    { id: 4, type: 'Domaine', date: '2024-01-08', score: 85, duration: 35, status: 'Réussi' },
-    { id: 5, type: 'Entraînement', date: '2024-01-06', score: 72, duration: 50, status: 'Réussi' },
-    { id: 6, type: 'Quiz', date: '2024-01-03', score: 64, duration: 18, status: 'Réussi' },
-    { id: 7, type: 'Complet', date: '2024-01-01', score: 58, duration: 175, status: 'Échoué' }
-  ];
+  constructor(
+    private navigationService: NavigationService,
+    private simulatorService: SimulatorService,
+  ) {}
 
-  chartData = [
-    { month: 1, score: 58 }, { month: 2, score: 64 }, { month: 3, score: 68 },
-    { month: 4, score: 78 }, { month: 5, score: 72 }, { month: 6, score: 82 }
-  ];
-
-  domainScores = [
-    { name: 'Personnes', score: 78 },
-    { name: 'Processus', score: 85 },
-    { name: 'Environnement', score: 72 }
-  ];
-
-  getStatusColor(status: string): string {
-    return status === 'Réussi' ? 'text-green-600' : 'text-red-600';
+  ngOnInit(): void {
+    this.loadData();
   }
 
-  getStatusBadge(status: string): string {
-    return status === 'Réussi'
+  loadData(): void {
+    this.isLoading = true;
+
+    this.simulatorService.getSessions().subscribe({
+      next: (res) => { this.sessions = res.data ?? []; },
+      error: () => {},
+    });
+
+    this.simulatorService.getStats().subscribe({
+      next: (res) => { this.stats = res.data; this.isLoading = false; },
+      error: () => { this.isLoading = false; },
+    });
+  }
+
+  get filteredSessions(): SimulatorSession[] {
+    if (this.filterMode === 'all') return this.sessions;
+    return this.sessions.filter(s => s.mode === this.filterMode);
+  }
+
+  get totalTimeFormatted(): string {
+    const secs = this.stats?.total_time_seconds ?? 0;
+    const h = Math.floor(secs / 3600);
+    const m = Math.floor((secs % 3600) / 60);
+    return h > 0 ? `${h}h${m > 0 ? m + 'min' : ''}` : `${m}min`;
+  }
+
+  getTimeDuration(secs: number): string {
+    const m = Math.floor(secs / 60);
+    return `${m} min`;
+  }
+
+  getStatusBadge(session: SimulatorSession): string {
+    const passed = (session.score ?? 0) >= 61;
+    return passed
       ? 'bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium'
       : 'bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-medium';
+  }
+
+  getStatusLabel(session: SimulatorSession): string {
+    if (session.status === 'abandoned') return 'Abandonné';
+    return (session.score ?? 0) >= 61 ? 'Réussi' : 'Échoué';
+  }
+
+  getStatusColor(session: SimulatorSession): string {
+    if (session.status === 'abandoned') return 'text-gray-500';
+    return (session.score ?? 0) >= 61 ? 'text-green-600' : 'text-red-600';
+  }
+
+  viewResult(session: SimulatorSession): void {
+    this.navigationService.navigate(`/customer/result?session=${session.id}`);
+  }
+
+  navigate(path: string): void {
+    this.navigationService.navigate(path);
   }
 }

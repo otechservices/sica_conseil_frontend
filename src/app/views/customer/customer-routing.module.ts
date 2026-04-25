@@ -18,14 +18,14 @@ const routes: Routes = [
       component: CustomerLayoutComponent,
       canActivate:[AuthGuard],
       children:[
-          { path: '', redirectTo: 'dashboard',pathMatch:"full" },
+          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
           { path: 'dashboard', component: DashboardComponent },
           { path: 'project-generator', component: ProjectGeneratorComponent },
           { path: 'simulator', component: PmpSimulatorComponent },
-          { path: 'history', component: PmpHistoryComponent },
-          { path: 'training', component: PmpTrainingComponent },
           { path: 'test', component: PmpTestComponent },
           { path: 'result', component: PmpResultComponent },
+          { path: 'history', component: PmpHistoryComponent },
+          { path: 'training', component: PmpTrainingComponent },
       ]
     },
 ];

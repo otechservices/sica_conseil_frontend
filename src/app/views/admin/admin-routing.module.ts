@@ -9,6 +9,7 @@ import { TeamMembersAdminComponent } from './pages/team-members/team-members-adm
 import { FaqsAdminComponent } from './pages/faqs/faqs-admin.component';
 import { ContactInfosAdminComponent } from './pages/contact-infos/contact-infos-admin.component';
 import { PageContentsAdminComponent } from './pages/page-contents/page-contents-admin.component';
+import { SimulatorQuestionsAdminComponent } from './pages/simulator-questions/simulator-questions-admin.component';
 
 const routes: Routes = [
   {
@@ -17,13 +18,14 @@ const routes: Routes = [
     canActivate: [AdminGuard],
     children: [
       { path: '', redirectTo: 'formations', pathMatch: 'full' },
-      { path: 'formations',    component: FormationsAdminComponent },
-      { path: 'services',      component: ServicesAdminComponent },
-      { path: 'testimonials',  component: TestimonialsAdminComponent },
-      { path: 'team-members',  component: TeamMembersAdminComponent },
-      { path: 'faqs',          component: FaqsAdminComponent },
-      { path: 'contact-infos', component: ContactInfosAdminComponent },
-      { path: 'page-contents', component: PageContentsAdminComponent },
+      { path: 'formations',           component: FormationsAdminComponent },
+      { path: 'services',             component: ServicesAdminComponent },
+      { path: 'testimonials',         component: TestimonialsAdminComponent },
+      { path: 'team-members',         component: TeamMembersAdminComponent },
+      { path: 'faqs',                 component: FaqsAdminComponent },
+      { path: 'contact-infos',        component: ContactInfosAdminComponent },
+      { path: 'page-contents',        component: PageContentsAdminComponent },
+      { path: 'simulator-questions',  component: SimulatorQuestionsAdminComponent },
     ]
   }
 ];

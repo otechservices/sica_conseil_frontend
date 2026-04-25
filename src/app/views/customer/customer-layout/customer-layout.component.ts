@@ -13,11 +13,9 @@ export class CustomerLayoutComponent {
   menuItems = [
     { id: 'customer/dashboard', label: 'Tableau de bord', icon: 'ri-dashboard-line' },
     { id: 'customer/project-generator', label: 'Générateur de projets', icon: 'ri-file-text-line' },
-    { id: 'customer/training', label: 'Formation', icon: 'ri-book-line' },
-    { id: 'customer/test', label: 'Simulateur', icon: 'ri-flask-line' },
-    { id: 'customer/history', label: 'Progression', icon: 'ri-bar-chart-line' },
-    { id: 'customer/result', label: 'Résultat', icon: 'ri-flask-line' },
-    { id: 'customer/settings', label: 'Paramètres', icon: 'ri-settings-line' }
+    { id: 'customer/training', label: 'Formation PMP', icon: 'ri-book-line' },
+    { id: 'customer/simulator', label: 'Simulateur PMP', icon: 'ri-flask-line' },
+    { id: 'customer/history', label: 'Historique', icon: 'ri-bar-chart-line' },
   ];
 
     constructor(private navigationService: NavigationService) {}

@@ -1,0 +1,269 @@
+<div class="p-6">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Banque de questions — Simulateur PMP</h1>
+      <p class="text-gray-500 text-sm mt-1">Gérez les questions locales et importez depuis Moodle</p>
+    </div>
+    <div class="flex items-center space-x-3">
+      <button (click)="openImport()"
+        [class]="moodleEnabled ? 'flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer' : 'flex items-center space-x-2 px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed'"
+        [disabled]="!moodleEnabled"
+        [title]="!moodleEnabled ? 'Configurez MOODLE_URL et MOODLE_TOKEN dans .env' : 'Importer depuis Moodle'">
+        <i class="ri-download-cloud-line"></i>
+        <span>Import Moodle</span>
+        <span *ngIf="!moodleEnabled" class="text-xs ml-1">(non configuré)</span>
+      </button>
+      <button (click)="openCreate()" class="flex items-center space-x-2 px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 cursor-pointer">
+        <i class="ri-add-line"></i><span>Nouvelle question</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6" *ngIf="stats">
+    <div class="bg-white rounded-xl p-4 border border-gray-200">
+      <div class="text-xs text-gray-500 mb-1">Total</div>
+      <div class="text-2xl font-bold text-gray-900">{{ stats.questions?.total ?? 0 }}</div>
+    </div>
+    <div class="bg-white rounded-xl p-4 border border-gray-200">
+      <div class="text-xs text-gray-500 mb-1">Actives</div>
+      <div class="text-2xl font-bold text-green-600">{{ stats.questions?.active ?? 0 }}</div>
+    </div>
+    <div class="bg-white rounded-xl p-4 border border-gray-200">
+      <div class="text-xs text-gray-500 mb-1">Depuis Moodle</div>
+      <div class="text-2xl font-bold text-blue-600">{{ stats.questions?.from_moodle ?? 0 }}</div>
+    </div>
+    <div class="bg-white rounded-xl p-4 border border-gray-200">
+      <div class="text-xs text-gray-500 mb-1">Locales</div>
+      <div class="text-2xl font-bold text-gray-600">{{ stats.questions?.local ?? 0 }}</div>
+    </div>
+    <div class="bg-white rounded-xl p-4 border border-gray-200">
+      <div class="text-xs text-gray-500 mb-1">Sessions réalisées</div>
+      <div class="text-2xl font-bold text-primary-600">{{ stats.sessions?.total_completed ?? 0 }}</div>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="bg-white rounded-xl border border-gray-200 p-4 mb-6 flex flex-wrap items-center gap-3">
+    <input [(ngModel)]="searchText" (keyup.enter)="loadQuestions()" placeholder="Rechercher une question..."
+      class="flex-1 min-w-48 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
+    <select [(ngModel)]="filterDomain" (change)="loadQuestions()" class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none">
+      <option value="">Tous les domaines</option>
+      <option *ngFor="let d of domains" [value]="d.value">{{ d.label }}</option>
+    </select>
+    <select [(ngModel)]="filterDifficulty" (change)="loadQuestions()" class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none">
+      <option value="">Toutes difficultés</option>
+      <option *ngFor="let d of difficulties" [value]="d.value">{{ d.label }}</option>
+    </select>
+    <select [(ngModel)]="filterSource" (change)="loadQuestions()" class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none">
+      <option value="">Toutes sources</option>
+      <option value="local">Locales</option>
+      <option value="moodle">Moodle</option>
+    </select>
+    <button (click)="loadQuestions()" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-sm">
+      <i class="ri-search-line"></i>
+    </button>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="flex justify-center py-12">
+    <i class="ri-loader-4-line text-3xl text-primary-500 animate-spin"></i>
+  </div>
+
+  <!-- Questions list -->
+  <div *ngIf="!loading" class="space-y-3">
+    <div *ngIf="questions.length === 0" class="text-center py-12 bg-white rounded-xl border border-gray-200">
+      <i class="ri-question-line text-4xl text-gray-300 mb-3 block"></i>
+      <p class="text-gray-500">Aucune question trouvée</p>
+    </div>
+
+    <div *ngFor="let q of questions" class="bg-white rounded-xl border border-gray-200 p-4">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center space-x-2 mb-2">
+            <span class="text-xs px-2 py-0.5 rounded bg-primary-100 text-primary-700">{{ getDomainLabel(q.domain) }}</span>
+            <span class="text-xs px-2 py-0.5 rounded" [ngClass]="getDifficultyClass(q.difficulty)">{{ q.difficulty }}</span>
+            <span *ngIf="q.moodle_question_id" class="text-xs px-2 py-0.5 rounded bg-blue-100 text-blue-700">
+              <i class="ri-link mr-1"></i>Moodle #{{ q.moodle_question_id }}
+            </span>
+            <span *ngIf="!q.is_active" class="text-xs px-2 py-0.5 rounded bg-gray-100 text-gray-500">Inactive</span>
+          </div>
+          <p class="text-sm text-gray-800 font-medium line-clamp-2">{{ q.question }}</p>
+          <div class="flex flex-wrap gap-1 mt-2">
+            <span *ngFor="let opt of q.options; let i = index"
+              class="text-xs px-2 py-0.5 rounded border"
+              [ngClass]="i === q.correct_answer ? 'border-green-300 bg-green-50 text-green-700' : 'border-gray-200 text-gray-500'">
+              {{ i === q.correct_answer ? '✓ ' : '' }}{{ opt | slice:0:40 }}{{ opt.length > 40 ? '...' : '' }}
+            </span>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-2 flex-shrink-0">
+          <button (click)="toggle(q)" [title]="q.is_active ? 'Désactiver' : 'Activer'"
+            class="p-2 rounded-lg hover:bg-gray-100 cursor-pointer"
+            [ngClass]="q.is_active ? 'text-green-600' : 'text-gray-400'">
+            <i [class]="q.is_active ? 'ri-toggle-fill text-lg' : 'ri-toggle-line text-lg'"></i>
+          </button>
+          <button (click)="openEdit(q)" class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg cursor-pointer">
+            <i class="ri-edit-line"></i>
+          </button>
+          <button (click)="delete(q)" class="p-2 text-red-500 hover:bg-red-50 rounded-lg cursor-pointer">
+            <i class="ri-delete-bin-line"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Modal : Import Moodle ===== -->
+<div *ngIf="showImportModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-2xl shadow-xl w-full max-w-md">
+    <div class="p-6 border-b border-gray-200">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-lg font-bold text-gray-900">Importer depuis Moodle</h2>
+          <p class="text-gray-500 text-sm mt-1">Les questions du quiz seront ajoutées à la banque locale</p>
+        </div>
+        <button (click)="closeImport()" class="p-2 text-gray-400 hover:text-gray-600"><i class="ri-close-line text-xl"></i></button>
+      </div>
+    </div>
+
+    <div class="p-6 space-y-4">
+      <!-- Success -->
+      <div *ngIf="importResult" class="bg-green-50 border border-green-200 rounded-xl p-4">
+        <div class="flex items-center space-x-3 mb-2">
+          <i class="ri-check-circle-line text-green-600 text-xl"></i>
+          <span class="font-semibold text-green-800">Import réussi !</span>
+        </div>
+        <p class="text-green-700 text-sm">{{ importResult.imported }} question(s) importée(s)</p>
+        <p *ngIf="importResult.skipped > 0" class="text-green-600 text-sm">{{ importResult.skipped }} ignorée(s) (déjà existantes)</p>
+        <button (click)="closeImport()" class="mt-3 w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600">Fermer</button>
+      </div>
+
+      <!-- Error -->
+      <div *ngIf="importError" class="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700 text-sm">
+        <i class="ri-error-warning-line mr-2"></i>{{ importError }}
+      </div>
+
+      <!-- Form -->
+      <div *ngIf="!importResult" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">ID du quiz Moodle <span class="text-red-500">*</span></label>
+          <input [(ngModel)]="importForm.quiz_id" type="number" placeholder="ex: 5" min="1"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
+          <p class="text-xs text-gray-400 mt-1">Retrouvez l'ID dans l'URL Moodle : /mod/quiz/view.php?id=<strong>5</strong></p>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Domaine PMP cible <span class="text-red-500">*</span></label>
+          <select [(ngModel)]="importForm.domain" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none">
+            <option *ngFor="let d of domains" [value]="d.value">{{ d.label }}</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Difficulté par défaut <span class="text-red-500">*</span></label>
+          <select [(ngModel)]="importForm.difficulty" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none">
+            <option *ngFor="let d of difficulties" [value]="d.value">{{ d.label }}</option>
+          </select>
+        </div>
+
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-700">
+          <i class="ri-information-line mr-1"></i>
+          Seules les questions QCM (choix multiple) seront importées. Les questions déjà présentes (même moodle_question_id) seront ignorées.
+        </div>
+
+        <div class="flex space-x-3 pt-2">
+          <button (click)="closeImport()" class="flex-1 border border-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-50">
+            Annuler
+          </button>
+          <button (click)="runImport()" [disabled]="!importForm.quiz_id || isImporting"
+            [ngClass]="{'opacity-50 cursor-not-allowed': !importForm.quiz_id || isImporting}"
+            class="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 flex items-center justify-center space-x-2">
+            <span *ngIf="!isImporting"><i class="ri-download-cloud-line mr-1"></i>Importer</span>
+            <span *ngIf="isImporting"><i class="ri-loader-4-line animate-spin mr-1"></i>Import en cours...</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Modal : Créer / Modifier question ===== -->
+<div *ngIf="showForm" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+    <div class="p-6 border-b border-gray-200 flex items-center justify-between">
+      <h2 class="text-lg font-bold text-gray-900">{{ editing ? 'Modifier la question' : 'Nouvelle question' }}</h2>
+      <button (click)="showForm = false" class="p-2 text-gray-400 hover:text-gray-600"><i class="ri-close-line text-xl"></i></button>
+    </div>
+
+    <div class="p-6 space-y-4">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Domaine</label>
+          <select [(ngModel)]="form.domain" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none">
+            <option *ngFor="let d of domains" [value]="d.value">{{ d.label }}</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Difficulté</label>
+          <select [(ngModel)]="form.difficulty" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none">
+            <option *ngFor="let d of difficulties" [value]="d.value">{{ d.label }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Question <span class="text-red-500">*</span></label>
+        <textarea [(ngModel)]="form.question" rows="3" placeholder="Formulez votre question..."
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"></textarea>
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <label class="block text-sm font-medium text-gray-700">Options de réponse <span class="text-red-500">*</span></label>
+          <button (click)="addOption()" [disabled]="form.options.length >= 6"
+            class="text-xs text-primary-600 hover:text-primary-800 cursor-pointer">+ Ajouter option</button>
+        </div>
+        <div class="space-y-2">
+          <div *ngFor="let opt of form.options; let i = index" class="flex items-center space-x-2">
+            <input type="radio" name="correct_answer" [value]="i" [(ngModel)]="form.correct_answer"
+              title="Marquer comme réponse correcte" class="text-primary-500">
+            <input [(ngModel)]="form.options[i]" [placeholder]="'Option ' + (i+1)"
+              class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none"
+              [ngClass]="i === form.correct_answer ? 'border-green-400 bg-green-50' : ''">
+            <button *ngIf="form.options.length > 2" (click)="removeOption(i)"
+              class="text-red-400 hover:text-red-600 p-1"><i class="ri-close-line"></i></button>
+          </div>
+        </div>
+        <p class="text-xs text-gray-400 mt-1">Cliquez sur le bouton radio pour marquer la réponse correcte (en vert)</p>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Explication (optionnel)</label>
+        <textarea [(ngModel)]="form.explanation" rows="2" placeholder="Expliquez pourquoi cette réponse est correcte..."
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none"></textarea>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <input type="checkbox" [(ngModel)]="form.is_active" id="is_active" class="rounded">
+        <label for="is_active" class="text-sm text-gray-700">Question active (visible dans le simulateur)</label>
+      </div>
+    </div>
+
+    <div class="p-6 border-t border-gray-200 flex space-x-3">
+      <button (click)="showForm = false" class="flex-1 border border-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-50">
+        Annuler
+      </button>
+      <button (click)="submit()" [disabled]="isSaving || !form.question"
+        [ngClass]="{'opacity-50 cursor-not-allowed': isSaving || !form.question}"
+        class="flex-1 bg-primary-500 text-white py-2 rounded-lg hover:bg-primary-600 flex items-center justify-center">
+        <span *ngIf="!isSaving">{{ editing ? 'Mettre à jour' : 'Créer la question' }}</span>
+        <span *ngIf="isSaving"><i class="ri-loader-4-line animate-spin mr-2"></i>Enregistrement...</span>
+      </button>
+    </div>
+  </div>
+</div>

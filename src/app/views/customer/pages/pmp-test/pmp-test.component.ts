@@ -2,73 +2,81 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, timer } from 'rxjs';
 import { NavigationService } from '../../../../core/services/navigation.service';
-
-interface Question {
-  id: number;
-  question: string;
-  options: string[];
-  correctAnswer: number;
-  explanation: string;
-  difficulty: 'Facile' | 'Moyen' | 'Difficile';
-}
+import { SimulatorService, SimulatorSession, SimulatorQuestion } from '../../../../core/services/simulator.service';
 
 @Component({
   selector: 'app-pmp-test',
   templateUrl: './pmp-test.component.html',
 })
 export class PmpTestComponent implements OnInit, OnDestroy {
-  domain: string = 'personnes';
-  isMenuOpen = false;
-  currentQuestion = 0;
-  selectedAnswers: { [key: number]: number } = {};
-  showResults = false;
-  timeLeft = 55 * 60;
+  session: SimulatorSession | null = null;
+  questions: SimulatorQuestion[] = [];
+  sessionId: number | null = null;
+
+  isLoading = true;
   isTestStarted = false;
+  isSubmitting = false;
+  showResults = false;
+  hasError = false;
+
+  currentQuestion = 0;
+  selectedAnswers: Record<number, number> = {};
   showExplanation = false;
-  timerSubscription: Subscription | undefined;
 
-  domainInfo: { [key: string]: any } = {
-    personnes: { title: 'Personnes', color: 'bg-primary-500', icon: 'ri-team-line', description: 'Leadership, gestion d\'équipe, communication et développement des compétences' },
-    processus: { title: 'Processus', color: 'bg-yellow-500', icon: 'ri-settings-line', description: 'Gestion du cycle de vie du projet, planification et contrôle' },
-    environnement: { title: 'Environnement', color: 'bg-green-500', icon: 'ri-building-line', description: 'Contexte organisationnel, stratégie et conformité' }
-  };
+  timeLeft = 0;
+  private timerSubscription?: Subscription;
 
-  questions: Question[] = [
-    { id: 1, question: "Quelle est la principale responsabilité d'un chef de projet selon le PMI ?", options: ["Gérer les ressources techniques du projet", "Assurer la livraison du projet dans les délais, le budget et la qualité requis", "Superviser l'équipe de développement uniquement", "Rédiger tous les documents du projet"], correctAnswer: 1, explanation: "Selon le PMI, le chef de projet est responsable de la livraison du projet en respectant le triangle de la performance : délais, coût et qualité.", difficulty: 'Facile' },
-    { id: 2, question: "Dans le cadre de la gestion des parties prenantes, quelle matrice est utilisée pour analyser leur influence et leur intérêt ?", options: ["Matrice des risques", "Matrice pouvoir/intérêt", "Matrice RACI", "Matrice de traçabilité"], correctAnswer: 1, explanation: "La matrice pouvoir/intérêt permet de cartographier les parties prenantes selon leur niveau d'influence (pouvoir) et leur degré d'intérêt pour le projet.", difficulty: 'Moyen' },
-    { id: 3, question: "Quel processus permet d'identifier formellement qu'un projet ou une phase peut commencer ?", options: ["Élaborer la charte du projet", "Planifier la gestion du contenu", "Définir les activités", "Estimer les coûts"], correctAnswer: 0, explanation: "L'élaboration de la charte du projet est le processus qui autorise formellement l'existence du projet et donne au chef de projet l'autorité nécessaire.", difficulty: 'Moyen' },
-    { id: 4, question: "Quelle technique est utilisée pour identifier les risques du projet ?", options: ["Analyse SWOT uniquement", "Brainstorming, entretiens, analyse documentaire", "Diagramme de Gantt", "Méthode du chemin critique"], correctAnswer: 1, explanation: "L'identification des risques utilise plusieurs techniques comme le brainstorming, les entretiens, l'analyse documentaire, l'analyse des hypothèses, etc.", difficulty: 'Facile' },
-    { id: 5, question: "Dans la méthode du chemin critique, qu'est-ce que la marge libre ?", options: ["Le temps disponible avant que le projet soit en retard", "Le temps qu'une activité peut être retardée sans affecter la date de début au plus tôt de l'activité suivante", "La durée minimale du projet", "Le temps nécessaire pour terminer toutes les activités"], correctAnswer: 1, explanation: "La marge libre est le temps qu'une activité peut être retardée sans impacter le début au plus tôt de ses activités successeures.", difficulty: 'Difficile' }
-  ];
-
-  constructor(private route: ActivatedRoute, private navigationService: NavigationService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private navigationService: NavigationService,
+    private simulatorService: SimulatorService,
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.domain = params['domain'] || 'personnes';
-    });
-  }
-
-  ngOnDestroy(): void {
-    if (this.timerSubscription) {
-      this.timerSubscription.unsubscribe();
-    }
-  }
-
-  startTimer() {
-    this.timerSubscription = timer(0, 1000).subscribe(() => {
-      if (this.timeLeft > 0) {
-        this.timeLeft--;
+      const id = parseInt(params['session'], 10);
+      if (id) {
+        this.sessionId = id;
+        this.loadSession(id);
       } else {
-        this.handleSubmitTest();
+        this.hasError = true;
+        this.isLoading = false;
       }
     });
   }
 
-  formatTime(seconds: number): string {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  ngOnDestroy(): void {
+    this.timerSubscription?.unsubscribe();
+  }
+
+  loadSession(id: number): void {
+    this.simulatorService.getSession(id).subscribe({
+      next: (res) => {
+        this.session = res.data;
+        this.questions = res.data.questions ?? [];
+        this.timeLeft = res.data.time_limit;
+
+        if (res.data.status === 'completed') {
+          this.showResults = true;
+          this.isTestStarted = false;
+          this.restoreAnswers();
+        } else if (res.data.status === 'in_progress') {
+          this.isTestStarted = false;
+        } else {
+          this.hasError = true;
+        }
+        this.isLoading = false;
+      },
+      error: () => { this.hasError = true; this.isLoading = false; },
+    });
+  }
+
+  private restoreAnswers(): void {
+    this.questions.forEach(q => {
+      if (q.selected_answer !== null && q.selected_answer !== undefined) {
+        this.selectedAnswers[q.id] = q.selected_answer;
+      }
+    });
   }
 
   handleStartTest(): void {
@@ -76,8 +84,19 @@ export class PmpTestComponent implements OnInit, OnDestroy {
     this.currentQuestion = 0;
     this.selectedAnswers = {};
     this.showResults = false;
-    this.timeLeft = 55 * 60;
+    this.timeLeft = this.session?.time_limit ?? 3600;
     this.startTimer();
+  }
+
+  private startTimer(): void {
+    this.timerSubscription?.unsubscribe();
+    this.timerSubscription = timer(0, 1000).subscribe(() => {
+      if (this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        this.handleSubmitTest();
+      }
+    });
   }
 
   handleAnswerSelect(questionId: number, answerIndex: number): void {
@@ -99,41 +118,62 @@ export class PmpTestComponent implements OnInit, OnDestroy {
   }
 
   handleSubmitTest(): void {
-    this.showResults = true;
-    this.isTestStarted = false;
-    if (this.timerSubscription) {
-      this.timerSubscription.unsubscribe();
-    }
-  }
+    if (this.isSubmitting || !this.sessionId) return;
+    this.isSubmitting = true;
+    this.timerSubscription?.unsubscribe();
 
-  calculateScore(): number {
-    let correct = 0;
-    this.questions.forEach(question => {
-      if (this.selectedAnswers[question.id] === question.correctAnswer) {
-        correct++;
-      }
+    const timeUsed = (this.session?.time_limit ?? 0) - this.timeLeft;
+
+    this.simulatorService.submitSession(this.sessionId, this.selectedAnswers, timeUsed).subscribe({
+      next: (res) => {
+        this.session = res.data;
+        this.questions = res.data.questions ?? [];
+        this.restoreAnswers();
+        this.showResults = true;
+        this.isTestStarted = false;
+        this.isSubmitting = false;
+        this.navigationService.navigate(`/customer/result?session=${this.sessionId}`);
+      },
+      error: () => { this.isSubmitting = false; },
     });
-    return Math.round((correct / this.questions.length) * 100);
   }
 
-  get currentDomainInfo() {
-    return this.domainInfo[this.domain];
+  formatTime(seconds: number): string {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   }
 
-  get currentQ() {
+  get currentQ(): SimulatorQuestion {
     return this.questions[this.currentQuestion];
   }
 
-  get progress() {
-    return ((this.currentQuestion + 1) / this.questions.length) * 100;
+  get progress(): number {
+    return this.questions.length > 0
+      ? ((this.currentQuestion + 1) / this.questions.length) * 100
+      : 0;
   }
 
-  get correctAnswersCount() {
-    return this.questions.filter(q => this.selectedAnswers[q.id] === q.correctAnswer).length;
-  }
-
-  get answeredQuestionsCount(): number {
+  get answeredCount(): number {
     return Object.keys(this.selectedAnswers).length;
+  }
+
+  get correctCount(): number {
+    return this.questions.filter(q => q.is_correct).length;
+  }
+
+  get score(): number {
+    if (!this.session?.score) return 0;
+    return Math.round(this.session.score);
+  }
+
+  get isPassed(): boolean {
+    return this.score >= 61;
+  }
+
+  get timeUsedFormatted(): string {
+    const used = (this.session?.time_limit ?? 0) - this.timeLeft;
+    return this.formatTime(used);
   }
 
   navigate(path: string): void {
