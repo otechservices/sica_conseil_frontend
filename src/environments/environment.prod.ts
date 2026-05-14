@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  API_SCHEME: 'https',
-  API_DOMAIN: 'api.mataccueil.gouv.bj/api',
-  API_FILE: 'api.mataccueil.gouv.bj',
+  API_SCHEME: 'http',
+  API_DOMAIN: 'sica-conseil.com/backend/api',
+  API_FILE: 'sica-conseil.com/backend',
   API_VERSION: 'v1'
 };
